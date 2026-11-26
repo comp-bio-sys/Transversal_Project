@@ -13,7 +13,7 @@ BLUE, TEAL, PURPLE, ORANGE = "#2878A5", "#078478", "#9268A1", "#BE6C37"
 DATA = Path(__file__).resolve().parent / "data"
 
 
-def draw_workflow(ax, scale=1.0, title=True):
+def draw_workflow(ax, scale=1.0, title=True, schematic_note=True):
     """Draw on a 180 by 66 canvas; all illustrative marks are schematic."""
     ax.set(xlim=(0, 180), ylim=(66, 0), aspect="equal")
     ax.axis("off")
@@ -196,7 +196,8 @@ def draw_workflow(ax, scale=1.0, title=True):
     text(125,45,"AdamW · equal 3-setting grid · 3 seeds",9,bold=True)
     text(125,48,"Control-only MLP + mean / linear baselines",8.8)
     text(125,50.2,"Diagnostics: chemical shuffle · control noise · coverage",7.8)
-    text(2,51.4,"Cells, structures and expression strips are schematic; no measured values are drawn here.",7.8,MUTED)
+    if schematic_note:
+        text(2,51.4,"Cells, structures and expression strips are schematic; no measured values are drawn here.",7.8,MUTED)
     arrow((163.5,50),(163.5,52.5))
 
     # Separate test settings: GEO uses a LINCS reference, not GEO as model input.
