@@ -1,0 +1,29 @@
+{
+  "best_epoch": 3,
+  "val_nll": 0.09618742906115746,
+  "elapsed_seconds": 69.62495275004767,
+  "parameters": 1659556,
+  "variants": [
+    "ResidualFCFP4",
+    "Residual",
+    "ResidualChemicalVAE",
+    "PRnet",
+    "ControlOnly"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "learning_rate": 0.001,
+  "weight_decay": 0.01,
+  "batch_size": 512,
+  "max_epochs": 50,
+  "patience": 7,
+  "selection": "validation Gaussian NLL only",
+  "device": "cpu",
+  "threads": 4,
+  "torch": "2.15.0",
+  "numpy": "2.5.4",
+  "split": "extension/balanced/group_holdout/split_indices.npz"
+}

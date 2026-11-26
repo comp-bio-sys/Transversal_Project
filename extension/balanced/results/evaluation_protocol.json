@@ -1,0 +1,6 @@
+{
+  "PRnet_noise_draws": 32,
+  "PRnet_noise_seed_sequence": "1042 through 1073, one RNG per draw",
+  "direction_threshold": ".5 absolute Level 3 units for internal/SKBR3; sign of measured change for GEO",
+  "replicate_reference": "Leave-one-profile-out mean response of same compound in SKBR3, across plates. Excludes own target; diagnostic reference, not deployable model or guaranteed ceiling."
+}

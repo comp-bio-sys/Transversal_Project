@@ -1,0 +1,34 @@
+{
+  "settings": {
+    "default": [
+      0.001,
+      0.01
+    ],
+    "lower_lr": [
+      0.0003,
+      0.01
+    ],
+    "lower_decay": [
+      0.001,
+      0.0001
+    ]
+  },
+  "selection_seed": 42,
+  "selection_metric": "validation Gaussian NLL",
+  "evaluation_seeds": [
+    42,
+    43,
+    44
+  ],
+  "test_data_used_for_selection": false,
+  "models": [
+    "ResidualFCFP4",
+    "Residual",
+    "ResidualChemicalVAE",
+    "PRnet",
+    "ControlOnly"
+  ],
+  "scope": "Within-grid setting and checkpoint selection use validation only. Earlier test inspection informed the exploratory revision design.",
+  "test_sets_previously_examined": true,
+  "epoch_cap": 150
+}

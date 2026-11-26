@@ -1,0 +1,282 @@
+gse_id,sample_id,arm,field,value
+GSE218402,GSM6744290,control,!Sample_title,A549_NC_01
+GSE218402,GSM6744290,control,!Sample_source_name_ch1,A549
+GSE218402,GSM6744290,control,!Sample_characteristics_ch1,cell line: A549
+GSE218402,GSM6744290,control,!Sample_characteristics_ch1,cell type: lung adenocarcinoma cell
+GSE218402,GSM6744290,control,!Sample_characteristics_ch1,time: 24h
+GSE218402,GSM6744290,control,!Sample_characteristics_ch1,treatment: Dimethyl sulfoxide
+GSE218402,GSM6744290,control,!Sample_treatment_protocol_ch1,PBMCs were treated with 30 uM ADO for 24 h; A549 was treated with 10uM NE for 24h.
+GSE218402,GSM6744290,control,!Sample_description,NE_DEGs_A549.txt
+GSE218402,GSM6744291,control,!Sample_title,A549_NC_02
+GSE218402,GSM6744291,control,!Sample_source_name_ch1,A549
+GSE218402,GSM6744291,control,!Sample_characteristics_ch1,cell line: A549
+GSE218402,GSM6744291,control,!Sample_characteristics_ch1,cell type: lung adenocarcinoma cell
+GSE218402,GSM6744291,control,!Sample_characteristics_ch1,time: 24h
+GSE218402,GSM6744291,control,!Sample_characteristics_ch1,treatment: Dimethyl sulfoxide
+GSE218402,GSM6744291,control,!Sample_treatment_protocol_ch1,PBMCs were treated with 30 uM ADO for 24 h; A549 was treated with 10uM NE for 24h.
+GSE218402,GSM6744291,control,!Sample_description,NE_DEGs_A549.txt
+GSE218402,GSM6744292,treated,!Sample_title,A549_NE_01
+GSE218402,GSM6744292,treated,!Sample_source_name_ch1,A549
+GSE218402,GSM6744292,treated,!Sample_characteristics_ch1,cell line: A549
+GSE218402,GSM6744292,treated,!Sample_characteristics_ch1,cell type: lung adenocarcinoma cell
+GSE218402,GSM6744292,treated,!Sample_characteristics_ch1,time: 24h
+GSE218402,GSM6744292,treated,!Sample_characteristics_ch1,treatment: 10uM Norepinephrine
+GSE218402,GSM6744292,treated,!Sample_treatment_protocol_ch1,PBMCs were treated with 30 uM ADO for 24 h; A549 was treated with 10uM NE for 24h.
+GSE218402,GSM6744292,treated,!Sample_description,NE_DEGs_A549.txt
+GSE218402,GSM6744293,treated,!Sample_title,A549_NE_02
+GSE218402,GSM6744293,treated,!Sample_source_name_ch1,A549
+GSE218402,GSM6744293,treated,!Sample_characteristics_ch1,cell line: A549
+GSE218402,GSM6744293,treated,!Sample_characteristics_ch1,cell type: lung adenocarcinoma cell
+GSE218402,GSM6744293,treated,!Sample_characteristics_ch1,time: 24h
+GSE218402,GSM6744293,treated,!Sample_characteristics_ch1,treatment: 10uM Norepinephrine
+GSE218402,GSM6744293,treated,!Sample_treatment_protocol_ch1,PBMCs were treated with 30 uM ADO for 24 h; A549 was treated with 10uM NE for 24h.
+GSE218402,GSM6744293,treated,!Sample_description,NE_DEGs_A549.txt
+GSE153871,GSM4656321,control,!Sample_title,EVUnt rep 1
+GSE153871,GSM4656321,control,!Sample_source_name_ch1,Osteosarcoma cell line
+GSE153871,GSM4656321,control,!Sample_characteristics_ch1,strain name: U2OS
+GSE153871,GSM4656321,control,!Sample_characteristics_ch1,drug treatment: Untreated
+GSE153871,GSM4656321,control,!Sample_characteristics_ch1,genotype: Empty Vector
+GSE153871,GSM4656321,control,!Sample_treatment_protocol_ch1,Cells were treated with 10 uM Ara-C for the indicated time points
+GSE153871,GSM4656321,control,!Sample_description,Replicate 1
+GSE153871,GSM4656321,control,!Sample_description,EVUT1_1
+GSE153871,GSM4656322,control,!Sample_title,EVUnt rep 2
+GSE153871,GSM4656322,control,!Sample_source_name_ch1,Osteosarcoma cell line
+GSE153871,GSM4656322,control,!Sample_characteristics_ch1,strain name: U2OS
+GSE153871,GSM4656322,control,!Sample_characteristics_ch1,drug treatment: Untreated
+GSE153871,GSM4656322,control,!Sample_characteristics_ch1,genotype: Empty Vector
+GSE153871,GSM4656322,control,!Sample_treatment_protocol_ch1,Cells were treated with 10 uM Ara-C for the indicated time points
+GSE153871,GSM4656322,control,!Sample_description,Replicate 2
+GSE153871,GSM4656322,control,!Sample_description,EVUT2_1
+GSE153871,GSM4656323,control,!Sample_title,EVUnt rep 3
+GSE153871,GSM4656323,control,!Sample_source_name_ch1,Osteosarcoma cell line
+GSE153871,GSM4656323,control,!Sample_characteristics_ch1,strain name: U2OS
+GSE153871,GSM4656323,control,!Sample_characteristics_ch1,drug treatment: Untreated
+GSE153871,GSM4656323,control,!Sample_characteristics_ch1,genotype: Empty Vector
+GSE153871,GSM4656323,control,!Sample_treatment_protocol_ch1,Cells were treated with 10 uM Ara-C for the indicated time points
+GSE153871,GSM4656323,control,!Sample_description,Replicate 3
+GSE153871,GSM4656323,control,!Sample_description,EVUT3_1
+GSE153871,GSM4656318,treated,!Sample_title,EV24HR Tr rep 1
+GSE153871,GSM4656318,treated,!Sample_source_name_ch1,Osteosarcoma cell line
+GSE153871,GSM4656318,treated,!Sample_characteristics_ch1,strain name: U2OS
+GSE153871,GSM4656318,treated,!Sample_characteristics_ch1,drug treatment: 24hr post treatment
+GSE153871,GSM4656318,treated,!Sample_characteristics_ch1,genotype: Empty Vector
+GSE153871,GSM4656318,treated,!Sample_treatment_protocol_ch1,Cells were treated with 10 uM Ara-C for the indicated time points
+GSE153871,GSM4656318,treated,!Sample_description,Replicate 1
+GSE153871,GSM4656318,treated,!Sample_description,EV24H1_1
+GSE153871,GSM4656319,treated,!Sample_title,EV24HR Tr rep 2
+GSE153871,GSM4656319,treated,!Sample_source_name_ch1,Osteosarcoma cell line
+GSE153871,GSM4656319,treated,!Sample_characteristics_ch1,strain name: U2OS
+GSE153871,GSM4656319,treated,!Sample_characteristics_ch1,drug treatment: 24hr post treatment
+GSE153871,GSM4656319,treated,!Sample_characteristics_ch1,genotype: Empty Vector
+GSE153871,GSM4656319,treated,!Sample_treatment_protocol_ch1,Cells were treated with 10 uM Ara-C for the indicated time points
+GSE153871,GSM4656319,treated,!Sample_description,Replicate 2
+GSE153871,GSM4656319,treated,!Sample_description,EV24H2_1
+GSE153871,GSM4656320,treated,!Sample_title,EV24HR Tr rep 3
+GSE153871,GSM4656320,treated,!Sample_source_name_ch1,Osteosarcoma cell line
+GSE153871,GSM4656320,treated,!Sample_characteristics_ch1,strain name: U2OS
+GSE153871,GSM4656320,treated,!Sample_characteristics_ch1,drug treatment: 24hr post treatment
+GSE153871,GSM4656320,treated,!Sample_characteristics_ch1,genotype: Empty Vector
+GSE153871,GSM4656320,treated,!Sample_treatment_protocol_ch1,Cells were treated with 10 uM Ara-C for the indicated time points
+GSE153871,GSM4656320,treated,!Sample_description,Replicate 3
+GSE153871,GSM4656320,treated,!Sample_description,EV24H3_1
+GSE2450,GSM46388,control,!Sample_title,"HUVEC, untreated"
+GSE2450,GSM46388,control,!Sample_source_name_ch1,HUVEC cell culture
+GSE2450,GSM46388,control,!Sample_description,Untreated HUVECs were harvested at confluence.
+GSE2450,GSM46389,control,!Sample_title,"HUVEC, untreated 2"
+GSE2450,GSM46389,control,!Sample_source_name_ch1,HUVEC cell culture
+GSE2450,GSM46389,control,!Sample_description,Untreated HUVECs were harvested at confluence.
+GSE2450,GSM46394,treated,!Sample_title,"HUVEC, atorvastatin"
+GSE2450,GSM46394,treated,!Sample_source_name_ch1,HUVEC cell culture
+GSE2450,GSM46394,treated,!Sample_description,HUVECs were harvested after 24 hours of treatment with atorvastatin (10 microM).
+GSE2450,GSM46395,treated,!Sample_title,"HUVEC, atorvastatin 2"
+GSE2450,GSM46395,treated,!Sample_source_name_ch1,HUVEC cell culture
+GSE2450,GSM46395,treated,!Sample_description,HUVECs were harvested after 24 hours of treatment with atorvastatin (10 microM).
+GSE200700,GSM6042446,control,!Sample_title,HepG2_caffeine_24h 0 μM_rep1
+GSE200700,GSM6042446,control,!Sample_source_name_ch1,HepG2 cells
+GSE200700,GSM6042446,control,!Sample_characteristics_ch1,cell line: HepG2 cells
+GSE200700,GSM6042446,control,!Sample_characteristics_ch1,treatment: untreated
+GSE200700,GSM6042446,control,!Sample_treatment_protocol_ch1,"Caffeine was dissolved in DMEM (100 mM stock solutions). Further dilutions were made with serum-free DMEM. At the time of caffeine exposure, after the FBS-DMEM culture medium was removed, HepG2 cells were washed with PBS once and were finally treated in the fresh serum-free DMEM culture medium containing different concentrations of caffeine (0-1000 μM) for 24 h."
+GSE200700,GSM6042447,control,!Sample_title,HepG2_caffeine_24h 0 μM_rep2
+GSE200700,GSM6042447,control,!Sample_source_name_ch1,HepG2 cells
+GSE200700,GSM6042447,control,!Sample_characteristics_ch1,cell line: HepG2 cells
+GSE200700,GSM6042447,control,!Sample_characteristics_ch1,treatment: untreated
+GSE200700,GSM6042447,control,!Sample_treatment_protocol_ch1,"Caffeine was dissolved in DMEM (100 mM stock solutions). Further dilutions were made with serum-free DMEM. At the time of caffeine exposure, after the FBS-DMEM culture medium was removed, HepG2 cells were washed with PBS once and were finally treated in the fresh serum-free DMEM culture medium containing different concentrations of caffeine (0-1000 μM) for 24 h."
+GSE200700,GSM6042448,control,!Sample_title,HepG2_caffeine_24h 0 μM_rep3
+GSE200700,GSM6042448,control,!Sample_source_name_ch1,HepG2 cells
+GSE200700,GSM6042448,control,!Sample_characteristics_ch1,cell line: HepG2 cells
+GSE200700,GSM6042448,control,!Sample_characteristics_ch1,treatment: untreated
+GSE200700,GSM6042448,control,!Sample_treatment_protocol_ch1,"Caffeine was dissolved in DMEM (100 mM stock solutions). Further dilutions were made with serum-free DMEM. At the time of caffeine exposure, after the FBS-DMEM culture medium was removed, HepG2 cells were washed with PBS once and were finally treated in the fresh serum-free DMEM culture medium containing different concentrations of caffeine (0-1000 μM) for 24 h."
+GSE200700,GSM6042458,treated,!Sample_title,HepG2_caffeine_24h 10 μM_rep1
+GSE200700,GSM6042458,treated,!Sample_source_name_ch1,HepG2 cells
+GSE200700,GSM6042458,treated,!Sample_characteristics_ch1,cell line: HepG2 cells
+GSE200700,GSM6042458,treated,!Sample_characteristics_ch1,treatment: treated with 10 microM caffeine for 24 h
+GSE200700,GSM6042458,treated,!Sample_treatment_protocol_ch1,"Caffeine was dissolved in DMEM (100 mM stock solutions). Further dilutions were made with serum-free DMEM. At the time of caffeine exposure, after the FBS-DMEM culture medium was removed, HepG2 cells were washed with PBS once and were finally treated in the fresh serum-free DMEM culture medium containing different concentrations of caffeine (0-1000 μM) for 24 h."
+GSE200700,GSM6042459,treated,!Sample_title,HepG2_caffeine_24h 10 μM_rep2
+GSE200700,GSM6042459,treated,!Sample_source_name_ch1,HepG2 cells
+GSE200700,GSM6042459,treated,!Sample_characteristics_ch1,cell line: HepG2 cells
+GSE200700,GSM6042459,treated,!Sample_characteristics_ch1,treatment: treated with 10 microM caffeine for 24 h
+GSE200700,GSM6042459,treated,!Sample_treatment_protocol_ch1,"Caffeine was dissolved in DMEM (100 mM stock solutions). Further dilutions were made with serum-free DMEM. At the time of caffeine exposure, after the FBS-DMEM culture medium was removed, HepG2 cells were washed with PBS once and were finally treated in the fresh serum-free DMEM culture medium containing different concentrations of caffeine (0-1000 μM) for 24 h."
+GSE200700,GSM6042460,treated,!Sample_title,HepG2_caffeine_24h 10 μM_rep3
+GSE200700,GSM6042460,treated,!Sample_source_name_ch1,HepG2 cells
+GSE200700,GSM6042460,treated,!Sample_characteristics_ch1,cell line: HepG2 cells
+GSE200700,GSM6042460,treated,!Sample_characteristics_ch1,treatment: treated with 10 microM caffeine for 24 h
+GSE200700,GSM6042460,treated,!Sample_treatment_protocol_ch1,"Caffeine was dissolved in DMEM (100 mM stock solutions). Further dilutions were made with serum-free DMEM. At the time of caffeine exposure, after the FBS-DMEM culture medium was removed, HepG2 cells were washed with PBS once and were finally treated in the fresh serum-free DMEM culture medium containing different concentrations of caffeine (0-1000 μM) for 24 h."
+GSE59008,GSM1424415,control,!Sample_title,MDA-MB-231 - Control_1
+GSE59008,GSM1424415,control,!Sample_source_name_ch1,MDA-MB-231_Control
+GSE59008,GSM1424415,control,!Sample_characteristics_ch1,cell line: MDA-MB-231
+GSE59008,GSM1424415,control,!Sample_characteristics_ch1,cell type: ER-ve basal breast cancer cells
+GSE59008,GSM1424415,control,!Sample_characteristics_ch1,treated with: water for 24hrs (mock-control)
+GSE59008,GSM1424415,control,!Sample_treatment_protocol_ch1,MDA-MB-231 cells were treated with sterile water for a period of 24h as a mock control
+GSE59008,GSM1424415,control,!Sample_description,SAMPLE 1
+GSE59008,GSM1424416,control,!Sample_title,MDA-MB-231 - Control_2
+GSE59008,GSM1424416,control,!Sample_source_name_ch1,MDA-MB-231_Control
+GSE59008,GSM1424416,control,!Sample_characteristics_ch1,cell line: MDA-MB-231
+GSE59008,GSM1424416,control,!Sample_characteristics_ch1,cell type: ER-ve basal breast cancer cells
+GSE59008,GSM1424416,control,!Sample_characteristics_ch1,treated with: water for 24hrs (mock-control)
+GSE59008,GSM1424416,control,!Sample_treatment_protocol_ch1,MDA-MB-231 cells were treated with sterile water for a period of 24h as a mock control
+GSE59008,GSM1424416,control,!Sample_description,SAMPLE 2
+GSE59008,GSM1424417,control,!Sample_title,MDA-MB-231 - Control_3
+GSE59008,GSM1424417,control,!Sample_source_name_ch1,MDA-MB-231_Control
+GSE59008,GSM1424417,control,!Sample_characteristics_ch1,cell line: MDA-MB-231
+GSE59008,GSM1424417,control,!Sample_characteristics_ch1,cell type: ER-ve basal breast cancer cells
+GSE59008,GSM1424417,control,!Sample_characteristics_ch1,treated with: water for 24hrs (mock-control)
+GSE59008,GSM1424417,control,!Sample_treatment_protocol_ch1,MDA-MB-231 cells were treated with sterile water for a period of 24h as a mock control
+GSE59008,GSM1424417,control,!Sample_description,SAMPLE 3
+GSE59008,GSM1424418,treated,!Sample_title,MDA-MB-231- Fluvastatin 10µM_24h_1
+GSE59008,GSM1424418,treated,!Sample_source_name_ch1,MDA-MB-231_Fluvastatin 10µM_24h
+GSE59008,GSM1424418,treated,!Sample_characteristics_ch1,cell line: MDA-MB-231
+GSE59008,GSM1424418,treated,!Sample_characteristics_ch1,cell type: ER-ve basal breast cancer cells
+GSE59008,GSM1424418,treated,!Sample_characteristics_ch1,treated with: 10µM fluvastatin for 24hrs
+GSE59008,GSM1424418,treated,!Sample_treatment_protocol_ch1,MDA-MB-231 cells were treated with sterile water for a period of 24h as a mock control
+GSE59008,GSM1424418,treated,!Sample_description,SAMPLE 4
+GSE59008,GSM1424419,treated,!Sample_title,MDA-MB-231- Fluvastatin 10µM_24h_2
+GSE59008,GSM1424419,treated,!Sample_source_name_ch1,MDA-MB-231_Fluvastatin 10µM_24h
+GSE59008,GSM1424419,treated,!Sample_characteristics_ch1,cell line: MDA-MB-231
+GSE59008,GSM1424419,treated,!Sample_characteristics_ch1,cell type: ER-ve basal breast cancer cells
+GSE59008,GSM1424419,treated,!Sample_characteristics_ch1,treated with: 10µM fluvastatin for 24hrs
+GSE59008,GSM1424419,treated,!Sample_treatment_protocol_ch1,MDA-MB-231 cells were treated with sterile water for a period of 24h as a mock control
+GSE59008,GSM1424419,treated,!Sample_description,SAMPLE 5
+GSE225537,GSM7050000,control,!Sample_title,HepG2_24h_1
+GSE225537,GSM7050000,control,!Sample_source_name_ch1,liver tumor
+GSE225537,GSM7050000,control,!Sample_characteristics_ch1,tissue: liver tumor
+GSE225537,GSM7050000,control,!Sample_characteristics_ch1,cell line: HepG2
+GSE225537,GSM7050000,control,!Sample_characteristics_ch1,cell type: Hepatoblastoma
+GSE225537,GSM7050000,control,!Sample_characteristics_ch1,genotype: p53 wild type
+GSE225537,GSM7050000,control,!Sample_characteristics_ch1,treatment: Control
+GSE225537,GSM7050000,control,!Sample_treatment_protocol_ch1,"Sorafenib was added at the concentration of 10 µM at 24 h hours after transfection, and lysates were obtained after  24 hours after treatment. Control cells were treated in parallel with dimethyl sulfoxide (DMSO), vehicle in wich Sorafenib was dissolved."
+GSE225537,GSM7050001,control,!Sample_title,HepG2_24h_2
+GSE225537,GSM7050001,control,!Sample_source_name_ch1,liver tumor
+GSE225537,GSM7050001,control,!Sample_characteristics_ch1,tissue: liver tumor
+GSE225537,GSM7050001,control,!Sample_characteristics_ch1,cell line: HepG2
+GSE225537,GSM7050001,control,!Sample_characteristics_ch1,cell type: Hepatoblastoma
+GSE225537,GSM7050001,control,!Sample_characteristics_ch1,genotype: p53 wild type
+GSE225537,GSM7050001,control,!Sample_characteristics_ch1,treatment: Control
+GSE225537,GSM7050001,control,!Sample_treatment_protocol_ch1,"Sorafenib was added at the concentration of 10 µM at 24 h hours after transfection, and lysates were obtained after  24 hours after treatment. Control cells were treated in parallel with dimethyl sulfoxide (DMSO), vehicle in wich Sorafenib was dissolved."
+GSE225537,GSM7050002,control,!Sample_title,HepG2_24h_3
+GSE225537,GSM7050002,control,!Sample_source_name_ch1,liver tumor
+GSE225537,GSM7050002,control,!Sample_characteristics_ch1,tissue: liver tumor
+GSE225537,GSM7050002,control,!Sample_characteristics_ch1,cell line: HepG2
+GSE225537,GSM7050002,control,!Sample_characteristics_ch1,cell type: Hepatoblastoma
+GSE225537,GSM7050002,control,!Sample_characteristics_ch1,genotype: p53 wild type
+GSE225537,GSM7050002,control,!Sample_characteristics_ch1,treatment: Control
+GSE225537,GSM7050002,control,!Sample_treatment_protocol_ch1,"Sorafenib was added at the concentration of 10 µM at 24 h hours after transfection, and lysates were obtained after  24 hours after treatment. Control cells were treated in parallel with dimethyl sulfoxide (DMSO), vehicle in wich Sorafenib was dissolved."
+GSE225537,GSM7050003,control,!Sample_title,HepG2_24h_4
+GSE225537,GSM7050003,control,!Sample_source_name_ch1,liver tumor
+GSE225537,GSM7050003,control,!Sample_characteristics_ch1,tissue: liver tumor
+GSE225537,GSM7050003,control,!Sample_characteristics_ch1,cell line: HepG2
+GSE225537,GSM7050003,control,!Sample_characteristics_ch1,cell type: Hepatoblastoma
+GSE225537,GSM7050003,control,!Sample_characteristics_ch1,genotype: p53 wild type
+GSE225537,GSM7050003,control,!Sample_characteristics_ch1,treatment: Control
+GSE225537,GSM7050003,control,!Sample_treatment_protocol_ch1,"Sorafenib was added at the concentration of 10 µM at 24 h hours after transfection, and lysates were obtained after  24 hours after treatment. Control cells were treated in parallel with dimethyl sulfoxide (DMSO), vehicle in wich Sorafenib was dissolved."
+GSE225537,GSM7050004,treated,!Sample_title,HepG2_SF24h_1
+GSE225537,GSM7050004,treated,!Sample_source_name_ch1,liver tumor
+GSE225537,GSM7050004,treated,!Sample_characteristics_ch1,tissue: liver tumor
+GSE225537,GSM7050004,treated,!Sample_characteristics_ch1,cell line: HepG2
+GSE225537,GSM7050004,treated,!Sample_characteristics_ch1,cell type: Hepatoblastoma
+GSE225537,GSM7050004,treated,!Sample_characteristics_ch1,genotype: p53 wild type
+GSE225537,GSM7050004,treated,!Sample_characteristics_ch1,treatment: Sorafenib 10 µM
+GSE225537,GSM7050004,treated,!Sample_treatment_protocol_ch1,"Sorafenib was added at the concentration of 10 µM at 24 h hours after transfection, and lysates were obtained after  24 hours after treatment. Control cells were treated in parallel with dimethyl sulfoxide (DMSO), vehicle in wich Sorafenib was dissolved."
+GSE225537,GSM7050005,treated,!Sample_title,HepG2_SF24h_2
+GSE225537,GSM7050005,treated,!Sample_source_name_ch1,liver tumor
+GSE225537,GSM7050005,treated,!Sample_characteristics_ch1,tissue: liver tumor
+GSE225537,GSM7050005,treated,!Sample_characteristics_ch1,cell line: HepG2
+GSE225537,GSM7050005,treated,!Sample_characteristics_ch1,cell type: Hepatoblastoma
+GSE225537,GSM7050005,treated,!Sample_characteristics_ch1,genotype: p53 wild type
+GSE225537,GSM7050005,treated,!Sample_characteristics_ch1,treatment: Sorafenib 10 µM
+GSE225537,GSM7050005,treated,!Sample_treatment_protocol_ch1,"Sorafenib was added at the concentration of 10 µM at 24 h hours after transfection, and lysates were obtained after  24 hours after treatment. Control cells were treated in parallel with dimethyl sulfoxide (DMSO), vehicle in wich Sorafenib was dissolved."
+GSE225537,GSM7050006,treated,!Sample_title,HepG2_SF24h_3
+GSE225537,GSM7050006,treated,!Sample_source_name_ch1,liver tumor
+GSE225537,GSM7050006,treated,!Sample_characteristics_ch1,tissue: liver tumor
+GSE225537,GSM7050006,treated,!Sample_characteristics_ch1,cell line: HepG2
+GSE225537,GSM7050006,treated,!Sample_characteristics_ch1,cell type: Hepatoblastoma
+GSE225537,GSM7050006,treated,!Sample_characteristics_ch1,genotype: p53 wild type
+GSE225537,GSM7050006,treated,!Sample_characteristics_ch1,treatment: Sorafenib 10 µM
+GSE225537,GSM7050006,treated,!Sample_treatment_protocol_ch1,"Sorafenib was added at the concentration of 10 µM at 24 h hours after transfection, and lysates were obtained after  24 hours after treatment. Control cells were treated in parallel with dimethyl sulfoxide (DMSO), vehicle in wich Sorafenib was dissolved."
+GSE225537,GSM7050007,treated,!Sample_title,HepG2_SF24h_4
+GSE225537,GSM7050007,treated,!Sample_source_name_ch1,liver tumor
+GSE225537,GSM7050007,treated,!Sample_characteristics_ch1,tissue: liver tumor
+GSE225537,GSM7050007,treated,!Sample_characteristics_ch1,cell line: HepG2
+GSE225537,GSM7050007,treated,!Sample_characteristics_ch1,cell type: Hepatoblastoma
+GSE225537,GSM7050007,treated,!Sample_characteristics_ch1,genotype: p53 wild type
+GSE225537,GSM7050007,treated,!Sample_characteristics_ch1,treatment: Sorafenib 10 µM
+GSE225537,GSM7050007,treated,!Sample_treatment_protocol_ch1,"Sorafenib was added at the concentration of 10 µM at 24 h hours after transfection, and lysates were obtained after  24 hours after treatment. Control cells were treated in parallel with dimethyl sulfoxide (DMSO), vehicle in wich Sorafenib was dissolved."
+GSE42872,GSM1052615,control,!Sample_title,A375 cells 24h Control rep1
+GSE42872,GSM1052615,control,!Sample_source_name_ch1,A375 melanoma cells treated with vehicle (0.1% DMSO) batch A
+GSE42872,GSM1052615,control,!Sample_characteristics_ch1,cell type: Melanoma cell line
+GSE42872,GSM1052615,control,!Sample_characteristics_ch1,cell line: A375
+GSE42872,GSM1052615,control,!Sample_treatment_protocol_ch1,"Cells were seeded in dup[licate 10cm dishes at 1,000,000 cells per dish and incubated for 24h then cells were treated with vehicle (0.1% DMSO) or Vemurafenib (Vem; PLX4032) for a further 24h."
+GSE42872,GSM1052615,control,!Sample_description,Gene expression data from A375 melanoma cells treated with vehicle control (0.1% DMSO)
+GSE42872,GSM1052616,control,!Sample_title,A375 cells 24h Control rep2
+GSE42872,GSM1052616,control,!Sample_source_name_ch1,A375 melanoma cells treated with vehicle (0.1% DMSO)
+GSE42872,GSM1052616,control,!Sample_characteristics_ch1,cell type: Melanoma cell line
+GSE42872,GSM1052616,control,!Sample_characteristics_ch1,cell line: A375
+GSE42872,GSM1052616,control,!Sample_treatment_protocol_ch1,"Cells were seeded in dup[licate 10cm dishes at 1,000,000 cells per dish and incubated for 24h then cells were treated with vehicle (0.1% DMSO) or Vemurafenib (Vem; PLX4032) for a further 24h."
+GSE42872,GSM1052616,control,!Sample_description,Gene expression data from A375 melanoma cells treated with vehicle control (0.1% DMSO)
+GSE42872,GSM1052617,control,!Sample_title,A375 cells 24h Control rep3
+GSE42872,GSM1052617,control,!Sample_source_name_ch1,A375 melanoma cells treated with vehicle (0.1% DMSO)
+GSE42872,GSM1052617,control,!Sample_characteristics_ch1,cell type: Melanoma cell line
+GSE42872,GSM1052617,control,!Sample_characteristics_ch1,cell line: A375
+GSE42872,GSM1052617,control,!Sample_treatment_protocol_ch1,"Cells were seeded in dup[licate 10cm dishes at 1,000,000 cells per dish and incubated for 24h then cells were treated with vehicle (0.1% DMSO) or Vemurafenib (Vem; PLX4032) for a further 24h."
+GSE42872,GSM1052617,control,!Sample_description,Gene expression data from A375 melanoma cells treated with vehicle control (0.1% DMSO)
+GSE42872,GSM1052618,treated,!Sample_title,A375 cells 24h Vemurafenib rep1
+GSE42872,GSM1052618,treated,!Sample_source_name_ch1,A375 melanoma cells treated with vemurafenib
+GSE42872,GSM1052618,treated,!Sample_characteristics_ch1,cell type: Melanoma cell line
+GSE42872,GSM1052618,treated,!Sample_characteristics_ch1,cell line: A375
+GSE42872,GSM1052618,treated,!Sample_treatment_protocol_ch1,"Cells were seeded in dup[licate 10cm dishes at 1,000,000 cells per dish and incubated for 24h then cells were treated with vehicle (0.1% DMSO) or Vemurafenib (Vem; PLX4032) for a further 24h."
+GSE42872,GSM1052618,treated,!Sample_description,Gene expression data from A375 melanoma cells treated with 10 μM vemurafenib
+GSE42872,GSM1052619,treated,!Sample_title,A375 cells 24h Vemurafenib rep2
+GSE42872,GSM1052619,treated,!Sample_source_name_ch1,A375 melanoma cells treated with vemurafenib
+GSE42872,GSM1052619,treated,!Sample_characteristics_ch1,cell type: Melanoma cell line
+GSE42872,GSM1052619,treated,!Sample_characteristics_ch1,cell line: A375
+GSE42872,GSM1052619,treated,!Sample_treatment_protocol_ch1,"Cells were seeded in dup[licate 10cm dishes at 1,000,000 cells per dish and incubated for 24h then cells were treated with vehicle (0.1% DMSO) or Vemurafenib (Vem; PLX4032) for a further 24h."
+GSE42872,GSM1052619,treated,!Sample_description,Gene expression data from A375 melanoma cells treated with 10 μM vemurafenib
+GSE42872,GSM1052620,treated,!Sample_title,A375 cells 24h Vemurafenib rep3
+GSE42872,GSM1052620,treated,!Sample_source_name_ch1,A375 melanoma cells treated with vemurafenib
+GSE42872,GSM1052620,treated,!Sample_characteristics_ch1,cell type: Melanoma cell line
+GSE42872,GSM1052620,treated,!Sample_characteristics_ch1,cell line: A375
+GSE42872,GSM1052620,treated,!Sample_treatment_protocol_ch1,"Cells were seeded in dup[licate 10cm dishes at 1,000,000 cells per dish and incubated for 24h then cells were treated with vehicle (0.1% DMSO) or Vemurafenib (Vem; PLX4032) for a further 24h."
+GSE42872,GSM1052620,treated,!Sample_description,Gene expression data from A375 melanoma cells treated with 10 μM vemurafenib
+GSE113505,GSM3108139,control,!Sample_title,MCF10A control rep1
+GSE113505,GSM3108139,control,!Sample_source_name_ch1,MCF10a cells
+GSE113505,GSM3108139,control,!Sample_characteristics_ch1,cell type: Non-tumorigenic breast epithelial cells
+GSE113505,GSM3108139,control,!Sample_characteristics_ch1,cell line: MCF10A
+GSE113505,GSM3108139,control,!Sample_characteristics_ch1,treatment: DMSO treated
+GSE113505,GSM3108139,control,!Sample_treatment_protocol_ch1,Cells were treated with DMSO or 10 µM emetine for 24 hours before collection
+GSE113505,GSM3108140,control,!Sample_title,MCF10A control rep2
+GSE113505,GSM3108140,control,!Sample_source_name_ch1,MCF10a cells
+GSE113505,GSM3108140,control,!Sample_characteristics_ch1,cell type: Non-tumorigenic breast epithelial cells
+GSE113505,GSM3108140,control,!Sample_characteristics_ch1,cell line: MCF10A
+GSE113505,GSM3108140,control,!Sample_characteristics_ch1,treatment: DMSO treated
+GSE113505,GSM3108140,control,!Sample_treatment_protocol_ch1,Cells were treated with DMSO or 10 µM emetine for 24 hours before collection
+GSE113505,GSM3108141,treated,!Sample_title,MCF10A emetine rep1
+GSE113505,GSM3108141,treated,!Sample_source_name_ch1,MCF10a cells
+GSE113505,GSM3108141,treated,!Sample_characteristics_ch1,cell type: Non-tumorigenic breast epithelial cells
+GSE113505,GSM3108141,treated,!Sample_characteristics_ch1,cell line: MCF10A
+GSE113505,GSM3108141,treated,!Sample_characteristics_ch1,treatment: 10 µM emetine treatment for 24 hrs
+GSE113505,GSM3108141,treated,!Sample_treatment_protocol_ch1,Cells were treated with DMSO or 10 µM emetine for 24 hours before collection
+GSE113505,GSM3108142,treated,!Sample_title,MCF10A emetine rep2
+GSE113505,GSM3108142,treated,!Sample_source_name_ch1,MCF10a cells
+GSE113505,GSM3108142,treated,!Sample_characteristics_ch1,cell type: Non-tumorigenic breast epithelial cells
+GSE113505,GSM3108142,treated,!Sample_characteristics_ch1,cell line: MCF10A
+GSE113505,GSM3108142,treated,!Sample_characteristics_ch1,treatment: 10 µM emetine treatment for 24 hrs
+GSE113505,GSM3108142,treated,!Sample_treatment_protocol_ch1,Cells were treated with DMSO or 10 µM emetine for 24 hours before collection

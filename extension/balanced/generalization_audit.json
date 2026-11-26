@@ -1,0 +1,22 @@
+{
+  "samples": {
+    "train": 210438,
+    "val": 25190,
+    "test": 27765
+  },
+  "compounds": {
+    "train": 8168,
+    "val": 1029,
+    "test": 1019
+  },
+  "test_profiles_with_control_group_seen_in_train": 27752,
+  "test_control_groups_seen_in_train": 2628,
+  "test_control_groups": 2633,
+  "test_cells_absent_from_training": [],
+  "test_compounds_above_0_7_similarity_to_train": 545,
+  "test_compounds_with_identical_ECFP4_to_training": 295,
+  "test_compounds_with_matching_connectivity_ignoring_stereochemistry": 293,
+  "interpretation": "Compound-disjoint split. Shared measured controls do not by themselves imply target leakage; batch and scaffold separation are distinct tests.",
+  "skbr3_compounds_seen_in_training": 86,
+  "skbr3_compounds_not_seen_in_training": 51
+}

@@ -1,0 +1,14 @@
+{
+  "control_group_fraction_target": 0.2,
+  "random_seed": 26026,
+  "sampling": "Within each training cell line; floor(20%) groups, minimum one when at least two groups exist; at least one training group retained.",
+  "samples": {
+    "train": 168883,
+    "val": 20194,
+    "test": 5574
+  },
+  "same_original_compound_assignments": true,
+  "test_cells_absent_from_training": [],
+  "selection": "Predeclared shared default settings; validation NLL; no test-based setting selection",
+  "interpretation": "Both compounds and matched control-group identities are absent from fitting; groups need not equal whole detection plates."
+}

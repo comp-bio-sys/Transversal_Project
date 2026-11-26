@@ -1,0 +1,25 @@
+{
+  "variants": [
+    "ResidualFCFP4",
+    "Residual",
+    "ResidualChemicalVAE",
+    "PRnet",
+    "ControlOnly"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "learning_rate": 0.001,
+  "weight_decay": 0.01,
+  "batch_size": 512,
+  "max_epochs": 150,
+  "patience": 7,
+  "selection": "validation Gaussian NLL only",
+  "device": "cpu",
+  "threads": 4,
+  "torch": "2.15.0",
+  "numpy": "2.5.4",
+  "split": "extension/balanced/group_holdout/split_indices.npz"
+}

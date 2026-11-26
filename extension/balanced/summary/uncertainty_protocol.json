@@ -1,0 +1,8 @@
+{
+  "bootstrap_draws": 4000,
+  "seed": 26026,
+  "seed_handling": "Mean of the three per-run losses or accuracies before paired cluster resampling. Not ensemble predictions.",
+  "internal_and_skbr3": "Profile-weighted paired losses, resampling compounds or control groups separately.",
+  "external": "Seven whole GEO studies; six genes stay together. All studies have six labels.",
+  "limits": "Exploratory descriptive percentile intervals; no multiplicity correction. Compound and control-group dependence is crossed and not jointly modeled. Seeds are not biological replicates. These are previously examined test sets."
+}

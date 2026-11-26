@@ -1,0 +1,33 @@
+{
+  "url": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level3/level3_beta_trt_cp_n1805898x12328.gctx",
+  "checked_rows": 11,
+  "max_abs_difference": 0.0,
+  "matched_ids": 304649,
+  "checked_original_row_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    50,
+    1000,
+    10000,
+    100000,
+    200000,
+    300000
+  ],
+  "checked_sample_ids": [
+    "DOSBIO001_A375_24H_X3_B11:H07",
+    "PCLB001_HT29_24H_X2_F2B6_DUO52HI53LO:M21",
+    "ERG014_VCAP_24H_X1_B10_DUO52HI53LO:A15",
+    "LJP009_A549_24H_X3_F1B19:O01",
+    "DOSBIO002_PC3_24H_X1_B11:H20",
+    "DOSBIO001_HT29_24H_X3_B11:L15",
+    "CPC016_SKB_24H_X1_B7_DUO52HI53LO:A15",
+    "CPC006_A549_24H_X1_B3_DUO52HI53LO:M13",
+    "REP.A026_A375_24H_X3_B25:M19",
+    "REP.A012_A375_24H_X2_B22:M07",
+    "LJP008_HEPG2_24H_X2_B20:D07"
+  ],
+  "genes_checked_per_sample": 978
+}

@@ -1,0 +1,25 @@
+# Local environments and generated caches
+.venv/
+venv/
+.cache/
+__pycache__/
+.ipynb_checkpoints/
+*.py[cod]
+.DS_Store
+*.log
+*.partial
+*.lock
+.convergence_pending
+
+# Data and trained parameters are supplied in the full submission archive.
+*.feather
+*.npy
+*.npz
+*.h5
+*.pt
+dose_matched/source/*.gz
+
+# Local rerun backups and the full-archive manifest
+runs/
+FILE_MANIFEST.tsv
+*.zip

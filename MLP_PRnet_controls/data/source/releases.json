@@ -1,0 +1,781 @@
+[
+  {
+    "name": "GSE92742_Broad_LINCS_Level1_LXB_n1403502.tar.gz",
+    "description": "Level 1 data (raw fluorescence measurements)",
+    "size": "1.2 TB",
+    "checksum": "",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5FLevel1%5FLXB%5Fn1403502%2Etar%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_Level1_LXB_n1403502.tar.gz",
+    "file_type": "Data",
+    "level": [
+      "Level 1"
+    ],
+    "version": "1.1",
+    "pert_type": [
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "year": 2017
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_Level2_GEX_delta_n49216x978.gctx.gz",
+    "description": "Level 2 data for delta probes/features (raw gene expression)",
+    "size": "98.9 MB",
+    "checksum": "",
+    "matrix": "49216x978",
+    "file_type": "Data",
+    "level": [
+      "Level 2"
+    ],
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5FLevel2%5FGEX%5Fdelta%5Fn49216x978%2Egctx%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_Level2_GEX_delta_n49216x978.gctx.gz",
+    "version": "1.1",
+    "pert_type": [
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "year": 2017
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_Level2_GEX_epsilon_n1269922x978.gctx.gz",
+    "description": "Level 2 data for epsilon probes/features (raw gene expression)",
+    "size": "2.3 GB",
+    "matrix": "1269922x978",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5FLevel2%5FGEX%5Fepsilon%5Fn1269922x978%2Egctx%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_Level2_GEX_epsilon_n1269922x978.gctx.gz",
+    "file_type": "Data",
+    "checksum": "",
+    "level": [
+      "Level 2"
+    ],
+    "version": "1.1",
+    "pert_type": [
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "year": 2017
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_Level3_INF_mlr12k_n1319138x12328.gctx.gz",
+    "description": "Level 3 data (normalized & inferred)",
+    "size": "48.8 GB",
+    "matrix": "1319138x12328",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5FLevel3%5FINF%5Fmlr12k%5Fn1319138x12328%2Egctx%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_Level3_INF_mlr12k_n1319138x12328.gctx.gz",
+    "file_type": "Data",
+    "checksum": "",
+    "level": [
+      "Level 3"
+    ],
+    "version": "1.1",
+    "pert_type": [
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "year": 2017
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_Level4_ZSPCINF_mlr12k_n1319138x12328.gctx.gz",
+    "description": "Level 4 data, plate-control normalized (robust z-scores)",
+    "size": "49.6 GB",
+    "matrix": "1319138x12328",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5FLevel4%5FZSPCINF%5Fmlr12k%5Fn1319138x12328%2Egctx%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_Level4_ZSPCINF_mlr12k_n1319138x12328.gctx.gz",
+    "file_type": "Data",
+    "checksum": "",
+    "level": [
+      "Level 4"
+    ],
+    "version": "1.1",
+    "pert_type": [
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "year": 2017
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx.gz",
+    "description": "Level 5 data (moderated z-scores)",
+    "size": "19.9 GB",
+    "matrix": "473647x12328",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5FLevel5%5FCOMPZ%2EMODZ%5Fn473647x12328%2Egctx%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_Level5_COMPZ.MODZ_n473647x12328.gctx.gz",
+    "file_type": "Data",
+    "checksum": "",
+    "level": [
+      "Level 5"
+    ],
+    "version": "1.1",
+    "pert_type": [
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "year": 2017
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_auxiliary_datasets.tar.gz",
+    "description": "Auxiliary datasets used for supplementary calculations.",
+    "size": "1.6 GB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5Fauxiliary%5Fdatasets%2Etar%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_auxiliary_datasets.tar.gz"
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_README.pdf",
+    "description": "README for GSE92742",
+    "size": "25.8 KB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5FREADME%2Epdf",
+    "checksum": "",
+    "file_type": "Docs",
+    "version": "1.1",
+    "year": 2017,
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_README.pdf"
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_cell_info.txt.gz",
+    "description": "Metadata for each cell line that was used in the experiments",
+    "size": "2.5 KB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5Fcell%5Finfo%2Etxt%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_cell_info.txt.gz",
+    "checksum": "",
+    "matrix": "-",
+    "file_type": "Metadata",
+    "version": "1.1",
+    "year": 2017
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_gene_info.txt.gz",
+    "description": "Metadata for each measured feature / gene (metadata for rows of the data matrices)",
+    "size": "211.6 KB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5Fgene%5Finfo%2Etxt%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_gene_info.txt.gz",
+    "checksum": "",
+    "matrix": "-",
+    "file_type": "Metadata",
+    "version": "1.1",
+    "year": 2017,
+    "level": [
+      "Level 5"
+    ]
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_gene_info_delta_landmark.txt.gz",
+    "description": "Metadata for each measured feature / gene (metadata for rows of the data matrices) including the delta probes that were used in a small number of initial experiments",
+    "size": "18.3 KB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5Fgene%5Finfo%5Fdelta%5Flandmark%2Etxt%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_gene_info_delta_landmark.txt.gz",
+    "checksum": "",
+    "matrix": "-",
+    "file_type": "Metadata",
+    "version": "1.1",
+    "year": 2017,
+    "level": [
+      "Level 5"
+    ]
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_inst_info.txt.gz",
+    "description": "Metadata for each experiment in the Levels 3-4 matrices (metadata for the columns in the Levels 3-4 data matrices)",
+    "size": "11.5 MB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5Finst%5Finfo%2Etxt%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_inst_info.txt.gz",
+    "checksum": "",
+    "matrix": "-",
+    "file_type": "Metadata",
+    "version": "1.1",
+    "year": 2017,
+    "level": [
+      "Level 3", "Level 4"
+    ],
+    "pert_type": [
+      "trt_xpr",
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ]
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_pert_info.txt.gz",
+    "description": "Metadata for each perturbagen that was used in the experiments",
+    "size": "1.1 MB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5Fpert%5Finfo%2Etxt%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_pert_info.txt.gz",
+    "checksum": "",
+    "matrix": "-",
+    "file_type": "Metadata",
+    "version": "1.1",
+    "year": 2017
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_pert_metrics.txt.gz",
+    "description": "Calculated / derived / inferred metrics and annotations associated with each perturbagen that was used in the experiments",
+    "size": "908.9 KB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5Fpert%5Fmetrics%2Etxt%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_pert_metrics.txt.gz",
+    "checksum": "",
+    "matrix": "-",
+    "file_type": "Metadata",
+    "version": "1.1",
+    "year": 2017
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_sig_info.txt.gz",
+    "description": "Metadata for each signature in the Level 5 matrix (metadata for the columns in the Level 5 data matrix)",
+    "size": "10.6 MB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5Fsig%5Finfo%2Etxt%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_sig_info.txt.gz",
+    "checksum": "",
+    "matrix": "-",
+    "file_type": "Metadata",
+    "version": "1.1",
+    "year": 2017,
+    "level": [
+      "Level 5"
+    ],
+    "pert_type": [
+      "trt_xpr",
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ]
+  },
+  {
+    "name": "GSE92742_Broad_LINCS_sig_metrics.txt.gz",
+    "description": "Calculated / derived / inferred metrics and annotations associated with each signature in the Level 5 matrix",
+    "size": "11.9 MB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FBroad%5FLINCS%5Fsig%5Fmetrics%2Etxt%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_Broad_LINCS_sig_metrics.txt.gz",
+    "checksum": "",
+    "matrix": "-",
+    "file_type": "Metadata",
+    "version": "1.1",
+    "year": 2017,
+    "level": [
+      "Level 5"
+    ],
+    "pert_type": [
+      "trt_xpr",
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ]
+  },
+  {
+    "name": "GSE92742_SHA512SUMS.txt.gz",
+    "description": "Text file containing checksums calculated for each of the above files, for use in verifying integrity of downloaded files",
+    "size": "1.4 KB",
+    "matrix": "",
+    "s3_location": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE92742&format=file&file=GSE92742%5FSHA512SUMS%2Etxt%2Egz",
+    "other_location": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE92nnn/GSE92742/suppl/GSE92742_SHA512SUMS.txt.gz",
+    "file_type": "Docs",
+    "checksum": "",
+    "version": "1.1",
+    "year": 2017
+  },
+  {
+    "name" : "level4_beta_all_n3026460x12328.gctx",
+    "description" : "All Level 4 data",
+    "size" : "115 GB",
+    "checksum" : "2e891826fbd61b6d84b132170554890c",
+    "matrix" : "3026460x12328",
+    "s3_location" : "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level4/level4_beta_all_n3026460x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 4"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_xpr",
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "year": 2020
+  },
+  {
+    "name" : "level3_beta_all_n3026460x12328.gctx",
+    "description" : "All Level 3 data",
+    "size" : "111 GB",
+    "checksum" : "5ac6450606587cf095ba948ce01a798c",
+    "matrix" : "3026460x12328",
+    "s3_location" : "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level3/level3_beta_all_n3026460x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 3"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_xpr",
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "year": 2020
+  },
+  {
+    "name" : "level5_beta_all_n1201944x12328.gctx ",
+    "description" : "All Level 5 data",
+    "size" : "51 GB",
+    "checksum" : "204a4890b056002cd41aa174bafaec36",
+    "matrix" : "1201944x12328",
+    "s3_location" : "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level5/level5_beta_all_n1201944x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 5"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_xpr",
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level4_beta_trt_xpr_n420583x12328.gctx",
+    "description": "Level 4 data for CRISPR",
+    "size": "15.90 GB",
+    "checksum": "f0232bbfdc27da8b7534465caee7a04e",
+    "matrix": "420583x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level4/level4_beta_trt_xpr_n420583x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 4"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_xpr"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level3_beta_trt_xpr_n420583x12328.gctx",
+    "description": "Level 3 data for CRISPR",
+    "size": "15.13 GB",
+    "checksum": "f680831fd084b97f43d6f0191daae04d",
+    "matrix": "420583x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level3/level3_beta_trt_xpr_n420583x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 3"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_xpr"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level5_beta_trt_xpr_n142901x12328.gctx",
+    "description": "Level 5 data for CRISPR",
+    "size": "6.07 GB",
+    "checksum": "f882dd971624d12f9e437b4017ace23c",
+    "matrix": "142901x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level5/level5_beta_trt_xpr_n142901x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 5"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_xpr"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "siginfo_beta.txt",
+    "description": "Metadata for level 5 signatures",
+    "size": "429.69 MB",
+    "checksum": "dc12eff6cadc5a0076236b957219ff4f",
+    "matrix": "-",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/siginfo_beta.txt",
+    "file_type": "Metadata",
+    "version": "beta",
+    "year": 2020,
+    "pert_type": [
+      "trt_xpr",
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "level": [
+      "Level 5"
+    ]
+  },
+  {
+    "name": "level3_beta_trt_sh_n453175x12328.gctx",
+    "description": "Level 3 data for shRNA",
+    "size": "20.81 GB",
+    "checksum": "e8cb551cc99446c04848695f657aee13",
+    "matrix": "453175x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level3/level3_beta_trt_sh_n453175x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 3"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_sh"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level4_beta_ctl_n188708x12328.gctx",
+    "description": "Level 4 data for controls",
+    "size": "8.67 GB",
+    "checksum": "621e76cdd1ad962b25355c84490c31ec",
+    "matrix": "188708x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level4/level4_beta_ctl_n188708x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 4"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_ctl"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level3_beta_trt_misc_n26428x12328.gctx",
+    "description": "Level 3 data for all other treatments",
+    "size": "1.21 GB",
+    "checksum": "9ffaec67580bae1346f18d5512a9f88e",
+    "matrix": "26428x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level3/level3_beta_trt_misc_n26428x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 3"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_misc"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level5_beta_trt_oe_n34171x12328.gctx",
+    "description": "Level 5 data for over-expression treatments",
+    "size": "1.57 GB",
+    "checksum": "a068e259e2d71676e8fa46a2d7a2de86",
+    "matrix": "34171x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level5/level5_beta_trt_oe_n34171x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 5"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_oe"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level4_beta_trt_cp_n1805898x12328.gctx",
+    "description": "Level 4 data for compounds",
+    "size": "82.94 GB",
+    "checksum": "ef69322d8589200e272e880890004473",
+    "matrix": "1805898x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level4/level4_beta_trt_cp_n1805898x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 4"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_cp"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level5_beta_trt_cp_n720216x12328.gctx",
+    "description": "Level 5 data for compounds",
+    "size": "33.08 GB",
+    "checksum": "9a82806e2aba6ec2a866cba77bd57fda",
+    "matrix": "720216x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level5/level5_beta_trt_cp_n720216x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 5"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_cp"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "LINCS2020 Release Metadata Field Definitions.xlsx",
+    "description": "Excel spreadsheet with definitions for the fields in each metadata file",
+    "size": "0.03 MB",
+    "checksum": "9872630a127094b30922d957e8591499",
+    "matrix": "-",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/LINCS2020 Release Metadata Field Definitions.xlsx",
+    "file_type": "Docs",
+    "version": "beta",
+    "year": 2020
+  },
+  {
+    "name": "level4_beta_trt_misc_n26428x12328.gctx",
+    "description": "Level 4 data for all other treatments",
+    "size": "1.21 GB",
+    "checksum": "783e66ca9fd3248fdff9556e4ab09ef5",
+    "matrix": "26428x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level4/level4_beta_trt_misc_n26428x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 4"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_misc"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level4_beta_trt_oe_n131668x12328.gctx",
+    "description": "Level 4 data for over-expression treatments",
+    "size": "6.05 GB",
+    "checksum": "2b63720aa7ee4fcb5a269286b5a6c6ce",
+    "matrix": "131668x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level4/level4_beta_trt_oe_n131668x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 4"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_oe"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level3_beta_trt_oe_n131668x12328.gctx",
+    "description": "Level 3 data for over-expression treatments",
+    "size": "6.05 GB",
+    "checksum": "2df38e3957f51357decb4b6ceaa23c56",
+    "matrix": "131668x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level3/level3_beta_trt_oe_n131668x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 3"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_oe"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "instinfo_beta.txt",
+    "description": "Metadata for levels 3 and 4 profiles",
+    "size": "643.81 MB",
+    "checksum": "b85c0e320dcf21911864138c3894fcc4",
+    "matrix": "-",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/instinfo_beta.txt",
+    "file_type": "Metadata",
+    "version": "beta",
+    "year": 2020,
+    "pert_type": [
+      "trt_xpr",
+      "trt_cp",
+      "trt_sh",
+      "trt_ctl",
+      "trt_misc",
+      "trt_oe"
+    ],
+    "level": [
+      "Level 3",
+      "Level 4"
+    ]
+  },
+  {
+    "name": "level4_beta_trt_sh_n453175x12328.gctx",
+    "description": "Level 4 data for shRNA",
+    "size": "20.81 GB",
+    "checksum": "c144cb2353ac06d0724011492a2ba3a3",
+    "matrix": "453175x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level4/level4_beta_trt_sh_n453175x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 4"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_sh"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "README.txt",
+    "description": "General information about these datasets",
+    "size": "0.00 MB",
+    "checksum": "2411c5f3ef7f673d2407123ce4e1d31a",
+    "matrix": "-",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/README.txt",
+    "file_type": "Docs",
+    "version": "beta",
+    "year": 2020
+  },
+  {
+    "name": "level3_beta_ctl_n188708x12328.gctx",
+    "description": "Level 3 data for controls",
+    "size": "17.33 GB",
+    "checksum": "9cfd7f129a3aaaade5de0565be317f83",
+    "matrix": "188708x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level3/level3_beta_ctl_n188708x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 3"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_ctl"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level5_beta_ctl_n58022x12328.gctx",
+    "description": "Level 5 data for controls",
+    "size": "2.66 GB",
+    "checksum": "4c70a6939637670d185775f2a2d98d67",
+    "matrix": "58022x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level5/level5_beta_ctl_n58022x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 5"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_ctl"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "geneinfo_beta.txt",
+    "description": "Metadata for genes (the features of the data matrices)",
+    "size": "1.09 MB",
+    "checksum": "45c725d17ce6c377f1e7de07b821a5f0",
+    "matrix": "-",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/geneinfo_beta.txt",
+    "file_type": "Metadata",
+    "version": "beta",
+    "year": 2020
+  },
+  {
+    "name": "level5_beta_trt_sh_n238351x12328.gctx",
+    "description": "Level 5 data for shRNA",
+    "size": "10.95 GB",
+    "checksum": "16952edbdc39756370a075b25f874029",
+    "matrix": "238351x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level5/level5_beta_trt_sh_n238351x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 5"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_sh"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level5_beta_trt_misc_n8283x12328.gctx",
+    "description": "Level 5 data for all other treatments",
+    "size": "389.61 MB",
+    "checksum": "b58bcaa628f9f2afeadbb815b49a7684",
+    "matrix": "8283x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level5/level5_beta_trt_misc_n8283x12328.gctx",
+    "file_type": "Data",
+    "level": [
+      "Level 5"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_misc"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "level3_beta_trt_cp_n1805898x12328.gctx",
+    "file_type": "Data",
+    "description": "Level 3 data for compounds",
+    "size": "82.94 GB",
+    "checksum": "cf1697601cd28f241ddf4ae118bc66ac",
+    "matrix": "1805898x12328",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/level3/level3_beta_trt_cp_n1805898x12328.gctx",
+    "level": [
+      "Level 3"
+    ],
+    "version": "beta",
+    "pert_type": [
+      "trt_cp"
+    ],
+    "year": 2020
+  },
+  {
+    "name": "cellinfo_beta.txt",
+    "file_type": "Metadata",
+    "description": "Metadata for cell lines",
+    "size": "0.04 MB",
+    "checksum": "c4686b4bcd2bad8fa64e229932c8d486",
+    "matrix": "-",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/cellinfo_beta.txt",
+    "version": "beta",
+    "year": 2020
+  },
+  {
+    "name": "compoundinfo_beta.txt",
+    "file_type": "Metadata",
+    "description": "Metadata for compounds",
+    "size": "4.40 MB",
+    "checksum": "bf8e3a15ad026b47903c98d625195d24",
+    "matrix": "-",
+    "s3_location": "https://s3.amazonaws.com/macchiato.clue.io/builds/LINCS2020/compoundinfo_beta.txt",
+    "version": "beta",
+    "year": 2020
+  }
+]

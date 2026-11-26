@@ -1,0 +1,10 @@
+{
+  "data/sample_usage.feather": "c227d567a63f54bb08ffc3f18dc983928ffad818a20b24dc696afc35a9b2556a",
+  "data/compound_split.csv": "9bdc965fa08151126e66ec8345e673a53876560d7286a2359344f6c86d669a02",
+  "data/source/instinfo_beta.txt": "2676189e8ea4a4cfdafc6c7e1b9f1776f4459ebfe4f79f6a736c3f3a732d3249",
+  "encoder/zinc.json": "9388f66952c5f95ba2ab157de0c6b81de9c342c290fef0549f3f824f6add5c1c",
+  "encoder/zinc_encoder.h5": "37e96cd3bc8f9680d3c2aa4d294a39e78f00a0decc22501bde23d5a464ac314a",
+  "vendor/PRnet/models/PRnet.py": "f27ac046f09035f72b921a467e60be04dfbde6c9818b55a413aea9619964a25e",
+  "vendor/PRnet/trainer/PRnetTrainer.py": "b932f8a1f113a1481613e6cf6cf9b640c17d8c67bb5f74596f2ac737140f2832",
+  "vendor/PRnet/data/_utils.py": "bfd08bc9fee3fe98f4196f288341ea29a1baaa1a5eddd3ead9c544df20eb9bd7"
+}

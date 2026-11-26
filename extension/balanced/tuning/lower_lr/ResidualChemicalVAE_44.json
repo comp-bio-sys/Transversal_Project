@@ -1,0 +1,24 @@
+{
+  "best_epoch": 20,
+  "val_nll": 0.08847099337586338,
+  "elapsed_seconds": 138.04418079182506,
+  "parameters": 1235620,
+  "variants": [
+    "ResidualChemicalVAE"
+  ],
+  "seeds": [
+    43,
+    44
+  ],
+  "learning_rate": 0.0003,
+  "weight_decay": 0.01,
+  "batch_size": 512,
+  "max_epochs": 50,
+  "patience": 7,
+  "selection": "validation Gaussian NLL only",
+  "device": "cpu",
+  "threads": 4,
+  "torch": "2.15.0",
+  "numpy": "2.5.4",
+  "split": "extension/split_indices.npz; unchanged from archived project"
+}

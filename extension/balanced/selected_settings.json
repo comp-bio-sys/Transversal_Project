@@ -1,0 +1,7 @@
+{
+  "ResidualFCFP4": "lower_decay",
+  "Residual": "lower_lr",
+  "ResidualChemicalVAE": "lower_lr",
+  "PRnet": "lower_lr",
+  "ControlOnly": "lower_lr"
+}

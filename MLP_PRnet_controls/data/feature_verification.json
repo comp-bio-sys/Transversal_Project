@@ -1,0 +1,14 @@
+{
+  "FCFP4": {
+    "compounds": 10228,
+    "max_abs_difference": 0.0
+  },
+  "ECFP4": {
+    "compounds": 10228,
+    "max_abs_difference": 0.0
+  },
+  "ChemicalVAE": {
+    "compounds": 10228,
+    "max_abs_difference": 0.0
+  }
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "file": "GPL10558.annot.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/platforms/GPL10nnn/GPL10558/annot/GPL10558.annot.gz",
+    "sha256": "c914fdbe1130906ce3b9c97f5a75280591c89c617c168fb687c641f683e76b45"
+  },
+  {
+    "file": "GPL6244.annot.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/platforms/GPL6nnn/GPL6244/annot/GPL6244.annot.gz",
+    "sha256": "99ee70f87e02c75ff1c8dc57b6c40c0482c7ef2760e004301315ac34344ac6dc"
+  },
+  {
+    "file": "GPL96.annot.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/platforms/GPLnnn/GPL96/annot/GPL96.annot.gz",
+    "sha256": "88e0b22362bac779eb220b3b185c80faa6510a92b9358eaad159a561ab4351c4"
+  },
+  {
+    "file": "GSE113505_counts.gz",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE113505&format=file&file=GSE113505_raw_counts_GRCh38.p13_NCBI.tsv.gz&type=rnaseq_counts",
+    "sha256": "99eb4b1c3078a3c8d765919fabbc1a46f0278891683bdaf7938658dfd64d435d"
+  },
+  {
+    "file": "GSE113505_series_matrix.txt.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE113nnn/GSE113505/matrix/GSE113505_series_matrix.txt.gz",
+    "sha256": "bccaa0090cbdddc94e2d0784026617346d192c8eb397e5305000b1ed05acb4a2"
+  },
+  {
+    "file": "GSE153871_counts.gz",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE153871&format=file&file=GSE153871_raw_counts_GRCh38.p13_NCBI.tsv.gz&type=rnaseq_counts",
+    "sha256": "20e2b94dd8a613a17766bec1a832ebb93049d6e2ea4fcce9deb96a749fe9b986"
+  },
+  {
+    "file": "GSE153871_series_matrix.txt.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE153nnn/GSE153871/matrix/GSE153871_series_matrix.txt.gz",
+    "sha256": "93777f0e3c94eba2f17d582249b05debbeea30240353c40cb57d5efc78ab0d7b"
+  },
+  {
+    "file": "GSE200700_counts.gz",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE200700&format=file&file=GSE200700_raw_counts_GRCh38.p13_NCBI.tsv.gz&type=rnaseq_counts",
+    "sha256": "d5132260e7c43459836e1718c96716256aa67b37b2914a528d20d76f3a6c005a"
+  },
+  {
+    "file": "GSE200700_series_matrix.txt.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE200nnn/GSE200700/matrix/GSE200700_series_matrix.txt.gz",
+    "sha256": "d726738464d265ebf28f29e34a5575f35d3544f76da714863881cd77382deb51"
+  },
+  {
+    "file": "GSE218402_counts.gz",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE218402&format=file&file=GSE218402_raw_counts_GRCh38.p13_NCBI.tsv.gz&type=rnaseq_counts",
+    "sha256": "127117ded3a20c3a087b8339d1adcf4615d88de7468ffb9619f588d195c28a80"
+  },
+  {
+    "file": "GSE218402_series_matrix.txt.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE218nnn/GSE218402/matrix/GSE218402_series_matrix.txt.gz",
+    "sha256": "2a74b34a5d507872d36a3ff3f747834c2c491d86a072f688d4af3736e8856985"
+  },
+  {
+    "file": "GSE225537_counts.gz",
+    "url": "https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE225537&format=file&file=GSE225537_raw_counts_GRCh38.p13_NCBI.tsv.gz&type=rnaseq_counts",
+    "sha256": "a0ecfcddcf59a6bde56b4d20cd1ba6486971410dcf2fde732f88a39fc08b3b0b"
+  },
+  {
+    "file": "GSE225537_series_matrix.txt.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE225nnn/GSE225537/matrix/GSE225537_series_matrix.txt.gz",
+    "sha256": "e7bf831b1377584159a8a83b665e353c4bfa4b6e7400197bf483deb8fdf784ff"
+  },
+  {
+    "file": "GSE2450_series_matrix.txt.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE2nnn/GSE2450/matrix/GSE2450_series_matrix.txt.gz",
+    "sha256": "e3ede4b042db5799592b827763e01589da9fd93e785afc05b2d987dfd9a5a4bb"
+  },
+  {
+    "file": "GSE42872_series_matrix.txt.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE42nnn/GSE42872/matrix/GSE42872_series_matrix.txt.gz",
+    "sha256": "c60edc7072933b7bb9c8a99cd9afa3f56fc53309a4e26a9c3d4027c37cd978a1"
+  },
+  {
+    "file": "GSE59008_series_matrix.txt.gz",
+    "url": "https://ftp.ncbi.nlm.nih.gov/geo/series/GSE59nnn/GSE59008/matrix/GSE59008_series_matrix.txt.gz",
+    "sha256": "49224f2ee6d03850dfed0765a901df12d324d5c54868d322d6e4f5303b200006"
+  }
+]

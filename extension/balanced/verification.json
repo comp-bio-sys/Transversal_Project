@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "published_PRnet_network_classes_match": true,
+  "training_compounds": 8168,
+  "max_similarity_to_eligible_external": 0.5882352941176471,
+  "external_studies": 7,
+  "external_directions": 42,
+  "clear_directions": 15,
+  "joint_split_rows": {
+    "train": 168883,
+    "val": 20194,
+    "test": 5574
+  },
+  "checked_checkpoints": 61,
+  "historical_tests_reused": true,
+  "interpretation": "Verified implementation and stored outcomes; this is not independent replication."
+}

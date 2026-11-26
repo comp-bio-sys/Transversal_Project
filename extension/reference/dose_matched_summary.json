@@ -1,0 +1,19 @@
+{
+  "model": "PRnet_source",
+  "checkpoint": "extension/reference/PRnet.pt",
+  "checkpoint_sha256": "96d4a2956a3b0b1eb3d99f98cc26e3822cf8e4f45eb235d1e6302d12126550a1",
+  "training_seed": 42,
+  "decoder_noise_seed": 1042,
+  "decoder_draws": 32,
+  "normalization": "Cell-matched mean controls are rescaled to the training median total and transformed with natural log1p.",
+  "training_median_total": 8231.2373046875,
+  "predicted_response": "Mean of decoder predictions minus the transformed control.",
+  "all_measured_rows": 47,
+  "eligible_filter": "chemical_split == 'eligible' and measured_change != 0",
+  "eligible_directions": 42,
+  "eligible_studies": 7,
+  "correct_directions": 24,
+  "accuracy": 0.5714285714285714,
+  "original_predictions_sha256": "e7301c26d8c5259ff9230d46e853fe8a5bae1001accef84f98b4dda02079b790",
+  "scope": "Separate source-recipe sensitivity analysis; not pooled with the shared-budget benchmark."
+}

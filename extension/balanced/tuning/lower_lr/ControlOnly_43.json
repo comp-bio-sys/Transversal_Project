@@ -1,0 +1,23 @@
+{
+  "best_epoch": 54,
+  "val_nll": 0.07845682029380549,
+  "elapsed_seconds": 246.22341574984603,
+  "parameters": 1135268,
+  "variants": [
+    "ControlOnly"
+  ],
+  "seeds": [
+    43
+  ],
+  "learning_rate": 0.0003,
+  "weight_decay": 0.01,
+  "batch_size": 512,
+  "max_epochs": 150,
+  "patience": 7,
+  "selection": "validation Gaussian NLL only",
+  "device": "cpu",
+  "threads": 4,
+  "torch": "2.15.0",
+  "numpy": "2.5.4",
+  "split": "extension/split_indices.npz; unchanged from archived project"
+}

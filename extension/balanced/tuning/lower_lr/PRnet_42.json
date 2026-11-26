@@ -1,0 +1,23 @@
+{
+  "best_epoch": 74,
+  "val_nll": 0.2571751840202616,
+  "elapsed_seconds": 361.09280433296226,
+  "parameters": 551204,
+  "variants": [
+    "PRnet"
+  ],
+  "seeds": [
+    42
+  ],
+  "learning_rate": 0.0003,
+  "weight_decay": 0.01,
+  "batch_size": 512,
+  "max_epochs": 150,
+  "patience": 7,
+  "selection": "validation Gaussian NLL only",
+  "device": "cpu",
+  "threads": 4,
+  "torch": "2.15.0",
+  "numpy": "2.5.4",
+  "split": "extension/split_indices.npz; unchanged from archived project"
+}

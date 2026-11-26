@@ -1,0 +1,8 @@
+{
+  "epochs": 110,
+  "best_epoch": 88,
+  "best_val_sampled_mse": 0.020012984052300453,
+  "training_median_total": 8231.2373046875,
+  "external_correct": 24,
+  "external_pairs": 38
+}

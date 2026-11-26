@@ -1,0 +1,13 @@
+{
+  "training_rows": 210438,
+  "alpha_candidates": [
+    0.0001,
+    0.001,
+    0.01,
+    0.1
+  ],
+  "selection": "validation MSE only",
+  "ridge_objective": "mean squared residual error plus alpha times coefficient squared norm",
+  "inputs": "ECFP4 + train-standardized control expression; unpenalized intercept",
+  "cell_mean_unseen_cell_fallback": "global training mean response"
+}

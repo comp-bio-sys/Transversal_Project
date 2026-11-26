@@ -1,0 +1,48 @@
+drug_id,genes,predicted_change,model,seed,gse_id,cell,drug,n_control,n_treated,measured_change,separated_replicates,clear_change,chemical_split,expression_scale,logFC,correct
+D02529,AKT1,-0.03450965881347656,PRnet_source,42,GSE218402,A549,norepinephrine,2,2,-0.19901662197966274,True,False,training analogue,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D03575,AKT1,0.057645559310913086,PRnet_source,42,GSE153871,U2OS,cytarabine,3,3,0.1849915037336416,True,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D04608,AKT1,-0.013863563537597656,PRnet_source,42,GSE2450,HUVEC,atorvastatin,2,2,-0.7975995432651537,True,True,eligible,per-sample median of uniquely mapped log2 probe intensities,,True
+D04729,AKT1,-0.023075103759765625,PRnet_source,42,GSE200700,HEPG2,caffeine,3,3,-0.06541190073640912,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D05123,AKT1,-0.01322793960571289,PRnet_source,42,GSE59008,MDAMB231,fluvastatin,3,2,-0.26803688333333575,True,False,eligible,per-sample median of uniquely mapped log2 probe intensities,,True
+D06161,AKT1,-0.042893409729003906,PRnet_source,42,GSE225537,HEPG2,sorafenib,4,4,-0.20711008037022438,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D07670,AKT1,-0.03224444389343262,PRnet_source,42,GSE42872,A375,vemurafenib,3,3,-0.19566666666666777,True,False,eligible,per-sample median of uniquely mapped log2 probe intensities,,True
+D10157,AKT1,-0.017961740493774414,PRnet_source,42,GSE113505,MCF10A,emetine,2,2,-1.679326400532208,True,True,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,-1.70748394652042,True
+D02529,AURKB,-0.003202676773071289,PRnet_source,42,GSE218402,A549,norepinephrine,2,2,-1.7165014523692381,False,False,training analogue,log2 size-factor-normalized gene count + pseudocount 0.5,-1.97587226096174,True
+D03575,AURKB,0.045890092849731445,PRnet_source,42,GSE153871,U2OS,cytarabine,3,3,-0.3340881492643444,True,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D04608,AURKB,0.02047562599182129,PRnet_source,42,GSE2450,HUVEC,atorvastatin,2,2,-3.2573364282994373,True,True,eligible,per-sample median of uniquely mapped log2 probe intensities,-3.39948815434132,False
+D04729,AURKB,0.013160467147827148,PRnet_source,42,GSE200700,HEPG2,caffeine,3,3,0.13415432882059442,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D05123,AURKB,0.010785818099975586,PRnet_source,42,GSE59008,MDAMB231,fluvastatin,3,2,-0.38955736750000014,True,False,eligible,per-sample median of uniquely mapped log2 probe intensities,,False
+D06161,AURKB,-0.01329493522644043,PRnet_source,42,GSE225537,HEPG2,sorafenib,4,4,0.10843270468020094,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D07670,AURKB,-0.018737077713012695,PRnet_source,42,GSE42872,A375,vemurafenib,3,3,-1.2762666666666664,True,True,eligible,per-sample median of uniquely mapped log2 probe intensities,-1.25718527777778,True
+D10157,AURKB,-0.004447460174560547,PRnet_source,42,GSE113505,MCF10A,emetine,2,2,-0.06374383002840922,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D03575,EGFR,0.12808561325073242,PRnet_source,42,GSE153871,U2OS,cytarabine,3,3,-0.18535437756161066,True,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D04608,EGFR,0.1932297945022583,PRnet_source,42,GSE2450,HUVEC,atorvastatin,2,2,0.974078525647748,True,True,eligible,per-sample median of uniquely mapped log2 probe intensities,,True
+D04729,EGFR,0.009937524795532227,PRnet_source,42,GSE200700,HEPG2,caffeine,3,3,-0.37563897793610224,True,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D05123,EGFR,-0.07297611236572266,PRnet_source,42,GSE59008,MDAMB231,fluvastatin,3,2,-0.1675772775000004,True,False,eligible,per-sample median of uniquely mapped log2 probe intensities,,True
+D06161,EGFR,-0.004356503486633301,PRnet_source,42,GSE225537,HEPG2,sorafenib,4,4,-0.0075026544560348185,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D07670,EGFR,-0.016874074935913086,PRnet_source,42,GSE42872,A375,vemurafenib,3,3,-1.2489966666666659,True,True,eligible,per-sample median of uniquely mapped log2 probe intensities,-1.29726722222222,True
+D10157,EGFR,-0.05532574653625488,PRnet_source,42,GSE113505,MCF10A,emetine,2,2,1.3330526648189132,True,True,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,1.3426343719998,False
+D02529,PIK3CA,-0.010779380798339844,PRnet_source,42,GSE218402,A549,norepinephrine,2,2,0.36261423206247656,True,False,training analogue,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D03575,PIK3CA,-0.005619525909423828,PRnet_source,42,GSE153871,U2OS,cytarabine,3,3,-0.033079800749183264,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D04608,PIK3CA,0.05189657211303711,PRnet_source,42,GSE2450,HUVEC,atorvastatin,2,2,-0.21724415955037202,False,False,eligible,per-sample median of uniquely mapped log2 probe intensities,,False
+D04729,PIK3CA,-0.024718284606933594,PRnet_source,42,GSE200700,HEPG2,caffeine,3,3,0.040304461660909396,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D05123,PIK3CA,0.13354921340942383,PRnet_source,42,GSE59008,MDAMB231,fluvastatin,3,2,-0.16850820549999934,True,False,eligible,per-sample median of uniquely mapped log2 probe intensities,,False
+D06161,PIK3CA,0.01638174057006836,PRnet_source,42,GSE225537,HEPG2,sorafenib,4,4,1.0241470820893763,True,True,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,1.18538613797635,True
+D07670,PIK3CA,0.06493139266967773,PRnet_source,42,GSE42872,A375,vemurafenib,3,3,0.10403666666666567,False,False,eligible,per-sample median of uniquely mapped log2 probe intensities,,True
+D10157,PIK3CA,0.04349637031555176,PRnet_source,42,GSE113505,MCF10A,emetine,2,2,0.2572101599542549,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D02529,SMAD3,-0.010019063949584961,PRnet_source,42,GSE218402,A549,norepinephrine,2,2,0.3567972426728776,True,False,training analogue,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D03575,SMAD3,-0.0014560222625732422,PRnet_source,42,GSE153871,U2OS,cytarabine,3,3,-0.23220474468057262,True,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D04608,SMAD3,-0.05649232864379883,PRnet_source,42,GSE2450,HUVEC,atorvastatin,2,2,0.2503164737827106,False,False,eligible,per-sample median of uniquely mapped log2 probe intensities,,False
+D04729,SMAD3,0.004108905792236328,PRnet_source,42,GSE200700,HEPG2,caffeine,3,3,0.1364446300235187,True,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D05123,SMAD3,-0.05935239791870117,PRnet_source,42,GSE59008,MDAMB231,fluvastatin,3,2,0.5501121700000002,True,True,eligible,per-sample median of uniquely mapped log2 probe intensities,,False
+D06161,SMAD3,-0.00903177261352539,PRnet_source,42,GSE225537,HEPG2,sorafenib,4,4,0.22193264941985547,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D07670,SMAD3,-0.007769584655761719,PRnet_source,42,GSE42872,A375,vemurafenib,3,3,-0.6398866666666656,True,True,eligible,per-sample median of uniquely mapped log2 probe intensities,,True
+D10157,SMAD3,-0.03291177749633789,PRnet_source,42,GSE113505,MCF10A,emetine,2,2,0.6689060133546096,True,True,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D02529,TP53,0.0866096019744873,PRnet_source,42,GSE218402,A549,norepinephrine,2,2,-0.05449056674522268,False,False,training analogue,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D03575,TP53,0.09618782997131348,PRnet_source,42,GSE153871,U2OS,cytarabine,3,3,-0.6277585217353963,True,True,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,False
+D04608,TP53,0.06018996238708496,PRnet_source,42,GSE2450,HUVEC,atorvastatin,2,2,-0.6547759237780237,True,True,eligible,per-sample median of uniquely mapped log2 probe intensities,,False
+D04729,TP53,0.07577681541442871,PRnet_source,42,GSE200700,HEPG2,caffeine,3,3,0.20347082269267958,True,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D05123,TP53,0.027801990509033203,PRnet_source,42,GSE59008,MDAMB231,fluvastatin,3,2,-0.017838927666664617,False,False,eligible,per-sample median of uniquely mapped log2 probe intensities,,False
+D06161,TP53,0.08556962013244629,PRnet_source,42,GSE225537,HEPG2,sorafenib,4,4,0.8180964319766257,True,True,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,True
+D07670,TP53,0.08257389068603516,PRnet_source,42,GSE42872,A375,vemurafenib,3,3,0.5995333333333317,True,True,eligible,per-sample median of uniquely mapped log2 probe intensities,,True
+D10157,TP53,0.03702211380004883,PRnet_source,42,GSE113505,MCF10A,emetine,2,2,-0.10257133542993557,False,False,eligible,log2 size-factor-normalized gene count + pseudocount 0.5,,False

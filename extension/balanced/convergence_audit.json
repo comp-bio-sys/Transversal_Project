@@ -1,0 +1,22 @@
+{
+  "initial_epoch_cap": 50,
+  "extended_epoch_cap": 150,
+  "patience": 7,
+  "rule": "Every completed trial reaching 50 epochs without patience stopping is refitted from its original seed with a cap of 150. Trials that already stopped are unchanged.",
+  "selection": "The same three settings are re-ranked by seed-42 validation NLL. Any newly selected setting is then fitted for seeds 43 and 44.",
+  "test_results_used": false,
+  "extended_trials": [
+    {
+      "checkpoint": "tuning/lower_lr/PRnet_42.json",
+      "old_epochs": 50,
+      "new_epochs": 81,
+      "first_50_epoch_max_nll_difference": 0.0
+    },
+    {
+      "checkpoint": "tuning/lower_lr/ControlOnly_43.json",
+      "old_epochs": 50,
+      "new_epochs": 61,
+      "first_50_epoch_max_nll_difference": 0.0
+    }
+  ]
+}

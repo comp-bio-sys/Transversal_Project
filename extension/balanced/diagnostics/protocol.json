@@ -1,0 +1,20 @@
+{
+  "model_selection": "validation NLL only; selected settings reused unchanged",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "permutation_draws": 20,
+  "permutation": "Chemical feature rows permuted within matched control group, same draws for every model and seed. Low-similarity scores restrict target rows; donor pool is the full internal test group.",
+  "empirical_control_resampling": "Twenty draws using half the measured DMSO replicates per plate (minimum one), without replacement.",
+  "PRnet_decoder_noise_draws": 32,
+  "noise_levels": [
+    0,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "synthetic_noise": "Independent Gaussian gene noise, scaled by within-plate DMSO replicate SD; a shared draw is added to all profiles on the same plate.",
+  "limits": "Already examined test sets; exploratory. Noise/permutation draws are technical repeats, not new biological replicates."
+}

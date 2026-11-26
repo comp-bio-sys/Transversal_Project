@@ -1,0 +1,16 @@
+model,setting,val_nll,best_epoch
+ResidualFCFP4,default,0.10800376239781012,2
+ResidualFCFP4,lower_lr,0.09747691269536585,7
+ResidualFCFP4,lower_decay,0.08833854198396655,7
+Residual,default,0.08464880684932673,7
+Residual,lower_lr,0.08372464548765358,7
+Residual,lower_decay,0.09287328267408629,2
+ResidualChemicalVAE,default,0.1105333868900714,4
+ResidualChemicalVAE,lower_lr,0.08991872280800613,17
+ResidualChemicalVAE,lower_decay,0.10232339442935715,7
+PRnet,default,0.2922553423474165,15
+PRnet,lower_lr,0.2571751840202616,74
+PRnet,lower_decay,0.2772755965963154,19
+ControlOnly,default,0.09070118339040914,15
+ControlOnly,lower_lr,0.08285012330834758,23
+ControlOnly,lower_decay,0.09076572822383966,15

@@ -1,0 +1,5 @@
+{
+  "NLL": "Gaussian marginal negative log likelihood, omitting 0.5*log(2*pi); for PRnet, log-average density across 32 decoder draws per gene.",
+  "interval": "Mean +/- 1.96 marginal standard deviations. Exact Gaussian interval for MLP; moment-matched Gaussian approximation to PRnet mixture.",
+  "limits": "Marginal profile-gene coverage, not joint 978-gene coverage or confidence in a biological effect. Descriptive on previously examined sets; no post-hoc calibration."
+}

@@ -1,0 +1,32 @@
+{
+  "best_epoch": 5,
+  "val_nll": 0.07991883997561772,
+  "elapsed_seconds": 71.6123677501455,
+  "parameters": 1659556,
+  "variants": [
+    "ResidualFCFP4",
+    "Residual",
+    "ResidualChemicalVAE",
+    "PRnet",
+    "ControlOnly",
+    "Direct",
+    "DirectZeroInit",
+    "ResidualRandomInit"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "learning_rate": 0.001,
+  "weight_decay": 0.01,
+  "batch_size": 512,
+  "max_epochs": 50,
+  "patience": 7,
+  "selection": "validation Gaussian NLL only",
+  "device": "cpu",
+  "threads": 4,
+  "torch": "2.15.0",
+  "numpy": "2.5.4",
+  "split": "extension/split_indices.npz; unchanged from archived project"
+}
