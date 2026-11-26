@@ -54,7 +54,7 @@ This is a focused methodological review, not a claim to benchmark every publishe
 
 ![pipeline](../presentation/figures/pipeline.png)
 
-Figure 1. The six steps are data assembly, control pairing, cohort screening, molecular encoding, validation-based selection and held-out evaluation. Each encoding feeds a separate MLP; PRnet and baselines use the same eligible samples. Icons and expression strips are schematic, while sample counts come from the data audit.
+Figure 1. Data assembly, control pairing, screening, encoding, validation-based selection and held-out evaluation. The blue dish represents the control input; the orange dish represents the measured treated target. Caffeine illustrates the molecular input. Control replicates are averaged per gene; output tiles denote predicted expression values. Dishes and colors are schematic; counts come from the audit.
 
 ### What enters the model
 

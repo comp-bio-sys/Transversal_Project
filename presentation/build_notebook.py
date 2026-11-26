@@ -74,7 +74,7 @@ print('Test compounds with identical ECFP4 to training:', audit['test_compounds_
 5. Select settings and checkpoints using validation NLL, with the same tuning budget and three seeds.
 6. Compare held-out predictions with measurements and baselines, then examine chemical dependence, noise and uncertainty.
 
-Cell icons, feature grids and expression strips are schematic. Their colors do not represent measured values; sample counts and result plots come from the saved analyses. External GEO predictions use a cell-specific mean of LINCS control groups. GEO treated and control samples determine the observed gene directions, so platform differences remain."""
+The blue DMSO dish represents the baseline input, and the orange treated dish represents the measured target. Caffeine is an example of the molecular structure encoded as SMILES. The dishes are illustrations, not microscopy; see `presentation/data/README.md`. Replicate rows share gene columns and are averaged per gene. Each output tile denotes a predicted gene-expression value. Schematic colors do not represent measurements; sample counts and result plots come from the saved analyses. External GEO predictions use a cell-specific mean of LINCS control groups. GEO treated and control samples determine the observed gene directions, so platform differences remain."""
     )
     md(
         """## 2. Models and fitting

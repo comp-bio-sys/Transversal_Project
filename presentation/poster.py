@@ -75,7 +75,7 @@ def main():
     text(32, 797, "Chemical MLPs have lower MSE than PRnet here; simple baselines remain strongest.", 28, INK, True)
     text(32, 810, "External differences remain uncertain; only 15/42 labels show clear changes. Reused test sets make these findings exploratory.", 20, MUTED)
     text(24, 829, "Qi et al., Nature Communications (2024), doi:10.1038/s41467-024-53457-1  ·  Wei et al., Nature Methods (2026), doi:10.1038/s41592-025-02980-0", 15, MUTED)
-    text(1165, 829, "Project code, data definitions and uncertainty analyses: full report and notebook", 15, MUTED, ha="right")
+    text(1165, 829, "Culture dishes are illustrative; all result plots use project measurements.", 15, MUTED, ha="right")
 
     fig.canvas.draw()
     renderer = fig.canvas.get_renderer()

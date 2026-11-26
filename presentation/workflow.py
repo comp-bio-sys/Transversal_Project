@@ -1,18 +1,24 @@
 """Vector overview of the data preparation, fitting and evaluation procedure."""
 
 import numpy as np
-from matplotlib.patches import Circle, Ellipse, Rectangle, FancyArrowPatch, Polygon
+import json
+from pathlib import Path
+import matplotlib.image as mimage
+from matplotlib.patches import Circle, Rectangle, FancyArrowPatch, Polygon
 from matplotlib.colors import to_rgb
 
 INK = "#202A31"
 MUTED = "#586A75"
 BLUE, TEAL, PURPLE, ORANGE = "#2878A5", "#078478", "#9268A1", "#BE6C37"
+DATA = Path(__file__).resolve().parent / "data"
 
 
 def draw_workflow(ax, scale=1.0, title=True):
     """Draw on a 180 by 66 canvas; all illustrative marks are schematic."""
     ax.set(xlim=(0, 180), ylim=(66, 0), aspect="equal")
     ax.axis("off")
+    culture_image = mimage.imread(DATA / "cultures.png")
+    compound = json.loads((DATA / "caffeine.json").read_text())
 
     def text(x, y, s, size=10, color=INK, bold=False, ha="left", va="top"):
         return ax.text(x, y, s, fontsize=size * scale, color=color,
@@ -38,20 +44,25 @@ def draw_workflow(ax, scale=1.0, title=True):
         text(x + 4.5, y + .15, label, 12, bold=True)
 
     def cells(x, y, c, s=1):
-        ax.add_patch(Ellipse((x, y + .5*s), 9*s, 5.5*s, fc="#F6F9FA", ec=c,
-                             lw=.8 * scale))
-        for dx, dy in [(-2,-.3),(-.2,1),(1.6,-.6),(.1,-1.2),(2,1.1)]:
-            ax.add_patch(Ellipse((x+dx*s,y+dy*s),2.4*s,1.8*s,angle=dx*18,
-                                 fc=c, ec="white", alpha=.55, lw=.5*scale))
-            ax.add_patch(Circle((x+dx*s,y+dy*s),.32*s,fc=c))
+        h,w = culture_image.shape[:2]
+        control = culture_image[int(h*.15):int(h*.97),:w//2]
+        width = 9*s
+        height = width * control.shape[0] / control.shape[1]
+        ax.imshow(control,extent=(x-width/2,x+width/2,y+height/2,y-height/2),
+                  interpolation="antialiased",zorder=3)
 
     def molecule(x, y, c=INK, s=1):
-        pts = [(x+1.9*s*np.cos(t), y+1.9*s*np.sin(t))
-               for t in np.linspace(0,2*np.pi,7)]
-        line(pts,c,1)
-        line([(x+1.9*s,y),(x+3.2*s,y-.8*s),(x+4.2*s,y+.1*s)],c,1)
-        line([(x-1.9*s,y),(x-3*s,y-1.1*s)],c,1)
-        text(x-4*s,y-2.2*s,"N",7,c)
+        coords = np.asarray(compound["xy"])*[s,-s]+[x,y]
+        for start,end,order in compound["bonds"]:
+            a,b = coords[start],coords[end]
+            direction = (b-a)/np.linalg.norm(b-a)
+            offset = .06*s*np.array([-direction[1],direction[0]])
+            for shift in ([-offset,offset] if order==2 else [np.zeros(2)]):
+                line([a+shift,b+shift],c,.8)
+        for (xx,yy),symbol in zip(coords,compound["symbols"]):
+            if symbol in ("N","O"):
+                ax.text(xx,yy,symbol,fontsize=6.5*scale,color=c,ha="center",va="center",
+                        bbox={"fc":"white","ec":"none","pad":.1},zorder=5)
 
     def matrix(x, y, w=10, h=4, c=TEAL, rows=3, binary=False):
         rgb = np.array(to_rgb(c))
@@ -80,24 +91,38 @@ def draw_workflow(ax, scale=1.0, title=True):
     rect(58,0,60,21,"#F1F7F5")
     rect(121,0,59,21,"#F7F5F0")
     step(1,2,1,"Assemble observed experiments")
-    cells(8,9,TEAL)
-    molecule(19,8,BLUE,.8)
-    text(14,8,"+",13,ha="center")
-    arrow((24,9),(29,9))
-    matrix(31,6,20,5,BLUE,4)
-    text(41,11.7,"978 measured genes",8.5,ha="center")
-    text(3,14.5,"LINCS Level 3 · 10 µM · 24 h",10,bold=True)
-    text(3,17.6,"298,470 selected treatment profiles + fixed split IDs",8.5)
+    ax.imshow(culture_image,extent=(1.5,25.5,16.7,4.7),interpolation="antialiased",zorder=3)
+    text(7.5,17.2,"DMSO control",8.5,BLUE,True,ha="center")
+    text(7.5,19.1,"Baseline input",7.4,MUTED,ha="center")
+    text(19.5,17.2,"Treated cells",8.5,ORANGE,True,ha="center")
+    text(19.5,19.1,"Measured target",7.4,MUTED,ha="center")
+    text(40,4.9,"Compound structure / SMILES",8.1,INK,True,ha="center")
+    molecule(40,9.5,INK,.93)
+    text(40,12.8,"Caffeine shown as an example",7.1,MUTED,ha="center")
+    text(28,15.4,"10 µM · 24 h · 978 genes",8.6,bold=True)
+    text(28,17.8,"298,470 selected profiles",7.8)
+    text(28,19.2,"LINCS Level 3 · fixed split IDs",7.8)
     arrow((55.2,10),(57.8,10))
 
     step(2,60,1,"Pair each treatment with controls")
-    cells(65,8.4,TEAL,.8)
+    cells(65,8.4,TEAL,.85)
     text(65,11.7,"DMSO",8,ha="center")
-    arrow((70,8.5),(74,8.5),TEAL)
-    matrix(75,6,9,5,TEAL,3)
-    arrow((85,8.5),(89,8.5),TEAL)
-    matrix(90,7,9,3,TEAL,1)
-    text(104,6.8,"Average replicates\n→ control vector c",8.4)
+    arrow((70,8.5),(73,8.5),TEAL)
+    text(82,4.6,"Replicate profiles",8.2,TEAL,True,ha="center")
+    values = np.array([[.25,.75,.5,.3],[.35,.65,.6,.45],[.3,.7,.4,.3]])
+    rgb = np.array(to_rgb(TEAL))
+    for i,row in enumerate(values):
+        text(74.5,6.5+i*1.7,f"r{i+1}",6.8,MUTED,ha="right")
+        for j,v in enumerate(row):
+            rect(76+j*3.2,6.3+i*1.7,2.8,1.35,rgb*v+(1-v)*np.ones(3))
+    for x in [76,101]:
+        for j,label in enumerate(["g₁","g₂","…","g₉₇₈"]):
+            text(x+j*3.2+1.4,11.7,label,6.8,MUTED,ha="center")
+    arrow((90,8.5),(99,8.5),TEAL)
+    text(94.5,6.3,"Mean",7.8,TEAL,True,ha="center")
+    text(107,4.6,"Control c",8.2,TEAL,True,ha="center")
+    for j,v in enumerate(values.mean(axis=0)):
+        rect(101+j*3.2,7.6,2.8,1.8,rgb*v+(1-v)*np.ones(3))
     text(61,14.5,"Match detection plate + cell + time + bead batch",9,bold=True)
     text(61,17.6,"269,364 paired profiles · 47,995 measured controls",8.5)
     arrow((118.2,10),(120.8,10))
@@ -117,9 +142,11 @@ def draw_workflow(ax, scale=1.0, title=True):
     step(4,2,24,"Encode the same molecule; fit separate predictors")
     text(28,28.4,"Chemical input",8.7,MUTED,True)
     text(64,28.4,"Network",8.7,MUTED,True)
-    text(93,28.4,"978 predicted genes",8.7,MUTED,True)
+    text(101,27.1,"Predicted treated expression",8.3,MUTED,True,ha="center")
+    text(101,28.8,"One value for each of 978 genes",7.4,MUTED,ha="center")
     molecule(9,36.5,INK,1.3)
-    text(9,41,"Structure\n(SMILES)",9,ha="center")
+    text(9,41,"Compound SMILES",8.2,ha="center")
+    text(9,43,"Example: caffeine",7,MUTED,ha="center")
     line([(17,31.7),(17,46.7)],BLUE,.75)
     arrow((14,36.5),(17,36.5))
     text(49,25.8,"Measured control c → every model",8.5,TEAL)
@@ -144,12 +171,13 @@ def draw_workflow(ax, scale=1.0, title=True):
         else:
             network(65,y,c)
         text(72,y-1.1,model,10,c,True)
-        arrow((82,y),(90,y),c)
-        matrix(92,y-1.2,7,2.4,c,1)
-        text(101,y-1.15,"c + Δ̂" if model=="MLP" else "μ̂",10,c)
+        arrow((82,y),(88,y),c)
+        for j,value in enumerate(["ŷ₁","ŷ₂","…","ŷ₉₇₈"]):
+            rect(90.5+j*5.4,y-1.1,4.9,2.4,"white",c,.7)
+            text(92.95+j*5.4,y+.1,value,8.8,c,ha="center",va="center")
         if model == "PRnet":
-            text(101,y+.8,"Test: 32 draws",7.8,c)
-    text(23,49.1,"MLPs: 512 → 256 units; mean change + variance     |     PRnet: published generative architecture",8.2)
+            text(101,y+1.8,"Mean of 32 test draws",7.5,c,ha="center")
+    text(23,49.6,"MLPs: control + learned change     |     512 → 256 hidden units; mean change + variance",8.2)
 
     line([(119,24),(119,50.3)],"#D0DADF",.8)
     arrow((113,36.7),(122,36.7),INK)
