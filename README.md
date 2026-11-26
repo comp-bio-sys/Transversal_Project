@@ -93,7 +93,9 @@ All three chemical MLPs have higher loss than control-only on the low-similarity
 
 ![External regulation results by study](presentation/figures/external_studies.png)
 
-*Correct directions out of six genes per study, averaged across three training seeds. Studies, rather than individual genes, are the resampling unit for external uncertainty intervals.*
+*Each row is a compound and cell type from one external study; each column is a model. Values count correct up/down predictions out of six genes, averaged across three training runs. Higher values are better; darker cells indicate more correct predictions.*
+
+The six genes are AKT1, AURKB, EGFR, PIK3CA, SMAD3 and TP53. For each gene, we compare the predicted increase or decrease relative to controls with the direction measured in GEO. A value of **6.0** means all six directions were correct in every run. **4.7** is a rounded average across the three runs, not an expression value or percentage. The score tests the direction of change, not its magnitude. Studies, rather than individual genes, are the resampling unit for external uncertainty intervals.
 
 The control-only network has the highest mean count among the five networks. Chemical-MLP versus PRnet accuracy intervals all span zero. Only 15 of the 42 measured directions satisfy the descriptive clear-change rule, so this panel provides limited evidence for ranking models.
 

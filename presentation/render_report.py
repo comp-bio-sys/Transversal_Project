@@ -17,20 +17,18 @@ from reportlab.platypus import (
     Table,
     TableStyle,
     Preformatted,
-    Image,
     Flowable,
     KeepTogether,
 )
-from PIL import Image as PILImage
 from pypdf import PdfReader, PdfWriter, Transformation
 
 ROOT = Path(__file__).resolve().parent
 PROJECT = ROOT.parent
 WIDTH, HEIGHT = A4
 CONTENT_WIDTH = WIDTH - 88
-INK = colors.HexColor("#22323B")
-TEAL = colors.HexColor("#087F7A")
-LIGHT = colors.HexColor("#F0F5F6")
+INK = colors.HexColor("#171717")
+MUTED = colors.HexColor("#555555")
+LIGHT = colors.HexColor("#F3F3F3")
 
 
 def main():
@@ -57,7 +55,7 @@ def main():
             fontName="Inter",
             fontSize=9,
             leading=13,
-            textColor=TEAL,
+            textColor=INK,
             spaceAfter=12,
         ),
         "paragraph": ParagraphStyle(
@@ -75,7 +73,7 @@ def main():
             fontName="InterBold",
             fontSize=12,
             leading=16,
-            textColor=TEAL,
+            textColor=INK,
             spaceBefore=7,
             spaceAfter=8,
             keepWithNext=True,
@@ -85,7 +83,7 @@ def main():
             fontName="Inter",
             fontSize=8,
             leading=11,
-            textColor=colors.HexColor("#596B75"),
+            textColor=MUTED,
             spaceAfter=12,
         ),
         "cell": ParagraphStyle(
@@ -131,7 +129,6 @@ def main():
     for index, section in enumerate(document["pages"]):
         if index:
             flow.append(PageBreak())
-        flow.append(Paragraph(f"RESEARCH REPORT / {index+1:02d}", styles["subtitle"]))
         flow.append(Paragraph(section["title"], styles["title"]))
         if section["subtitle"]:
             flow.append(Paragraph(section["subtitle"], styles["subtitle"]))
@@ -181,7 +178,7 @@ def main():
                                 (0, -1),
                                 (-1, -1),
                                 0.5,
-                                colors.HexColor("#CAD7DC"),
+                                colors.HexColor("#CCCCCC"),
                             ),
                         ]
                     )
@@ -228,13 +225,8 @@ def main():
 
     def footer(canvas, doc):
         canvas.saveState()
-        canvas.setStrokeColor(colors.HexColor("#CAD7DC"))
-        canvas.line(44, 38, WIDTH - 44, 38)
         canvas.setFont("Inter", 8)
-        canvas.setFillColor(colors.HexColor("#596B75"))
-        canvas.drawString(
-            44, 25, "M2 GENIOMHE-AI  |  Chemical perturbation response prediction"
-        )
+        canvas.setFillColor(MUTED)
         canvas.drawRightString(WIDTH - 44, 25, str(doc.page))
         canvas.restoreState()
 
@@ -267,7 +259,7 @@ def main():
     )
     with report_path.open("wb") as stream:
         writer.write(stream)
-    css = """@font-face{font-family:Inter;src:url(presentation/data/Inter-Regular.ttf)}body{font:16px/1.6 Inter,Arial,sans-serif;color:#22323b;background:#edf2f4;margin:0}main{max-width:1000px;margin:auto;background:white;padding:48px}section{padding:12px 0 40px;border-bottom:1px solid #cad7dc}h1{font-size:30px;line-height:1.25}h2{font-size:20px;color:#087f7a}table{border-collapse:collapse;width:100%;font-size:14px;margin:20px 0}th,td{text-align:left;padding:10px;vertical-align:top}th{background:#22323b;color:white}tr:nth-child(even){background:#f0f5f6}img{max-width:100%}figure{margin:20px 0}figcaption,.subtitle{font-size:13px;color:#596b75}pre{background:#f0f5f6;padding:16px;overflow:auto}@media print{body{background:white}main{padding:0}section{break-before:page}h1,h2{break-after:avoid}table,figure{break-inside:avoid}}"""
+    css = """@font-face{font-family:Inter;src:url(presentation/data/Inter-Regular.ttf)}body{font:16px/1.6 Inter,Arial,sans-serif;color:#171717;background:#f3f3f3;margin:0}main{max-width:1000px;margin:auto;background:white;padding:48px}section{padding:12px 0 40px}h1{font-size:30px;line-height:1.25}h2{font-size:20px;color:#171717}table{border-collapse:collapse;width:100%;font-size:14px;margin:20px 0}th,td{text-align:left;padding:10px;vertical-align:top}th{background:#171717;color:white}tr:nth-child(even){background:#f3f3f3}a{color:inherit}img{max-width:100%}figure{margin:20px 0}figcaption,.subtitle{font-size:13px;color:#555555}pre{background:#f3f3f3;padding:16px;overflow:auto}@media print{body{background:white}main{padding:0}section{break-before:page}h1,h2{break-after:avoid}table,figure{break-inside:avoid}}"""
     htmltext = (
         '<!doctype html><html lang="en"><meta charset="utf-8"><title>'
         + html.escape(document["title"])

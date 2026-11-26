@@ -155,6 +155,13 @@ Seven eligible GEO studies each contribute six genes at 10 µM and 24 hours. For
 
 Observed directions use GEO treated and control samples. Predictions use LINCS cell-matched control references, so platform and culture differences remain. Norepinephrine is excluded because it has a training analogue. Small changes can have uncertain signs; the sensitivity subsets are not significance tests."""
     )
+    md(
+        """### Reading the external-study heatmap
+
+Each row is one compound tested in one cell type; each column is a model. For AKT1, AURKB, EGFR, PIK3CA, SMAD3 and TP53, we ask whether the predicted increase or decrease relative to controls agrees with the direction measured in the GEO experiment.
+
+Each cell counts correct directions out of six, averaged over three independently seeded training runs. Values range from 0 to 6: higher values and darker shading indicate more correct directions. A value of **6.0** means all six genes were correct in every run. **4.7** is a rounded mean across the three runs, not a gene-expression value or a percentage. This score measures direction, not the size of the expression change. The seven studies remain the independent clusters for uncertainty estimation."""
+    )
     code(
         """labels = pd.read_csv(PROJECT / 'dose_matched/measured_effects.csv')
 labels = labels.loc[labels.chemical_split.eq('eligible')]

@@ -107,7 +107,7 @@ def main():
         "The brief asks whether perturbation predictors are reliable enough to evaluate new compounds. Model complexity alone cannot answer that question. The comparison needs a common cohort, explicit generalization tests and baselines that reveal how much can be predicted from cellular context without chemical information."
     )
     table(
-        ["Approach", "Published idea", "Role in this project"],
+        ["Approach", "Published idea", "Implementation"],
         [
             [
                 "PRnet",
@@ -153,13 +153,16 @@ def main():
         "The input files define the common experiment. l1000_level3_filtered_train_clean.feather contains treated-expression targets; compound_split.csv assigns compounds to train, validation or test; sample_usage.feather identifies the selected sample IDs. The frozen ChemicalVAE encoder supplies molecular features."
     )
     p(
-        "Measured DMSO controls are paired with treated profiles. Chemical structure is encoded as FCFP4, ECFP4 or a ChemicalVAE vector. Each residual MLP adds a learned response to the observed control. Cell context therefore comes from gene expression rather than a cell-ID embedding; the model can receive a new cell line if a suitable control profile is available."
+        "Measured DMSO controls are paired with treated profiles. FCFP4 and ECFP4 encode chemical structure as 1,024 binary features (0 or 1); ChemicalVAE supplies 196 continuous encoder values. These are molecular descriptors, not gene-expression measurements. Each residual MLP adds a learned 978-gene response to the measured control. Control expression supplies the cell context, so a new cell line can be used when a suitable control is available."
     )
     code(
         "chemical features + standardized control\n    -> 512 hidden units -> 256 hidden units\n    -> predicted change and positive variance\npredicted treated expression = control + predicted change"
     )
 
     page("Data preparation and what the splits actually test")
+    p(
+        "One profile is one measured sample, represented by 978 gene-expression values. Rows of the expression matrix are profiles; columns are landmark genes. A compound can occur in several profiles, cell lines and experimental replicates, so a profile count is not a count of independent compounds. The values are supplied LINCS Level 3 expression measurements, not RNA-sequencing read counts, percentages or probabilities."
+    )
     table(
         ["Stage", "Retained profiles / details"],
         [
@@ -179,7 +182,7 @@ def main():
         ],
     )
     p(
-        "Internal controls match detection plate, cell line, exposure time and bead batch. Controls pass source quality flags, are DMSO vehicle profiles and use the 24-hour time point. Their mean supplies the control vector. Targets stay on the supplied Level 3 scale. Only the 978 measured landmark genes are modeled; inferred genes are excluded."
+        "Matched controls are quality-passed DMSO profiles from the same detection plate, cell line, 24-hour exposure and bead batch. Their mean is the 978-value control vector. Targets retain the supplied Level 3 scale: the preparation code applies no additional logarithm or target standardization. Control inputs are standardized gene by gene using training-only means and standard deviations. The residual prediction is then added to the original control values. Inferred genes are excluded."
     )
     p(
         "The original compound assignments are preserved for retained samples. Molecules above 0.7 ECFP4 Tanimoto similarity to the original external screening panel are excluded, as are SKBR3 and the separately named SKB line. The expanded seven-study panel was checked directly: all seven structures also remain at or below 0.7 similarity to the retained training molecules."
@@ -240,7 +243,10 @@ def main():
         "PRnet uses its published network classes with project-specific standardization, fitting and data pairing. Validation uses one fixed decoder-noise draw; final prediction averages 32 fixed draws. This is a shared-budget comparison on this cohort, not a reproduction of the article’s published numerical scores or proof that PRnet is optimally tuned. A separate source-recipe run in extension/reference trained for 110 epochs and selected epoch 88 at seed 42. Its dose-matched evaluation averages 32 fixed decoder draws and scores 24/42 directions. It uses different expression preprocessing; this one-seed sensitivity result is not pooled with the main comparison, and its raw MSE is on a different scale. The separate 24/38 score in its original summary uses the original external labels and one decoder draw, so it is not directly comparable to the dose-matched score."
     )
 
-    page("Generalization depends on the evaluation setting")
+    page("Performance across evaluation settings")
+    p(
+        "MSE is the mean squared difference between predicted and measured treated expression, averaged over profiles and genes. Lower is better; zero would mean exact prediction. Its units are squared Level 3 expression units. Values after ± show variation across the three training seeds. External counts instead measure how many of 42 gene directions were predicted correctly."
+    )
     table(
         ["Model", "Internal MSE", "SKBR3 MSE", "GEO correct, seeds 42 / 43 / 44"],
         [[NAMES[m], mse(m, "internal"), mse(m, "skbr3"), count(m)] for m in MODELS]
@@ -277,13 +283,13 @@ def main():
         ],
     )
     p(
-        "Response correlation is Pearson correlation across genes within each profile, averaged over profiles after subtracting the measured control from both target and prediction. Internal/SKBR3 direction uses absolute measured changes of at least 0.5 Level 3 units. These metrics address the response rather than only the full expression profile."
+        "Response r is Pearson correlation across the 978 genes after subtracting the matched control from both prediction and measurement, then averaging across profiles. It ranges from -1 to 1: a higher value means better agreement in the response pattern. The SKBR3 direction percentage counts correct up/down signs only where the measured absolute change is at least 0.5 Level 3 units. It measures sign agreement, not effect size."
     )
     reference = summary.loc[summary.phase.eq("reference")]
     ref = reference.loc[reference.model.eq("LeaveOneProfileOutResponse")].iloc[0]
     dm = reference.loc[reference.model.eq("DMSO")].iloc[0]
     p(
-        f"A leave-one-profile-out reference predicts a SKBR3 response from other treatment profiles of the same compound. Across {int(ref.profiles)} eligible profiles, its MSE is {ref.mse_mean:.4f}, versus {dm.mse_mean:.4f} for unchanged controls on exactly those rows. This indicates repeatable signal. It uses other test treatment replicates and is a diagnostic reference, not a deployable model or a guaranteed noise ceiling."
+        f"A leave-one-profile-out reference averages other test responses for the same compound. Across {int(ref.profiles)} eligible SKBR3 profiles, MSE is {ref.mse_mean:.4f}, versus {dm.mse_mean:.4f} for unchanged controls on those rows. This indicates repeatable signal, but uses test replicates: it is neither deployable nor a guaranteed noise ceiling."
     )
 
     page("A stricter test of unseen chemical structures")
@@ -312,7 +318,7 @@ def main():
         ],
     )
     p(
-        f"Unchanged-control MSE on these same rows is {mse('DMSO','internal_low_similarity','baseline')}. This subset gives a more demanding chemical-separation test than the original split, but it still includes control groups seen during training. It is distinct from the joint control-group holdout."
+        f"Low-similarity MSE gives equal weight to each profile; macro-compound MSE first averages profiles within a compound, then weights every compound equally. Response r measures the agreement of gene-response patterns. Unchanged-control MSE on these rows is {mse('DMSO','internal_low_similarity','baseline')}. This subset still includes control groups seen during training and is distinct from the joint control-group holdout."
     )
     strict_intervals = paired.loc[
         paired.dataset.eq("internal_low_similarity")
@@ -415,8 +421,14 @@ def main():
     page("External direction: seven studies, not 42 independent experiments")
     figure(
         "external_studies",
-        "Figure 5. Correct directions out of six genes for each GEO study, averaged across three training seeds. A study stays together when uncertainty intervals are calculated.",
-        275,
+        "Figure 5. Rows are compound/cell-line studies; columns are prediction models. Each value is the mean number of correct up/down directions among six genes across three training seeds. Scores range from 0 to 6; higher is better. Shading repeats this same score.",
+        235,
+    )
+    p(
+        "The six genes are AKT1, AURKB, EGFR, PIK3CA, SMAD3 and TP53. For each gene, the observed sign comes from GEO treated-minus-control expression; the predicted sign comes from model-predicted treated expression minus its LINCS control reference. Matching signs count as correct. This tests regulation direction, not the size of the expression change."
+    )
+    p(
+        "A value of 6.0 means that all six directions were correct in each of the three runs. A value such as 4.7 is a rounded average of integer counts across runs, not an expression level or a percentage. Summing the seven study scores before rounding gives the mean correct count out of 42 below. The six genes within a study are correlated, so uncertainty intervals resample whole studies, not individual heatmap cells."
     )
     table(
         ["Model", "All 42: mean correct", "Clear 15: mean correct"],
@@ -430,11 +442,11 @@ def main():
         ],
     )
     p(
-        "The all-label and clear-change counts describe the same fixed model predictions. The smaller subset reduces weak-label ambiguity but leaves only 15 observations across seven studies. Its construction and replicate counts are detailed on the previous page."
+        "The clear-change column scores the same predictions on the 15 stronger measured changes defined on the previous page. It uses a different denominator, so compare proportions or use the full 42-direction column when comparing total counts."
     )
     vote = external.loc[external.model.eq("TrainingGeneDirection")].iloc[0]
     p(
-        f"The training gene-direction baseline gets {int(vote['sum'])}/42 correct. Always predicting down would get 25/42 because the observed labels are imbalanced. Model inputs use LINCS cell-matched control references; observed GEO directions use GEO controls. Dose and time alignment does not remove platform, culture or treatment-context differences."
+        f"The training gene-direction baseline gets {int(vote['sum'])}/42 correct; always predicting down gets 25/42. Platform, culture and treatment-context differences remain despite matched dose and time."
     )
 
     page("How much external evidence favors one model?")
@@ -517,7 +529,7 @@ def main():
         ],
     )
     p(
-        "Coverage is the fraction of profile-gene targets inside mean ± 1.96 predicted standard deviations. PRnet uses the total variance across 32 decoder draws and a moment-matched Gaussian interval; its reported NLL instead averages the component densities before taking the log. Coverage is marginal, not simultaneous across all 978 genes. A variance head does not automatically provide confidence in a biological mechanism or a causal treatment effect."
+        "Coverage is the percentage of measured profile-gene values inside the model's predicted 95% interval (mean ± 1.96 standard deviations). A calibrated interval should cover about 95%; high coverage alone can also reflect overly wide intervals. NLL scores the predictive distribution, with lower values preferred. PRnet uses total variance across 32 decoder draws for its Gaussian interval, but averages component densities before calculating NLL. Coverage applies to individual gene values, not all 978 genes simultaneously or confidence in a treatment mechanism."
     )
 
     page("Separating architecture and experimental context")
@@ -630,13 +642,16 @@ def main():
         ],
     )
     p(
-        "The saved checkpoints are the epochs with the lowest validation NLL, not the last epoch. Some learning curves are unstable; preserving the complete curves and selected epochs makes that visible. The verification checks sample/compound separation, external chemical distances, subset-only scaling, checkpoint selection, score arithmetic and negative-control diagnostics. It verifies implementation consistency, not independent scientific replication."
+        "Checkpoints are selected by the lowest validation NLL. Complete learning curves are retained, including unstable runs. Verification checks sample and compound separation, chemical distances, training-only scaling, checkpoint selection, score arithmetic and negative controls. These are consistency checks, not independent scientific replication."
+    )
+    p(
+        f"The audit covers {verification['checked_checkpoints']} checkpoints, seven eligible studies and 42 external labels. Original train, validation and test assignments have no target-compound overlap. Audit details and checkpoint hashes are in extension/balanced/verification.json and checkpoint_manifest.csv."
     )
     code(
         "python -m pip install -r requirements.txt\npython run.py check\npython run.py evaluate\npython run.py figures\npython run.py report\npython run.py notebook"
     )
     p(
-        "Open Analysis.ipynb for the executed explanation and plots. Run python run.py train --fresh to repeat training. The full submission ZIP contains prepared expression arrays, encoder weights and checkpoints; restoring these bundled assets is required for verification and evaluation from a GitHub clone. The saved tables support rebuilding figures and reports without the large assets. Data locations and restoration instructions are in docs/DATA.md."
+        "Analysis.ipynb contains the executed analysis and plots. Run python run.py train --fresh to repeat training. The full submission ZIP contains prepared expression arrays, supplied splits, encoder weights, checkpoints and source-data checksums. Restore these assets before verification or evaluation from a GitHub clone; see docs/DATA.md. Figures and reports can be rebuilt from the saved tables alone. Main results are in extension/balanced; the separate source-recipe PRnet run is in extension/reference."
     )
 
     page("Relation to the brief and the next scientific step")
@@ -691,61 +706,21 @@ def main():
         "The supplied analyses cover the available cohort. Independent external validation and prospective experimental evidence remain separate research steps."
     )
 
-    page("Sources and provenance")
-    p(
-        "The project specification is included as docs/Project_brief.pdf. Main numerical results come from extension/balanced. The source-recipe PRnet comparison is stored separately in extension/reference and is not pooled with the main results. The supplied splits, molecular encoder files and relevant source-data checksums are included in the full submission package."
-    )
-    table(
-        ["Source", "Role"],
-        [
-            [
-                "Giard, M2 Research Project, 2026",
-                "Research questions, data restrictions and six external genes",
-            ],
-            [
-                "Subramanian et al., Cell 171, 1437–1452.e17 (2017). doi:10.1016/j.cell.2017.10.049",
-                "L1000 measurement framework",
-            ],
-            [
-                "Qi et al., Nature Communications 15, 9256 (2024). doi:10.1038/s41467-024-53457-1",
-                "PRnet architecture and published implementation",
-            ],
-            [
-                "Hetzel et al., NeurIPS 35 (2022). doi:10.52202/068431-1937",
-                "chemCPA and molecular-encoder transfer; literature context",
-            ],
-            [
-                "Hu et al., Quantitative Biology (2026). doi:10.1002/qub2.70016",
-                "PertDiT and conditional diffusion; literature context",
-            ],
-            [
-                "github.com/Perturbation-Response-Prediction/PRnet",
-                "Vendored network/training source; Apache-2.0 license retained",
-            ],
-            [
-                "PharmGEO authors’ release. doi:10.5281/zenodo.16556994",
-                "Study annotations and external chemical structures",
-            ],
-            [
-                "GSE153871, GSE2450, GSE200700, GSE59008, GSE225537, GSE42872, GSE113505",
-                "Seven eligible dose/time-matched external experiments",
-            ],
-            [
-                "Wei et al., Nature Methods 23, 451–464 (2026). doi:10.1038/s41592-025-02980-0",
-                "Motivation for generalization and baseline comparisons; a different single-cell benchmark",
-            ],
-            [
-                "Wu et al., PerturBench. arXiv:2408.10609",
-                "Complementary metrics and strong simple baselines",
-            ],
-        ],
-    )
-    p(
-        "The companion Published_Figures_Context.pdf explains selected figures from the supplied Wei et al. paper. Those published single-cell results are explicitly separate from this project’s bulk L1000 data. They do not supply additional observations for our numerical comparisons. Published figures retain their attribution and original rights statement."
-    )
-    p(
-        f"Final consistency checks: {verification['checked_checkpoints']} checkpoints audited; seven eligible studies and 42 labels verified; no target-compound overlap across the original train/validation/test assignments. The exact checks and checkpoint hashes are in extension/balanced/verification.json and checkpoint_manifest.csv."
-    )
+    page("References")
+    references = [
+        "Giard, A. M2 Research Project (2026). Project brief, IBISC.",
+        "Subramanian et al. A Next Generation Connectivity Map: L1000 Platform and the First 1,000,000 Profiles. Cell 171, 1437–1452.e17 (2017). doi:10.1016/j.cell.2017.10.049.",
+        "Qi et al. Predicting transcriptional responses to novel chemical perturbations using deep generative model for drug discovery. Nature Communications 15, 9256 (2024). doi:10.1038/s41467-024-53457-1.",
+        "Hetzel et al. Predicting Cellular Responses to Novel Drug Perturbations at a Single-Cell Resolution. Advances in Neural Information Processing Systems 35 (2022). doi:10.52202/068431-1937.",
+        "Hu et al. Predicting drug-perturbed transcriptional responses using multi-conditional diffusion transformer. Quantitative Biology 14(1), e70016 (2026). doi:10.1002/qub2.70016.",
+        "PRnet source code. https://github.com/Perturbation-Response-Prediction/PRnet. Apache-2.0 license.",
+        "PharmGEO data release. Zenodo. doi:10.5281/zenodo.16556994.",
+        "NCBI Gene Expression Omnibus: GSE153871, GSE2450, GSE200700, GSE59008, GSE225537, GSE42872 and GSE113505.",
+        "Wei et al. Benchmarking algorithms for generalizable single-cell perturbation response prediction. Nature Methods 23, 451–464 (2026). doi:10.1038/s41592-025-02980-0.",
+        "Wu et al. PerturBench: Benchmarking Machine Learning Models for Cellular Perturbation Analysis. arXiv:2408.10609.",
+    ]
+    for number, reference in enumerate(references, start=1):
+        p(f"{number}. {reference}")
     (PROJECT / "report_content.json").write_text(
         json.dumps(
             {"title": "Chemical perturbation response prediction", "pages": pages},
