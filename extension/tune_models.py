@@ -1,4 +1,4 @@
-"""Equal small validation-only tuning budget for the five main models."""
+"""Validation-only tuning for four chemical models and the control-only comparator."""
 
 from pathlib import Path
 import json

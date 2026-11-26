@@ -3,116 +3,124 @@
 **Yernur Kenzhegazin · Alan Berdigaliyev · Hugo Telles**  
 M2 GENIOMHE-AI · Supervisor: Amaury Giard, IBISC
 
-This project compares three molecular representations in multilayer perceptrons (MLPs) with PRnet and simple baselines. The task is to predict treated expression for the 978 measured LINCS L1000 genes from a chemical structure and measured DMSO control expression.
+This project compares three MLP encodings, identifies **ECFP4 as the validation-preferred representation**, examines its learning-rate refinement and compares the resulting MLP with **retrained PRnet**. Both predictors receive measured DMSO expression and chemical information to predict treated expression for 978 LINCS L1000 genes. We evaluate unseen compounds, the excluded SKBR3 cell line, external gene-regulation directions and sensitivity to noisy controls.
 
-[Read the full report](docs/REPORT.md) · [Report PDF](Research_Report.pdf) · [Analysis notebook](Analysis.ipynb) · [Poster](presentation/Conference_Poster.pdf) · [Detailed methods](METHODS.md)
+[Full report](docs/REPORT.md) · [Report PDF](Research_Report.pdf) · [Analysis notebook](Analysis.ipynb) · [Poster](presentation/Conference_Poster.pdf) · [Methods](METHODS.md) · [Supplementary analyses](docs/SUPPLEMENTARY_ANALYSES.md)
 
-**Main finding:** The chemical MLPs have lower expression-prediction error than PRnet under the shared protocol, but simple baselines remain stronger on the main evaluation sets. The small external panel does not establish a clear advantage for the chemical MLPs.
+**Main finding:** ECFP4 has the lowest recorded validation NLL among the three MLPs. Lowering its learning rate improves validation NLL but worsens SKBR3 and external performance. The refined ECFP4 MLP has lower MSE than PRnet, yet unchanged DMSO expression is stronger on SKBR3 and external evidence does not establish an advantage over PRnet. Supplementary baselines also limit claims of added value from chemistry.
 
-## Research question
+## Project objectives and findings
 
-A predictor of cellular responses could help prioritize chemical compounds before experimental testing. However, a low expression-prediction error may largely reflect the untreated cellular state rather than an accurate prediction of the chemical response.
+The [project brief](docs/Project_brief.pdf) asks whether chemical-perturbation predictors are reliable enough to help evaluate compounds in early drug discovery.
 
-Following [Amaury Giard's project brief](docs/Project_brief.pdf), this benchmark asks:
-
-- Does performance generalize to unseen chemical compounds and an unseen cell line?
-- Can the models predict the direction of regulation for six genes in external experiments?
-- How sensitive are predictions to noise in the control measurements?
-
-The central comparison is whether chemical information improves prediction beyond the control state. The experiment therefore includes models with different chemical encodings, a network without chemical inputs and simple statistical baselines.
-
-## Data and evaluation sets
-
-The study uses normalized LINCS Level 3 expression at **10 µM and 24 hours**, restricted to the **978 directly measured landmark genes**. Treated profiles are paired with measured DMSO controls matched by detection plate, cell line, exposure time and bead batch. The supplied compound assignments are preserved for eligible samples.
-
-| Evaluation component | Size | What it tests |
+| Objective | What was done | What was found |
 |---|---|---|
-| Training | 210,438 profiles; 8,168 compounds | Model fitting |
-| Validation | 25,190 profiles; 1,029 compounds | Settings and checkpoint selection |
-| Original internal test | 27,765 profiles; 1,019 compounds | Held-out compound identifiers |
-| Low-similarity internal subset | 16,531 profiles; 474 compounds | Chemically more distant compounds |
-| SKBR3 test | 574 profiles; 137 compounds | Transfer to an excluded cell line |
-| External GEO panel | Seven studies; 42 gene directions | Regulation in independent experimental sources |
+| Review models and choose relevant metrics | Reviewed the motivating literature; measured expression MSE, response correlation, regulation direction and noise sensitivity | These metrics address different aspects of prediction and must be interpreted separately |
+| Train PRnet and compare an MLP | Compared three MLP encodings, designated ECFP4 from recorded validation scores and compared its refined setting with retrained PRnet | ECFP4 has lower MSE than PRnet; this is not an exact reproduction of the paper's original numerical results |
+| Test unseen compounds | Evaluated 474 held-out compounds with nearest-training ECFP4 Tanimoto similarity at most 0.7 | The selected ECFP4 MLP improves on unchanged DMSO expression |
+| Test an unseen cell line | Excluded SKBR3 from training and evaluated 574 profiles | Neither ECFP4 nor PRnet improves on unchanged DMSO expression |
+| Predict regulation of the six specified genes | Reconstructed dose/time-matched measurements from seven GEO studies identified through PharmGEO | ECFP4 scores 24.3 correct directions out of 42, versus 23.0 for PRnet; uncertainty does not resolve a clear advantage |
+| Test robustness to noise | Added Gaussian noise to measured controls while keeping models and treated targets fixed | ECFP4 MSE increases with noise; PRnet changes less but starts with higher error |
 
-Training excludes SKBR3 and compounds above 0.7 ECFP4 Tanimoto similarity to the external screening compounds. The eligible expanded external panel also passes this threshold. The original internal test contains close training analogues, so the main chemical-generalization results use its separate subset with maximum training similarity at most 0.7.
+The three-encoding comparison is our experimental design; the brief requires an MLP comparison and makes enhancement optional. Here, ECFP4 learning-rate tuning is the evaluated refinement. A validation improvement is not presented as a general improvement in prediction.
 
-The external panel reconstructs measurements for **AKT1, AURKB, EGFR, PIK3CA, SMAD3 and TP53** from dose-matched GEO studies identified through PharmGEO. These are seven study clusters, with six correlated gene observations per study.
+## Data and controls
+
+The study uses normalized **LINCS Level 3 expression at 10 µM and 24 hours**, restricted to **978 directly measured landmark genes**. Each treated profile supplies one target value per gene. These are supplied normalized expression measurements, not raw sequencing counts. The code retains their supplied scale.
+
+DMSO measurements are matched to each treated profile by **detection plate, cell line, exposure time and bead batch**. Control replicates are averaged separately for each gene, producing a vector of 978 values. This measured vector represents the cellular baseline and is an input to every chemical model.
+
+**Unchanged DMSO** uses that same vector as its prediction: it assumes treatment makes no change and has no fitted weights. The supplementary **control-only MLP** is different: it learns a prediction from control expression without receiving chemical features.
+
+| Dataset | Profiles | Compounds | Purpose |
+|---|---:|---:|---|
+| Training | 210,438 | 8,168 | Model fitting |
+| Validation | 25,190 | 1,029 | Settings and checkpoint selection |
+| Original internal test | 27,765 | 1,019 | Held-out compound identifiers |
+| Low-similarity test subset | 16,531 | 474 | Chemically more distant compounds |
+| SKBR3 test | 574 | 137 | Transfer to an excluded cell line |
+
+Supplied compound assignments are preserved for eligible samples. Training excludes SKBR3 and close analogues of the external screening compounds. All seven compounds in the expanded external panel independently pass the 0.7 similarity threshold against retained training compounds. The original internal test contains close training analogues, so the main comparison uses its low-similarity subset. This is a filtered subset of the existing test, not new independent data or a scaffold-disjoint split.
+
+The external panel contains seven GEO studies and the six genes **AKT1, AURKB, EGFR, PIK3CA, SMAD3 and TP53**. Dose and time are matched at 10 µM and 24 hours. GEO treated/control measurements determine the observed regulation directions. Model inputs use cell-specific LINCS control references; they do not use GEO measurements as inputs. Platform and experimental-context differences remain.
 
 ## Pipeline
 
 ![Experimental pipeline](presentation/figures/pipeline.png)
 
-1. **Assemble the experiments.** Read treated-expression targets, the supplied compound split and selected sample IDs ([preparation](MLP_PRnet_controls/prepare.py)).
-2. **Pair treatments with controls.** Match quality-passed DMSO measurements by plate, cell line, time and bead batch, then average control replicates ([matching](MLP_PRnet_controls/match_controls.py), [aggregation](MLP_PRnet_controls/aggregate_controls.py)).
-3. **Screen the cohort and retain split assignments.** Exclude SKBR3 and close external analogues; estimate control scaling from training inputs only ([external-compound screening](extension/curate.py), [split and scaling checks](extension/verify_revision.py)).
-4. **Encode the same compounds.** Compute FCFP4, ECFP4 and frozen ChemicalVAE features for three separate MLPs; use dose-scaled FCFP4 for PRnet ([features](MLP_PRnet_controls/prepare_features.py), [networks](extension/benchmark.py)).
-5. **Fit and select models.** Compare an equal three-setting grid, select settings and checkpoints by validation NLL, and repeat selected fits with three seeds ([training](extension/balanced_train.py), [tuning](extension/tune_models.py)).
-6. **Evaluate held-out predictions.** Compare the models and baselines on new compounds, SKBR3 and external gene directions; examine chemical shuffling, control noise and uncertainty ([evaluation](extension/evaluate_balanced.py), [diagnostics](extension/diagnose_final.py)).
+1. **Assemble the experiments.** Read treated targets, supplied compound assignments and sample IDs ([preparation](MLP_PRnet_controls/prepare.py)).
+2. **Pair treatments with controls.** Match DMSO measurements and average replicates gene by gene ([matching](MLP_PRnet_controls/match_controls.py), [aggregation](MLP_PRnet_controls/aggregate_controls.py)).
+3. **Screen the cohort.** Exclude SKBR3 and close external analogues; estimate control-input scaling from training data only ([screening](extension/curate.py), [checks](extension/verify_revision.py)).
+4. **Compare the three MLP representations.** Fit FCFP4, ECFP4 and frozen ChemicalVAE inputs on the shared cohort; rank their default-setting seed-42 validation NLL ([features](MLP_PRnet_controls/prepare_features.py), [models](extension/benchmark.py)).
+5. **Refine the validation-preferred MLP.** Examine ECFP4 learning-rate tuning and compare its selected setting with PRnet, retrained on the same cohort. All settings and checkpoints use validation NLL; selected fits use three seeds ([training](extension/balanced_train.py), [tuning](extension/tune_models.py)).
+6. **Evaluate the comparison.** Compare ECFP4, PRnet and unchanged DMSO expression on held-out expression, then compare the two models on external gene directions and assess input-noise sensitivity ([evaluation](extension/evaluate_balanced.py), [diagnostics](extension/diagnose_final.py)).
 
-The blue dish represents the DMSO control used as a baseline input; the orange dish represents treated cells whose measured expression is the prediction target. Caffeine illustrates how a molecular structure enters the workflow as SMILES. Replicate rows share gene columns, and the control reference is their mean for each gene. The output tiles each denote one predicted expression value, indexed from gene 1 to gene 978. The dishes and expression colors are schematic, not experimental images or measured values; see [illustration sources](presentation/data/README.md). Counts and result plots come from the saved data and analyses. For the external GEO comparison, predictions use a cell-specific mean of LINCS control groups. GEO treated and control measurements supply the observed regulation directions, not the model inputs; differences between experimental platforms remain.
+The blue and orange dishes illustrate control and treated cells. Caffeine is an example structure. Replicate rows share gene columns; their column means form the control input. Each output position represents one predicted gene-expression value. These illustrations are schematic; counts and result plots come from saved analyses. [Illustration sources](presentation/data/README.md) are documented separately.
 
-## Models and experimental design
+## Compare representations, then examine the refinement
 
-| Model | Chemical representation | Prediction |
-|---|---|---|
-| FCFP4 MLP | 1,024 feature-Morgan bits, radius 2 | Measured control plus a learned response |
-| ECFP4 MLP | 1,024 atom-Morgan bits, radius 2 | Measured control plus a learned response |
-| ChemicalVAE MLP | 196 frozen encoder values | Measured control plus a learned response |
-| PRnet | Dose-scaled FCFP4 | Published generative network architecture |
-| Control-only MLP | No chemical input | Response learned from control expression |
+| MLP candidate | Chemical input | Default validation NLL, seed 42 |
+|---|---|---:|
+| FCFP4 MLP | 1,024 feature-Morgan bits, radius 2 | 0.10800 |
+| ECFP4 MLP | 1,024 atom-Morgan bits, radius 2 | **0.08465** |
+| ChemicalVAE MLP | 196 frozen encoder values | 0.11053 |
 
-The residual MLPs use hidden layers of 512 and 256 units and predict both a mean response and positive variance. Control expression supplies cellular context; these models do not use cell-ID embeddings. PRnet predictions average 32 fixed decoder-noise draws.
+![MLP validation comparison and ECFP4 refinement](presentation/figures/model_selection.png)
 
-Five main networks are trained with **three seeds** and the same small grid of AdamW settings. Validation Gaussian negative log likelihood (NLL) selects settings and checkpoints. Controls are standardized using training inputs only. Additional baselines predict unchanged control expression, the global or cell-specific training mean response, or a linear response from ECFP4 and controls.
+*Left: the three MLPs at the default setting, ranked by their best seed-42 validation Gaussian NLL. Right: ECFP4 before and after learning-rate tuning. These are checkpoint-selection scores from one training seed, without biological uncertainty bars. Lower is better.*
 
-The analysis also tests chemical-input shuffling, residual prediction versus initialization, separate control-group holdouts, synthetic control noise, measured-control subsampling and predictive interval coverage. These checks examine how a model achieves its score and where performance fails.
+The representations were tuned in parallel; ECFP4 is identified here from the recorded validation scores. Test scores do not determine the designation.
+
+The MLPs use 512 and 256 hidden units and predict a response added to measured DMSO expression, plus positive variance. They have no cell-ID embedding. Reducing ECFP4's learning rate from 0.001 to 0.0003, with weight decay fixed at 0.01, lowers seed-42 validation NLL from 0.08465 to 0.08372. The refined setting is compared with PRnet, which uses dose-scaled FCFP4 and averages 32 fixed decoder-noise draws at test time. Both use validation-selected checkpoints and three training seeds.
+
+| ECFP4 setting | Validation NLL, seed 42 | SKBR3 MSE, three-seed mean | External correct / 42, three-seed mean |
+|---|---:|---:|---:|
+| Default | 0.08465 | 0.5803 | 26.3 |
+| Lower learning rate | 0.08372 | 0.6537 | 24.3 |
+
+The validation improvement does **not** carry over to these two evaluations. The final comparison retains the validation-selected setting rather than choosing retrospectively by test performance. [Validation records](extension/balanced/tuning_validation.csv), [evaluation summaries](extension/balanced/summary/model_summary.csv) and [external counts](extension/balanced/summary/external_seed_counts.csv) retain both stages. Full settings are in [METHODS.md](METHODS.md).
 
 ## Results
 
-![Comparison across the evaluation sets](presentation/figures/benchmark.png)
+![Expression prediction on distant compounds and SKBR3](presentation/figures/benchmark.png)
 
-*Network points represent three training seeds; diamonds show their means. The left panel uses the original internal test (27,765 profiles); the table below reports its stricter low-similarity subset (16,531 profiles). MSE measures expression error, while the external panel scores regulation direction.*
+*The three bars in each panel show the refined ECFP4 MLP, retrained PRnet and unchanged DMSO. The left panel uses 16,531 profiles from 474 low-similarity compounds; the right uses 574 SKBR3 profiles. Model bars show means across three training seeds, with seed ranges. DMSO is a measured reference with no training-seed variability. Lower MSE means closer agreement with measured treated expression.*
 
-| Model | Low-similarity MSE | SKBR3 MSE | External correct / 42 |
+| Model or reference | Low-similarity MSE | SKBR3 MSE | External correct / 42 |
 |---|---:|---:|---:|
-| FCFP4 MLP | 0.6892 | 0.6102 | 26.0 |
 | ECFP4 MLP | 0.6723 | 0.6537 | 24.3 |
-| ChemicalVAE MLP | 0.6671 | 0.6009 | 27.0 |
 | PRnet | 0.9055 | 2.1759 | 23.0 |
-| Control-only MLP | 0.6561 | 0.6198 | 29.7 |
-| Global mean response | 0.7215 | 0.5505 | 26.0 |
-| Cell mean response | 0.7080 | 0.5505 | 29.0 |
-| Linear ECFP4 + control | 0.6350 | 1.0404 | 26.0 |
+| Unchanged DMSO | 0.7357 | 0.5689 | Not applicable |
 
-Network scores average three training seeds; fractional external counts are averages of integer counts from the individual runs. Lower MSE and higher correct-direction counts are better. Seed variability and paired uncertainty intervals are provided in the report and notebook.
+Network scores average three training seeds. Fractional external counts are averages of integer counts across runs. Unchanged DMSO predicts zero change, so it does not classify genes as up or down; its external direction score is **not applicable**, not zero.
 
-### Simple baselines remain competitive
+The refined ECFP4 MLP improves on PRnet in both expression tests and on unchanged DMSO for distant compounds. On SKBR3, unchanged DMSO is stronger than either model. Additional representation results and fitted baselines remain in the report supplement and saved tables; some simpler fitted predictors outperform ECFP4. These findings limit claims that the chemical network adds reliable predictive value.
 
-All three molecular MLPs have lower MSE than PRnet under this protocol. Nevertheless, the linear model performs best on the low-similarity internal subset, and the training mean-response baseline performs best on SKBR3. Good internal reconstruction therefore does not guarantee transfer to an unseen cell line.
+### Regulation in independent studies
 
-![Chemical MLPs compared with the control-only model](presentation/figures/chemical_added_value.png)
+![Regulation direction by external study](presentation/figures/external_studies.png)
 
-*MSE differences from control-only, with descriptive 95% paired compound-bootstrap intervals. Negative values favor the chemical MLP. Per-run losses are averaged before resampling compounds.*
+*Each row is one compound/cell-line study; columns show the refined ECFP4 MLP and PRnet. Values count correct up/down predictions among the six specified genes, averaged over three training seeds. The scale is 0–6; darker cells mean more correct predictions. A value of 4.3 is a rounded mean count, not an expression value or percentage.*
 
-All three chemical MLPs have higher loss than control-only on the low-similarity subset. ChemicalVAE improves over control-only on SKBR3, but remains worse than the mean-response baseline. Chemical shuffling increases error, indicating input dependence; this does not establish a consistent benefit over a separately fitted baseline.
+The predicted direction is the sign of predicted treated expression minus its LINCS control reference. It is compared with the sign of measured treated-minus-control expression in GEO. The score tests direction, not response magnitude. A value of 6.0 means all six directions were correct in every run. The six genes within a study are correlated, so uncertainty intervals resample whole studies.
 
-### External regulation varies across studies
+The ECFP4-minus-PRnet accuracy difference is 3.2 percentage points, with a descriptive study-bootstrap interval from −13.5 to +19.0 points. Only 15 of 42 observed directions satisfy the descriptive clear-change rule. This small panel does not establish a reliable model ranking or performance on biologically unchanged genes.
 
-![External regulation results by study](presentation/figures/external_studies.png)
+### Sensitivity to control noise
 
-*Each row is a compound and cell type from one external study; each column is a model. Values count correct up/down predictions out of six genes, averaged across three training runs. Higher values are better; darker cells indicate more correct predictions.*
+![Effect of noise in control measurements](presentation/figures/control_noise.png)
 
-The six genes are AKT1, AURKB, EGFR, PIK3CA, SMAD3 and TP53. For each gene, we compare the predicted increase or decrease relative to controls with the direction measured in GEO. A value of **6.0** means all six directions were correct in every run. **4.7** is a rounded average across the three runs, not an expression value or percentage. The score tests the direction of change, not its magnitude. Studies, rather than individual genes, are the resampling unit for external uncertainty intervals.
+*Gaussian noise is added to the same SKBR3 controls at 0, 0.25, 0.5 and 1 times the within-plate DMSO replicate standard deviation. The vertical axis shows total treated-expression MSE at each noise level. Models and treated targets stay fixed. Nonzero levels use 20 technical draws; network curves average three training seeds and shading shows their range. The dashed DMSO curve has no training-seed band.*
 
-The control-only network has the highest mean count among the five networks. Chemical-MLP versus PRnet accuracy intervals all span zero. Only 15 of the 42 measured directions satisfy the descriptive clear-change rule, so this panel provides limited evidence for ranking models.
+DMSO controls are measured expression profiles, so replicate variation and measurement noise can affect their mean. This experiment adds a controlled amount of noise to those model inputs, as required by the project's robustness question. At noise level zero, the plot reproduces the clean SKBR3 scores above. At one replicate standard deviation, ECFP4 MSE rises from **0.6537 to 0.9928**, PRnet from **2.1759 to 2.2292**, and unchanged DMSO from **0.5689 to 0.8876**. PRnet changes less but retains higher total error; the clean and noisy evaluations are therefore consistent. This tests a specified input perturbation, not all biological or transcriptomic variability.
 
 ## Interpretation and limitations
 
-The results support a cautious assessment of prediction reliability: chemical features affect the networks, but their inclusion does not consistently improve accuracy or external regulation prediction. These are exploratory analyses of previously examined evaluation sets. The original internal test includes close analogues and shared control groups; stricter subsets address specific aspects of separation without establishing scaffold generalization. SKBR3 is one unseen cell line, the external panel is small, and LINCS/GEO platform differences remain. PRnet uses its published architecture with project-specific fitting; its original published numerical results are not exactly reproduced. The benchmark does not establish prospective drug-ranking utility.
+The project addresses the requested comparisons, but the evidence is exploratory. Evaluation sets were examined during development. The low-similarity subset still shares control groups with training; an additional group-holdout analysis is reported separately. SKBR3 is the only unseen cell line evaluated, and many of its compounds appear in other training cell lines. The external panel contains only seven studies, and LINCS/GEO platform differences remain. PRnet uses its published architecture with project-specific preprocessing and fitting, rather than reproducing the paper's original numerical results. Prospective compound ranking, dose/time extrapolation and a calibrated up/down/unchanged decision remain untested.
 
 ## Reproduce the analysis
 
-The report, figures and executed notebook can be read directly on GitHub. To rerun the analysis of the saved result tables, use Python 3.13:
+The report, figures and executed notebook can be read directly on GitHub. To rerun analysis of the saved result tables, use Python 3.13:
 
 ```sh
 git clone https://github.com/comp-bio-sys/Transversal_Project.git
@@ -122,20 +130,20 @@ python run.py notebook
 python run.py figures
 ```
 
-The notebook contains executed outputs. Install JupyterLab with `python -m pip install jupyterlab` if needed, then open the notebook with `jupyter lab Analysis.ipynb`. The prediction example is skipped when data and weights are absent. For full verification and prediction, first restore the assets described in [DATA.md](docs/DATA.md), then run `python run.py check`. Recomputing the full evaluation with `python run.py evaluate` can take hours. Full training with `python run.py train --fresh` can take days and first backs up the existing experiment outputs. All commands are listed by `python run.py --help`.
+Install JupyterLab with `python -m pip install jupyterlab` if needed, then open `jupyter lab Analysis.ipynb`. The notebook contains executed outputs; its prediction example is skipped when data and weights are absent.
 
-A GitHub clone contains code, result tables and presentation files. The full submission ZIP also includes the arrays and weights needed for prediction and evaluation. See [Data and model files](docs/DATA.md) and [Repository organization](docs/GITHUB.md).
+A GitHub clone contains code, result tables and presentation files. The full submission ZIP also includes arrays and weights needed for prediction and evaluation. Restore the assets described in [Data and model files](docs/DATA.md), then run `python run.py check`. Recomputing evaluation with `python run.py evaluate` can take hours; full training with `python run.py train --fresh` can take days and first backs up existing experiment outputs. All commands are listed by `python run.py --help`.
 
-## Project files and sources
+## Repository guide
 
 | Path | Contents |
 |---|---|
 | `Analysis.ipynb` | Executed analysis and prediction example |
-| `MLP_PRnet_controls/` | Data preparation, encoding and PRnet network |
+| `MLP_PRnet_controls/` | Data preparation, molecular encoding and PRnet network |
 | `extension/` | Training, evaluation and robustness analysis |
-| `extension/balanced/` | Results, settings and checkpoint metadata |
+| `extension/balanced/` | Result tables, selected settings and checkpoint metadata |
 | `dose_matched/` | External studies and reconstructed measurements |
 | `presentation/` | Figures, report builders and poster |
-| `docs/` | Project brief, data instructions and repository organization |
+| `docs/` | Project brief, supplementary analyses and data instructions |
 
-Data and model references are listed in [SOURCES.md](MLP_PRnet_controls/SOURCES.md). The report discusses PRnet, chemCPA, PertDiT and the motivating benchmarking literature. Third-party source credits and licenses are retained with the corresponding files.
+See [repository organization](docs/GITHUB.md) for the file structure. Data and model sources are listed in [SOURCES.md](MLP_PRnet_controls/SOURCES.md) and [extension/SOURCES.md](extension/SOURCES.md). Literature references are retained in the report. Third-party source credits and licenses remain with their corresponding files.

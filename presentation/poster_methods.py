@@ -95,7 +95,7 @@ def draw_pairing(ax):
         _gene_row(ax, 114, 13 + i * 9, row, TEAL, width=75, height=7)
     _arrow(ax, (194, 29), (249, 29), TEAL)
     _text(ax, 221, 19, "Mean", 20, TEAL, ha="center")
-    _text(ax, 293, 4, "Control c", 21, ha="center", bold=True)
+    _text(ax, 293, 7, "Mean DMSO\nexpression", 20, ha="center", bold=True)
     _gene_row(ax, 256, 25, values.mean(axis=0), TEAL, width=76, height=8)
     for x, width in [(114, 75), (256, 76)]:
         for j, label in enumerate(["g₁", "g₂", "…", "g₉₇₈"]):
@@ -111,13 +111,14 @@ def draw_encoding(ax):
     _text(ax, 25, 88, "(example)", 16, MUTED, ha="center")
     _arrow(ax, (46, 47), (62, 47))
     _line(ax, [(62, 21), (62, 84)], MUTED)
-    _text(ax, 196, 3, "Control c", 19, TEAL, ha="center")
+    _text(ax, 196, 3, "DMSO expression", 19, TEAL, ha="center")
     _line(ax, [(196, 10), (196, 87)], TEAL, 1.2)
     _text(ax, 307, 3, "978 genes", 18, MUTED, ha="center")
     rows = [(21, BLUE, "FCFP4", "1,024 feature bits", "MLP"),
             (42, TEAL, "ECFP4", "1,024 atom bits", "MLP"),
             (63, PURPLE, "ChemicalVAE", "196 frozen values", "MLP"),
             (84, ORANGE, "FCFP4 × dose", "Dose-scaled bits", "PRnet")]
+    _rect(ax, 76, 32, 259, 20, "#F0F7F5", TEAL, .8)
     for y, color, name, detail, model in rows:
         _arrow(ax, (62, y), (76, y), color)
         vals = [0, 1, 1, 0, 1, 0]
@@ -145,21 +146,21 @@ def draw_encoding(ax):
             _rect(ax, 287 + 15 * j, y - 5, 14, 10, edge=color, lw=1)
             _text(ax, 294 + 15 * j, y, label, 17, color, ha="center")
 
-    _text(ax, 166, 96, "MLPs: control + predicted change", 18, MUTED, ha="center")
+    _text(ax, 166, 96, "ECFP4 selected by recorded validation; all four models fitted", 17, MUTED, ha="center")
 
 def draw_training(ax):
-    """Draw training, validation and checkpoint selection on a 335 × 50 mm canvas."""
+    """Summarize representation selection and tuning from recorded validation."""
     _canvas(ax, 50)
-    boxes = [(4, 91, "Train batches", BLUE),
-             (121, 94, "Validation NLL", TEAL),
-             (248, 83, "Best checkpoint", INK)]
+    _text(ax, 167.5, 4, "Recorded validation results; same training cohort", 18, MUTED, ha="center")
+    boxes = [(4, 91, "Three MLPs", BLUE),
+             (121, 94, "Select ECFP4", TEAL),
+             (248, 83, "Lower learning rate", INK)]
     for x, width, label, color in boxes:
-        _rect(ax, x, 19, width, 19, edge=color, lw=1.2)
-        _text(ax, x + width / 2, 28.5, label, 21, color, ha="center", bold=True)
-    _arrow(ax, (96, 28.5), (119, 28.5))
-    _arrow(ax, (216, 28.5), (246, 28.5))
-    _line(ax, [(169, 18), (169, 6), (49, 6), (49, 16)], MUTED, 1)
-    _arrow(ax, (49, 14), (49, 19), MUTED, 1)
-    _text(ax, 49, 45, "Gaussian NLL loss", 18, MUTED, ha="center")
-    _text(ax, 169, 45, "After each epoch", 18, MUTED, ha="center")
-    _text(ax, 289, 45, "Lowest val. NLL", 18, MUTED, ha="center")
+        _rect(ax, x, 13, width, 15, edge=color, lw=1.2)
+        _text(ax, x + width / 2, 20.5, label, 20, color, ha="center", bold=True)
+    _arrow(ax, (96, 20.5), (119, 20.5))
+    _arrow(ax, (216, 20.5), (246, 20.5))
+    _text(ax, 49, 34, "Default validation NLL", 17, MUTED, ha="center")
+    _text(ax, 169, 34, "Lowest NLL: 0.0846", 17, MUTED, ha="center")
+    _text(ax, 289, 34, "0.001 → 0.0003", 17, MUTED, ha="center")
+    _text(ax, 167.5, 46, "Tuned ECFP4 NLL: 0.0837; compare with retrained PRnet", 17, MUTED, ha="center")

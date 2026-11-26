@@ -7,31 +7,12 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import figures
+from focus_figures import mse_bar_axis, external_bar_axis, noise_axis, selection_axis
 from poster_methods import draw_pairing, draw_encoding, draw_training
 
 ROOT = Path(__file__).resolve().parent
 WIDTH, HEIGHT = 1189, 841
 INK, MUTED, RULE = "#242426", "#54595D", "#D2D2D2"
-
-
-def noise_axis(ax, data):
-    rows = data["noise"].copy()
-    rows["increase"] = rows.mse - rows.clean_mse
-    for model in figures.MODELS:
-        summary = rows.loc[rows.model.eq(model)].groupby("level").increase.agg(
-            ["mean", "min", "max"])
-        ax.plot(summary.index, summary["mean"], "o-", lw=2.3, ms=6,
-                color=figures.COLORS[model], label=figures.NAMES[model])
-        ax.fill_between(summary.index, summary["min"], summary["max"],
-                        color=figures.COLORS[model], alpha=.12)
-    ax.axhline(0, color="#999999", lw=1)
-    ax.set_xticks([0, .25, .5, 1])
-    ax.set_xlabel("Added noise / control replicate SD", fontsize=21)
-    ax.set_ylabel("Increase in SKBR3 MSE", fontsize=21)
-    ax.tick_params(labelsize=20)
-    ax.grid(color="#E8E8E8", lw=.8)
-    ax.legend(frameon=False, loc="upper left", fontsize=18, ncol=2,
-              columnspacing=.8, handlelength=1.5)
 
 
 def main():
@@ -78,15 +59,16 @@ def main():
     text(30, 151,
          "Predicting gene-expression responses could help\n"
          "prioritize compounds for experimental testing.\n"
-         "We compare three chemical multilayer perceptrons\n"
-         "(MLPs) with retrained PRnet [1] and simple baselines,\n"
-         "asking whether chemistry adds predictive value [2].", 24)
+         "We compare three chemical MLPs, retain ECFP4 by\n"
+         "validation, then compare it with retrained PRnet [1].\n"
+         "DMSO measurements anchor the response tests [2].", 24)
     cultures = plt.imread(ROOT / "data/cultures.png")
     page.imshow(cultures, extent=(77, 317, 325, 205), aspect="auto", zorder=2)
     text(137, 326, "DMSO control", 24, "#3F7895", True, "center")
     text(137, 338, "Baseline input", 21, MUTED, ha="center")
     text(257, 326, "Treated cells", 24, "#B47C53", True, "center")
     text(257, 338, "Measured target", 21, MUTED, ha="center")
+    text(30, 351, "Figure 1. DMSO provides the reference; treated expression is the target.", 16, MUTED)
 
     section(24, 360, 346, "METHODS")
     subtitle(24, 391, 346, "1  Pair treatments with measured controls")
@@ -95,6 +77,7 @@ def main():
          "Match controls by plate, cell, time and bead batch;\n"
          "average replicate expression for each gene.", 23)
     draw_pairing(axes(30, 451, 335, 50))
+    text(30, 503, "Figure 2a. Averaging matched DMSO replicates gives 978 input values.", 16, MUTED)
 
     subtitle(24, 512, 346, "2  Compare three chemical representations")
     text(30, 536,
@@ -102,71 +85,83 @@ def main():
          "ChemicalVAE: frozen SMILES features. Each MLP also\n"
          "receives controls; PRnet uses dose-scaled FCFP4.", 23)
     draw_encoding(axes(30, 575, 335, 100))
+    text(30, 680, "Figure 2b. Each chemical representation enters a separate predictor.", 16, MUTED)
 
-    subtitle(24, 695, 346, "3  Fit on training data; select on validation")
+    subtitle(24, 695, 346, "3  Select ECFP4; compare with PRnet")
     text(30, 719,
-         "Use compound-disjoint splits. Select settings and\n"
-         "checkpoints by validation negative log likelihood\n"
-         "(NLL), then repeat with three training seeds.", 23)
+         "Use compound-disjoint splits and validation NLL.\n"
+         "Select ECFP4; adjust its learning rate using validation.\n"
+         "Compare the fitted models across three training seeds.", 23)
     draw_training(axes(30, 754, 335, 43))
+    text(30, 800, "Figure 2c. Validation-based selection and ECFP4 learning-rate adjustment.", 16, MUTED)
 
     section(398, 119, 767, "RESULTS")
-    subtitle(398, 151, 371, "A  Distant compounds: a linear model leads")
-    text(404, 177, "474 compounds · 16,531 profiles", 23, MUTED)
-    text(404, 190, "Nearest-training ECFP4 Tanimoto ≤ 0.7", 21, MUTED)
-    a = axes(528, 215, 231, 154)
-    figures.benchmark_axis(a, data, "internal_low_similarity", baselines=True,
-                           size=2.2, annotate=True)
-    text(404, 397,
-         "Lower MSE means closer predicted expression.\n"
-         "The linear baseline has the lowest error (0.635).\n"
-         "All chemical MLPs have lower MSE than PRnet, but none\n"
-         "improves on this simple baseline.", 24)
+    subtitle(398, 151, 371, "A  Validation selects the ECFP4 MLP")
+    text(404, 177, "Three default MLPs · seed 42 · lower NLL is better", 22, MUTED)
+    a = axes(431, 205, 324, 120)
+    selection_axis(a, data, size=2.2)
+    text(404, 354,
+         "Figure 3. Lowest validation NLL for each default-setting MLP.\n"
+         "Each bar is one training run; no seed range is estimated.", 18, MUTED)
+    text(404, 381, "ECFP4 learning rate: 0.001 → 0.0003", 24, bold=True)
+    text(404, 397, "Validation NLL: 0.08465 → 0.08372", 23)
+    text(404, 413, "SKBR3 MSE rises: 0.580 → 0.654 (three seeds).", 20)
+    text(404, 429,
+         "All encodings were tuned in parallel. The validation ranking\n"
+         "identifies ECFP4 for this focused comparison.", 18, MUTED)
 
-    subtitle(398, 454, 371, "B  Unseen cell line: the mean response leads")
-    text(404, 480, "SKBR3 · 574 profiles · 137 compounds", 23, MUTED)
-    text(404, 493, "Cell line excluded from model training", 21, MUTED)
-    b = axes(528, 518, 231, 154)
-    figures.benchmark_axis(b, data, "skbr3", baselines=True, size=2.2, annotate=True)
-    text(404, 700,
-         "Adding the training mean response to measured\n"
-         "controls gives the lowest error (0.551), below every\n"
-         "neural network. Accurate compound prediction\n"
-         "does not guarantee transfer to a new cell context.", 24)
-    text(404, 755,
-         "A–B: circles = training seeds; diamond = mean;\n"
-         "line = seed range. Dashed line = unchanged control.", 20, MUTED)
+    subtitle(398, 454, 371, "B  Test the selected MLP against PRnet")
+    text(431, 481, "Distant compounds", 23, bold=True)
+    text(612, 481, "Unseen SKBR3", 23, bold=True)
+    text(431, 496, "474 compounds / 16,531 profiles", 17, MUTED)
+    text(612, 496, "137 compounds / 574 profiles", 17, MUTED)
+    b1 = axes(431, 522, 141, 156)
+    mse_bar_axis(b1, data, "internal_low_similarity", size=1.85)
+    b2 = axes(612, 522, 141, 156)
+    mse_bar_axis(b2, data, "skbr3", size=1.85)
+    text(404, 709,
+         "Figure 4. Treated-expression MSE; lower is better.\n"
+         "Bars: mean; dots: three seeds; whiskers: seed range.\n"
+         "DMSO is an unchanged-expression reference, not a fitted model.\n"
+         "Distant compounds have nearest-training Tanimoto ≤ 0.7.", 18, MUTED)
+    text(404, 751,
+         "ECFP4 has lower MSE than PRnet in both tests.\n"
+         "Unchanged DMSO is strongest on SKBR3.", 23)
+    text(404, 781,
+         "A validation gain alone does not establish better transfer.", 20, MUTED)
 
     subtitle(796, 151, 369, "C  External studies: evidence remains limited")
     text(802, 177, "Seven GEO studies · six gene directions per study", 23, MUTED)
-    c = axes(922, 203, 243, 146)
-    figures.study_axis(c, data, size=2.2)
+    c = axes(832, 203, 324, 146)
+    external_bar_axis(c, data, size=2.2)
     text(802, 380,
-         "Values count correct up/down predictions out of six,\n"
-         "averaged over three seeds; darker means more correct.\n"
-         "The chemical MLPs show no clear advantage over PRnet.\n"
-         "Only 15 of 42 observed directions show clear changes.", 23)
+         "Figure 5. Correct directions across seven studies × six genes.\n"
+         "Bars: mean; points: three runs; whiskers: run range.\n"
+         "DMSO is the reference and does not make up/down predictions.\n"
+         "Only 15 of the 42 observed directions show clear changes.", 18, MUTED)
+    text(802, 415, "No clear external advantage over PRnet is established.", 23)
 
-    subtitle(796, 431, 369, "D  Control noise increases prediction error")
+    subtitle(796, 431, 369, "D  Control noise: ECFP4 stays below PRnet")
     d = axes(837, 463, 319, 127)
-    noise_axis(d, data)
+    noise_axis(d, data, size=2.1)
     text(802, 618,
-         "Gaussian noise is added to the same SKBR3 controls;\n"
-         "models and treated targets stay fixed. Curves show\n"
-         "the increase over each model’s clean-input MSE.\n"
-         "At 1 replicate SD, chemical-MLP error rises by 0.33–0.34.", 23)
-    text(802, 665,
-         "20 draws per nonzero noise level; 3 seeds. Shading: seed range.\n"
-         "PRnet changes less, but its clean-input error is higher (B).", 19, MUTED)
+         "Figure 6. Absolute SKBR3 MSE after noise is added to DMSO inputs.\n"
+         "Zero noise matches panel B; fitted weights and targets stay fixed.\n"
+         "20 draws/nonzero level; lines: means; bands: three-seed range.\n"
+         "DMSO is not trained and has no training-seed band.", 18, MUTED)
+    text(802, 657,
+         "At 1 replicate SD: ECFP4 MSE rises from 0.654 to 0.993;\n"
+         "PRnet rises from 2.176 to 2.229. ECFP4 remains lower.", 22)
 
     section(796, 695, 369, "CONCLUSIONS")
     text(802, 727,
-         "Chemical MLPs have lower MSE than PRnet here,\n"
-         "but simple baselines remain strongest.\n"
-         "Added predictive value from chemistry is not established.", 24, bold=True)
+         "Selected ECFP4 has lower MSE than PRnet here.\n"
+         "Unchanged DMSO is stronger on unseen SKBR3.\n"
+         "Reliable external regulation prediction is not established.", 24, bold=True)
     text(802, 768,
          "One held-out cell line, a small external panel and\n"
          "reused test sets make these findings exploratory.", 21, MUTED)
+    text(802, 795, "Additional linear/mean baselines perform better; see report supplement.", 16, MUTED)
 
     page.plot([24, 1165], [810, 810], color=RULE, lw=1)
     text(24, 820, "REFERENCES", 19, INK, True)

@@ -120,11 +120,12 @@ def draw_workflow(ax, scale=1.0, title=True, schematic_note=True):
             text(x+j*3.2+1.4,11.7,label,6.8,MUTED,ha="center")
     arrow((90,8.5),(99,8.5),TEAL)
     text(94.5,6.3,"Mean",7.8,TEAL,True,ha="center")
-    text(107,4.6,"Control c",8.2,TEAL,True,ha="center")
+    text(107,4.0,"Mean DMSO\nexpression",8.2,TEAL,True,ha="center")
     for j,v in enumerate(values.mean(axis=0)):
         rect(101+j*3.2,7.6,2.8,1.8,rgb*v+(1-v)*np.ones(3))
     text(61,14.5,"Match detection plate + cell + time + bead batch",9,bold=True)
     text(61,17.6,"269,364 paired profiles · 47,995 measured controls",8.5)
+    text(61,19.3,"DMSO reference: 978-gene replicate mean; not a network",7.4,MUTED)
     arrow((118.2,10),(120.8,10))
 
     step(3,123,1,"Screen, then preserve the splits")
@@ -139,7 +140,7 @@ def draw_workflow(ax, scale=1.0, title=True, schematic_note=True):
 
     line([(151,21.1),(151,22.1),(4,22.1),(4,23)],lw=.7)
     arrow((4,23),(4,24),lw=.7)
-    step(4,2,24,"Encode the same molecule; fit separate predictors")
+    step(4,2,24,"Fit three chemical MLPs and a PRnet comparator")
     text(28,28.4,"Chemical input",8.7,MUTED,True)
     text(64,28.4,"Network",8.7,MUTED,True)
     text(101,27.1,"Predicted treated expression",8.3,MUTED,True,ha="center")
@@ -149,12 +150,13 @@ def draw_workflow(ax, scale=1.0, title=True, schematic_note=True):
     text(9,43,"Example: caffeine",7,MUTED,ha="center")
     line([(17,31.7),(17,46.7)],BLUE,.75)
     arrow((14,36.5),(17,36.5))
-    text(49,25.8,"Measured control c → every model",8.5,TEAL)
+    text(49,26.4,"DMSO expression → every model",8.1,TEAL)
     line([(60,28.5),(60,47.2)],TEAL,.9)
     rows = [(31.7,BLUE,"FCFP4","1,024 feature bits","MLP"),
             (36.7,TEAL,"ECFP4","1,024 atom bits","MLP"),
             (41.7,PURPLE,"ChemicalVAE","196 frozen values","MLP"),
             (46.7,ORANGE,"FCFP4 × dose","Dose-scaled bits","PRnet")]
+    rect(21.2,34.8,91,4.2,"#F0F7F5",TEAL,.8)
     for y,c,name,detail,model in rows:
         arrow((17,y),(22,y),c)
         matrix(22,y-1.2,6.5,2.4,c,2,binary=model=="MLP" and name!="ChemicalVAE")
@@ -177,11 +179,11 @@ def draw_workflow(ax, scale=1.0, title=True, schematic_note=True):
             text(92.95+j*5.4,y+.1,value,8.8,c,ha="center",va="center")
         if model == "PRnet":
             text(101,y+1.8,"Mean of 32 test draws",7.5,c,ha="center")
-    text(23,49.6,"MLPs: control + learned change     |     512 → 256 hidden units; mean change + variance",8.2)
+    text(23,49.6,"MLPs: DMSO expression + predicted change     |     512 → 256 units; mean change + variance",8.2)
 
     line([(119,24),(119,50.3)],"#D0DADF",.8)
     arrow((113,36.7),(122,36.7),INK)
-    step(5,123,24,"Select using validation")
+    step(5,123,24,"Select from recorded validation")
     rect(125,30,18,5,"#EAF2F7")
     text(134,30.7,"Train batches\nGaussian NLL loss",8.5,BLUE,True,"center")
     arrow((144,32.5),(149,32.5))
@@ -191,18 +193,19 @@ def draw_workflow(ax, scale=1.0, title=True, schematic_note=True):
     arrow((134,29.2),(134,30),lw=.7)
     arrow((163.5,35.2),(163.5,38.2))
     text(125,36.3,"Fit to measured treated expression y",8.3)
-    rect(139,39,38,5,"white",TEAL)
-    text(158,40.5,"Save best checkpoint",9.5,TEAL,True,"center")
-    text(125,45,"AdamW · equal 3-setting grid · 3 seeds",9,bold=True)
-    text(125,48,"Control-only MLP + mean / linear baselines",8.8)
-    text(125,50.2,"Diagnostics: chemical shuffle · control noise · coverage",7.8)
+    rect(125,39,52,6,"white",TEAL)
+    text(151,39.8,"ECFP4: lowest recorded validation NLL",8.8,TEAL,True,"center")
+    text(151,42.1,"Lower learning rate: 0.001 → 0.0003",8.5,TEAL,False,"center")
+    text(125,46,"ECFP4 validation NLL: 0.0846 → 0.0837",8.7,bold=True)
+    text(125,48.1,"Selected ECFP4 vs PRnet + measured DMSO reference",8.1)
+    text(125,50.2,"Same cohort · best validation checkpoints · 3 seeds",7.8)
     if schematic_note:
         text(2,51.4,"Cells, structures and expression strips are schematic; no measured values are drawn here.",7.8,MUTED)
     arrow((163.5,50),(163.5,52.5))
 
     # Separate test settings: GEO uses a LINCS reference, not GEO as model input.
     rect(0,53,180,13,"#F4F7F9")
-    step(6,2,54,"Compare predictions with held-out measurements")
+    step(6,2,54,"Evaluate selected ECFP4 and retrained PRnet")
     text(177,54.4,"MSE · response correlation · direction agreement",9,MUTED,ha="right")
     for x in [60,120]:
         line([(x,58),(x,65)],"#CDD8DD",.7)
@@ -215,7 +218,7 @@ def draw_workflow(ax, scale=1.0, title=True, schematic_note=True):
     for j,dy in enumerate([-1,1,-1]):
         arrow((125+j*2,62),(125+j*2,62+dy*2),PURPLE,.8)
     text(134,58.5,"Independent GEO measurements",10,PURPLE,True)
-    text(134,61.2,"7 studies × 6 genes · dose/time matched\nPredict with cell-mean LINCS controls",8.2)
+    text(134,61.2,"7 studies × 6 genes · dose/time matched\nPredict with cell-mean LINCS DMSO expression",8.2)
     if title:
         text(0,-2.3,"How the benchmark was carried out",15,bold=True)
 

@@ -1,4 +1,4 @@
-"""Create and execute the project walkthrough with an in-process IPython kernel."""
+"""Create and execute the project analysis notebook."""
 
 import os
 import sys
@@ -26,11 +26,13 @@ def main():
 **Yernur Kenzhegazin · Alan Berdigaliyev · Hugo Telles**  
 M2 GENIOMHE-AI · Supervisor: Amaury Giard, IBISC
 
-This notebook explains the data, models and evaluation. It reads the saved results, displays the main figures and runs a small prediction example when the model and data files are available. Full retraining is described below.
+This notebook compares three MLP representations, derives the validation-preferred candidate from saved scores, examines its refinement and compares the refined ECFP4 MLP with retrained PRnet. Every predictor receives measured DMSO expression as input. The unchanged-DMSO reference directly copies that measured expression as the prediction and has no fitted weights.
 
-The question is whether chemical structure adds useful information beyond measured control expression, and whether that benefit transfers to unseen compounds, SKBR3 and external experiments. These test sets were inspected during model development, so the analyses are exploratory rather than independent confirmation."""
+This notebook follows the project questions: prediction for unseen compounds, transfer to SKBR3, external gene-regulation direction and sensitivity to control noise. It reads saved measurements and results, and includes a small checkpoint inference example. These evaluation sets were examined during development, so the findings remain exploratory."""
     )
-    code("""from pathlib import Path
+
+    code(
+        """from pathlib import Path
 import json, sys
 import numpy as np
 import pandas as pd
@@ -42,16 +44,22 @@ if not (PROJECT / 'extension/balanced').exists():
 BALANCED = PROJECT / 'extension/balanced'
 sys.path.insert(0, str(PROJECT / 'extension'))
 sys.path.insert(0, str(PROJECT / 'presentation'))
+from focus_figures import SELECTED_MODELS, DISPLAY_MODELS, NAMES
+MLP_CANDIDATES = ['ResidualFCFP4', 'Residual', 'ResidualChemicalVAE']
 print('Python:', sys.version.split()[0])
-print('NumPy:', np.__version__, '| pandas:', pd.__version__)
-print('Results:', BALANCED.name)""")
-    md(
-        """## 1. What the files mean
-
-The treated-expression Feather file supplies targets. `compound_split.csv` fixes compound assignments and `sample_usage.feather` fixes eligible sample IDs. Measured DMSO profiles supply the untreated reference. A control group matches detection plate, cell, time and bead batch.
-
-The original split labels are preserved for retained rows. Similarity screening and control availability remove rows; they do not create different training samples for the three encoders. The main comparison uses one common cohort."""
+print('NumPy:', np.__version__, '| pandas:', pd.__version__)"""
     )
+
+    md(
+        """## 1. What the data and DMSO controls mean
+
+Each row in the treated-expression file is a measured profile. The 978 gene columns contain normalized LINCS Level 3 expression values, not read counts, percentages or probabilities. The analysis uses 10 µM exposure for 24 hours.
+
+DMSO is the vehicle used without the active compound. Controls are matched by detection plate, cell line, time and bead batch, then averaged separately for each gene. **DMSO expression therefore means 978 averaged measurements.** It is an input to each model, not a fifth network. Model inputs are standardized with training-only statistics; targets and the residual output remain on the original supplied scale.
+
+The compound split and sample-usage files preserve the shared assignments. Screening removes ineligible rows equally for all representations. Extra fitted control-only, mean-response and linear models are documented separately in `docs/SUPPLEMENTARY_ANALYSES.md`."""
+    )
+
     code(
         """audit = json.loads((BALANCED / 'generalization_audit.json').read_text())
 verification = json.loads((BALANCED / 'verification.json').read_text())
@@ -61,41 +69,71 @@ print('Internal test profiles sharing a training control group:', audit['test_pr
 print('Internal test compounds with a training analogue above 0.7:', audit['test_compounds_above_0_7_similarity_to_train'])
 print('Test compounds with identical ECFP4 to training:', audit['test_compounds_with_identical_ECFP4_to_training'])"""
     )
+
     code(
-        "display(Image(filename=str(PROJECT / 'presentation/figures/pipeline.png'), width=1100))"
+        """display(Image(filename=str(PROJECT / 'presentation/figures/pipeline.png'), width=1100))"""
     )
+
     md(
-        """The diagram follows six steps:
+        """**Figure 1.** Common data preparation, chemical encoding, validation selection and evaluation. Replicate rows share gene columns; averaging them gives the DMSO input. Each model predicts one treated-expression value per landmark gene. The dishes and feature patterns are illustrations; numerical counts come from the saved audit.
 
-1. Assemble the supplied treated profiles, compound assignments and sample IDs.
-2. Match measured DMSO controls by plate, cell, time and bead batch, and average replicates.
-3. Screen the cohort, retain the supplied split labels and estimate control scaling from training inputs only.
-4. Encode each compound as FCFP4, ECFP4 or ChemicalVAE features for separate MLPs; fit PRnet with dose-scaled FCFP4.
-5. Select settings and checkpoints using validation NLL, with the same tuning budget and three seeds.
-6. Compare held-out predictions with measurements and baselines, then examine chemical dependence, noise and uncertainty.
+## 2. Compare three representations, select and refine
 
-The blue DMSO dish represents the baseline input, and the orange treated dish represents the measured target. Caffeine is an example of the molecular structure encoded as SMILES. The dishes are illustrations, not microscopy; see `presentation/data/README.md`. Replicate rows share gene columns and are averaged per gene. Each output tile denotes a predicted gene-expression value. Schematic colors do not represent measurements; sample counts and result plots come from the saved analyses. External GEO predictions use a cell-specific mean of LINCS control groups. GEO treated and control samples determine the observed gene directions, so platform differences remain."""
+FCFP4 describes local functional classes, ECFP4 describes local atom environments, and ChemicalVAE supplies a frozen 196-value representation. FCFP4 and ECFP4 each have 1,024 bits and radius 2. Each enters a separate multilayer perceptron with measured DMSO expression.
+
+The MLP mean is `DMSO expression + predicted change`. Its hidden layers contain 512 and 256 units; a positive variance head supports Gaussian negative log likelihood (NLL). The response head starts at zero. PRnet uses its published network classes, dose-scaled FCFP4 and decoder noise; its test mean averages 32 fixed draws.
+
+The three MLPs are first compared at the common default setting using seed-42 validation NLL. NLL evaluates the predicted mean and variance; its ranking is specific to this criterion. Three AdamW settings were actually evaluated in parallel for each representation. Their selected settings use seeds 42, 43 and 44, with every checkpoint selected by validation NLL. PRnet is retrained with the same grid; this does not reproduce its original published numerical scores.
+
+The next cell derives the preferred representation directly from the default validation rows. ECFP4 has the lowest recorded value (0.08465), and its lower-learning-rate setting reduces it to 0.08372. The representations were tuned in parallel; ECFP4 is identified here from the recorded validation scores. Test scores are not used for the designation; all representation results remain archived."""
     )
-    md(
-        """## 2. Models and fitting
 
-FCFP4 describes local functional classes, ECFP4 describes local atom environments, and ChemicalVAE supplies a frozen 196-value molecular embedding. FCFP4 and ECFP4 each have 1,024 bits and radius 2. Each representation enters a separate MLP with the measured control vector.
-
-The residual MLP computes `treated_mean = control + response`. The response head starts at zero; a positive variance head supports Gaussian NLL training. Cell context is encoded by control expression, not a cell-ID embedding. PRnet uses the published PGM architecture, FCFP4 dose encoding and decoder noise. Its final mean averages 32 fixed draws.
-
-Five main models receive three training seeds and the same three-setting AdamW tuning budget. Seed 42 validation NLL selects the setting; every checkpoint is selected by its own validation NLL. Test labels do not select settings. The comparison does not establish globally optimal tuning for any architecture."""
-    )
     code(
         """selected = json.loads((BALANCED / 'selected_settings.json').read_text())
 tuning = pd.read_csv(BALANCED / 'tuning_validation.csv')
-display(tuning.assign(selected=tuning.apply(lambda r: selected[r['model']] == r['setting'], axis=1)))
-display(Image(filename=str(PROJECT / 'presentation/figures/training_convergence.png'), width=1100))"""
-    )
-    md(
-        """## 3. Run a saved model on held-out samples
+candidate_scores = tuning.loc[
+    tuning.model.isin(MLP_CANDIDATES) & tuning.setting.eq('default')
+].copy()
+assert len(candidate_scores) == 3 and candidate_scores.model.is_unique
+winner = candidate_scores.loc[candidate_scores.val_nll.idxmin(), 'model']
+winner_setting = selected[winner]
+assert winner == 'Residual', 'The current report figures require ECFP4 as validation winner.'
+display(candidate_scores[['model','val_nll','best_epoch']].sort_values('val_nll'))
+print('Validation-preferred MLP:', NAMES[winner])
+print('Selected refinement:', winner_setting)
+display(tuning.loc[tuning.model.eq(winner)].assign(
+    selected=lambda frame: frame.setting.eq(winner_setting)))
+display(Image(filename=str(PROJECT / 'presentation/figures/model_selection.png'), width=1100))
 
-The following cell loads eight internal test rows and the validation-selected ECFP4 checkpoint. It uses the same data loader and inference function as the full benchmark. These eight rows demonstrate execution; their MSE is not the headline test score. The example is skipped when large data or checkpoint files are absent. Restore these files from the full submission archive as described in `docs/DATA.md`. The saved tables and figures can be read without them."""
+summary = pd.read_csv(BALANCED / 'summary/model_summary.csv')
+external_all = pd.read_csv(BALANCED / 'summary/external_seed_counts.csv')
+before_after = []
+for phase, label, setting_name in [('fixed','Default','default'),
+                                  ('tuned','Refined',winner_setting)]:
+    evaluation = summary.loc[summary.model.eq(winner) & summary.phase.eq(phase)
+                             & summary.dataset.eq('skbr3')].iloc[0]
+    val_nll = tuning.loc[tuning.model.eq(winner) & tuning.setting.eq(setting_name),
+                        'val_nll'].iloc[0]
+    ext_count = external_all.loc[external_all.model.eq(winner)
+                                & external_all.phase.eq(phase), 'sum'].mean()
+    before_after.append({'setting':label, 'validation_nll_seed42':val_nll,
+                         'skbr3_mse_mean':evaluation.mse_mean,
+                         'external_correct_mean_out_of_42':ext_count})
+display(pd.DataFrame(before_after))"""
     )
+
+    md(
+        """**Figure 2.** Default-setting validation NLL for three MLPs (left), followed by default versus refined ECFP4 (right). Each value is the best checkpoint score from seed 42, not a test result or an average of biological replicates. No uncertainty bars are assigned to these single-run selection values.
+
+The refinement lowers learning rate from 0.001 to 0.0003 at weight decay 0.01. Validation NLL improves, but ECFP4's mean SKBR3 MSE worsens from 0.5803 to 0.6537 and its external count falls from 26.3 to 24.3 out of 42. The final comparison keeps the validation-selected setting. This is evidence that validation improvement does not guarantee better transfer, not a reason to select a different setting using the test."""
+    )
+
+    md(
+        """## 3. Run a saved model on held-out profiles
+
+The next cell loads eight internal test rows and the selected ECFP4 checkpoint. The model and unchanged-DMSO errors use the same target values. This is an execution example, not the headline test result. When data or checkpoints are absent from a GitHub clone, restore the full ZIP assets using `docs/DATA.md`."""
+    )
+
     code(
         """setting = selected['Residual']
 folder = BALANCED / 'weights' if setting == 'default' else BALANCED / 'tuning' / setting
@@ -129,99 +167,115 @@ else:
                           'model_mse': ((prediction - example['y']) ** 2).mean(1),
                           'control_mse': ((example['control'] - example['y']) ** 2).mean(1)}))"""
     )
+
     md(
-        """## 4. Full benchmark and simple baselines
+        """## 4. Unseen compounds and the SKBR3 cell line
 
-The main scores below average three independently initialized model runs. They are not ensemble scores. The linear model, global mean response, cell mean response and unchanged-control baselines provide additional tests of complexity. Cell mean response falls back to the global training response for unseen SKBR3.
+The main compound test contains 16,531 profiles for 474 compounds with nearest-training ECFP4 Tanimoto similarity at most 0.7. SKBR3 contains 574 profiles for 137 compounds; the cell line is excluded from training. Some SKBR3 compounds were seen in other training cell lines, so this is a cell-transfer test.
 
-The low-similarity subset contains 474 compounds / 16,531 profiles with nearest-training ECFP4 similarity at most 0.7. It avoids fingerprint-identical training analogues present in the original compound-disjoint split, but still shares some control groups with training. It is a subset of the existing test, not newly collected evidence.
-
-MSE measures treated-expression reconstruction. Response correlation and direction measure treatment-minus-control changes. Lower MSE need not imply better regulation prediction or useful drug ranking."""
+MSE is the mean squared difference between predicted and measured treated expression, averaged over genes and profiles. Lower is better. The refined ECFP4 MLP has lower MSE than PRnet in both tests. It improves on unchanged DMSO for distant compounds, but unchanged DMSO is stronger than both models on SKBR3."""
     )
+
     code(
         """summary = pd.read_csv(BALANCED / 'summary/model_summary.csv')
-main = summary.loc[summary.phase.isin(['tuned', 'baseline']) & summary.dataset.isin(['internal', 'internal_low_similarity', 'skbr3'])]
-display(main[['dataset','model','seeds','mse_mean','mse_seed_sd','macro_compound_mse','response_pearson','direction_accuracy']])
-fixed = summary.loc[summary.phase.eq('fixed') & summary.dataset.isin(['internal','skbr3'])]
-display(fixed[['dataset','model','mse_mean','mse_seed_sd']])
-display(Image(filename=str(PROJECT / 'presentation/figures/benchmark.png'), width=1200))
-display(Image(filename=str(PROJECT / 'presentation/figures/compound_response.png'), width=1000))"""
+main = summary.loc[
+    ((summary.phase.eq('tuned') & summary.model.isin(SELECTED_MODELS)) |
+     (summary.phase.eq('baseline') & summary.model.eq('DMSO'))) &
+    summary.dataset.isin(['internal_low_similarity', 'skbr3'])
+].copy()
+main['model'] = main.model.map(NAMES)
+display(main[['dataset','model','profiles','compounds','seeds','mse_mean','mse_seed_sd']])
+display(Image(filename=str(PROJECT / 'presentation/figures/benchmark.png'), width=1100))"""
     )
+
     md(
-        """## 5. Does the model use chemical information?
+        """**Figure 3.** Treated-expression MSE on distant compounds (left) and SKBR3 (right). Bars are model means across three training runs; points are individual runs and whiskers span their minimum and maximum. The DMSO bar is one fixed no-change reference and has no training-seed error bar. Seed variation is not a confidence interval over independent biological experiments.
 
-For each trained model, chemical features are shuffled within matched control groups while targets, controls and PRnet decoder draws remain fixed. The control-only model must be unchanged. A shuffling penalty indicates input dependence under this diagnostic; it does not prove a causal mechanism or improvement over a separately fitted control-only model.
+## 5. External regulation in six genes
 
-Paired intervals resample compounds after averaging per-run losses. Control-group intervals are provided separately. Neither approach completely models crossed dependence between chemical compounds and experimental groups."""
+Seven dose-matched GEO studies contribute 42 direction labels for AKT1, AURKB, EGFR, PIK3CA, SMAD3 and TP53. Observed signs come from GEO treated-minus-control expression. Predictions use cell-specific mean LINCS DMSO expression, not the GEO target measurements.
+
+The unchanged-DMSO reference predicts exactly zero response, so it has no up/down prediction to score. It is intentionally absent from the direction bars. The refined ECFP4 and PRnet means are 24.3 and 23.0 correct directions out of 42. Their paired accuracy difference is 3.2 percentage points, with a descriptive study-bootstrap interval from -13.5 to +19.0 points. A clear external advantage is not established."""
     )
+
     code(
-        """permutation = pd.read_csv(BALANCED / 'diagnostics/permutation_seed_means.csv')
-assert permutation.loc[permutation.model.eq('ControlOnly'),'mse_increase'].eq(0).all()
-display(permutation.groupby(['dataset','model'])[['clean_mse','shuffled_mse','mse_increase']].mean())
-display(Image(filename=str(PROJECT / 'presentation/figures/chemical_added_value.png'), width=1000))"""
+        """external = pd.read_csv(BALANCED / 'summary/external_seed_counts.csv')
+external = external.loc[external.phase.eq('tuned') & external.model.isin(SELECTED_MODELS)]
+display(external[['model','seed','sum','size','mean']])
+intervals = pd.read_csv(BALANCED / 'summary/paired_external_intervals.csv')
+display(intervals.loc[intervals.model.eq(winner) & intervals.reference.eq('PRnet')])
+display(Image(filename=str(PROJECT / 'presentation/figures/external_comparison.png'), width=800))
+display(Image(filename=str(PROJECT / 'presentation/figures/external_studies.png'), width=1000))"""
     )
+
     md(
-        """## 6. Dose-matched external regulation
+        """**Figure 4.** Correct regulation directions for refined ECFP4 and PRnet across seven studies and six genes. Bars, points and whiskers show the three-run mean, individual runs and range. The 42 labels are clustered within seven studies, not 42 independent experiments.
 
-Seven eligible GEO studies each contribute six genes at 10 µM and 24 hours. Forty-two directions are not 42 independent experiments: genes in the same study share samples and context. Twenty-seven directions have separated replicates; fifteen also pass the descriptive absolute-change threshold of 0.5 on their log-expression scale.
+**Figure 5.** Correct directions out of six for each study, averaged across the same three runs. A cell value of 4.3 is a rounded count average, not expression or a percentage. Darker cells mean more correct signs. Only 15 of the 42 observed directions meet the descriptive clear-change rule; this is not a differential-expression significance test.
 
-Observed directions use GEO treated and control samples. Predictions use LINCS cell-matched control references, so platform and culture differences remain. Norepinephrine is excluded because it has a training analogue. Small changes can have uncertain signs; the sensitivity subsets are not significance tests."""
+## 6. Sensitivity to DMSO-input noise
+
+DMSO controls are measured expression profiles, so their replicate mean can contain noise. To address the project's robustness question, Gaussian noise is added to these inputs at 0, 0.25, 0.5 and 1 times each gene's within-plate DMSO replicate standard deviation. Models and measured treated targets stay fixed. Twenty technical draws are averaged at each nonzero level; these are not new biological samples.
+
+The plot shows total SKBR3 MSE at every noise level. At zero added noise, it reproduces the clean SKBR3 scores in Figure 3. At one replicate standard deviation, ECFP4 changes from 0.6537 to 0.9928, PRnet from 2.1759 to 2.2292 and unchanged DMSO from 0.5689 to 0.8876. PRnet is less sensitive to this input perturbation but retains higher total error. The two evaluations are consistent: a smaller increase does not imply a smaller prediction error."""
     )
-    md(
-        """### Reading the external-study heatmap
 
-Each row is one compound tested in one cell type; each column is a model. For AKT1, AURKB, EGFR, PIK3CA, SMAD3 and TP53, we ask whether the predicted increase or decrease relative to controls agrees with the direction measured in the GEO experiment.
-
-Each cell counts correct directions out of six, averaged over three independently seeded training runs. Values range from 0 to 6: higher values and darker shading indicate more correct directions. A value of **6.0** means all six genes were correct in every run. **4.7** is a rounded mean across the three runs, not a gene-expression value or a percentage. This score measures direction, not the size of the expression change. The seven studies remain the independent clusters for uncertainty estimation."""
-    )
     code(
-        """labels = pd.read_csv(PROJECT / 'dose_matched/measured_effects.csv')
-labels = labels.loc[labels.chemical_split.eq('eligible')]
-display(labels.groupby('gse_id').agg(genes=('genes','size'), separated=('separated_replicates','sum'), clear=('clear_change','sum')))
-display(pd.read_csv(BALANCED / 'summary/external_seed_counts.csv').query("phase == 'tuned'"))
-display(pd.read_csv(BALANCED / 'summary/paired_external_intervals.csv'))
-display(Image(filename=str(PROJECT / 'presentation/figures/external_studies.png'), width=850))"""
+        """noise = pd.read_csv(BALANCED / 'diagnostics/noise_seed_means.csv')
+noise = noise.loc[noise.model.isin(DISPLAY_MODELS)].copy()
+display(noise.groupby(['model','level'])[['clean_mse','mse']].mean())
+for model in DISPLAY_MODELS:
+    phase = 'baseline' if model == 'DMSO' else 'tuned'
+    reference = summary.loc[summary.model.eq(model) & summary.phase.eq(phase)
+                            & summary.dataset.eq('skbr3'), 'mse_mean'].iloc[0]
+    zero_noise = noise.loc[noise.model.eq(model) & noise.level.eq(0), 'mse'].mean()
+    assert np.isclose(zero_noise, reference), 'Noise level zero must match clean SKBR3 MSE.'
+display(Image(filename=str(PROJECT / 'presentation/figures/control_noise.png'), width=1000))"""
     )
+
     md(
-        """## 7. Robustness, uncertainty and stricter separation
+        """**Figure 6.** Total SKBR3 treated-expression MSE after perturbing DMSO inputs. Curves average selected training runs; shaded bands span their range after averaging technical draws. At zero added noise, values match the clean SKBR3 comparison. DMSO has no training seeds and no seed-range band. Models and treated targets stay fixed; this experiment does not reproduce all biological or measurement noise.
 
-Synthetic Gaussian noise perturbs control inputs using the measured within-plate replicate SD. These technical repeats are not biological replicates and do not model every source of transcriptomic noise. Predictive intervals are marginal profile-gene intervals, not simultaneous coverage of the full expression vector.
+## 7. What the project establishes
 
-A secondary split removes control groups from training and validation while preserving compound assignments. Its test groups and compounds are both unseen in fitting. The training set is also smaller, so any change cannot be attributed purely to group reuse. A 2 × 2 ablation separates the residual connection from zero mean-head initialization."""
-    )
-    code(
-        """display(pd.read_csv(BALANCED / 'results/calibration.csv').groupby(['dataset','model'])[['nll','covered95','width95']].mean())
-empirical = pd.read_csv(BALANCED / 'diagnostics/empirical_control_resampling.csv')
-display(empirical.groupby('model')[['clean_mse','half_control_mse','prediction_rms_change']].mean())
-display(Image(filename=str(PROJECT / 'presentation/figures/control_noise.png'), width=850))
-display(Image(filename=str(PROJECT / 'presentation/figures/control_group_holdout.png'), width=850))
-display(Image(filename=str(PROJECT / 'presentation/figures/residual_ablation.png'), width=1000))"""
-    )
-    md(
-        """## 8. Recompute tables or retrain
+- Selection: ECFP4 has the lowest default validation NLL among the three MLPs.
+- Refinement: lower learning rate improves validation NLL but worsens SKBR3 and external performance.
+- Unseen compounds: refined ECFP4 improves on PRnet and unchanged DMSO in the low-similarity subset.
+- Unseen cell line: unchanged DMSO has lower MSE than either model on SKBR3.
+- External regulation: seven studies do not resolve an ECFP4 advantage over PRnet.
+- Noise: ECFP4 predictions become less accurate as DMSO inputs are perturbed.
 
-Run these commands from the project directory. They are not started automatically by this notebook. Checking and evaluation require the data and checkpoints from the full submission archive; see `docs/DATA.md`.
+The results do not establish a reliable compound-ranking system. Evaluation sets were reused during development, only one unseen cell line was tested, and LINCS/GEO platform differences remain. The additional baseline analyses below also limit claims that chemical encodings add value.
+
+## 8. Reproduce the analysis
 
 ```sh
+python -m pip install -r requirements.txt
 python run.py check
-python run.py evaluate
+python run.py figures
+python run.py report
+python run.py notebook
 ```
 
-To fit all models again:
+`python run.py evaluate` reevaluates saved checkpoints. `python run.py train --fresh` refits the complete archived experimental programme, including supplementary analyses. Both need the data and weights from the full ZIP. The figures and reports can be rebuilt from the saved result tables alone."""
+    )
 
-```sh
-python run.py train --fresh
-```
+    md(
+        """## Supplementary analyses
 
-Retraining is substantially longer than reading saved results. Fixed-setting models, validation tuning and joint holdout are separate result phases.
+FCFP4 and ChemicalVAE test scores remain supplementary to the validation-selected comparison. Their test rankings do not determine the lead MLP. The control-only network, mean responses and linear model are additional comparisons, not experimental DMSO controls. Their results are retained because they change the interpretation: the linear baseline outperforms the chemical MLPs on distant compounds, while a training mean response performs best on SKBR3.
 
-## 9. What the project can and cannot conclude
+Further checks include chemical-input shuffling, joint compound/control-group holdout, residual-connection ablations and uncertainty calibration. See `docs/SUPPLEMENTARY_ANALYSES.md` and the report supplement for definitions, settings and limitations. The source result files are unchanged."""
+    )
 
-The results address the brief through tests of unseen compounds, SKBR3, the six external genes, model components and control noise. They can support a qualified conclusion about chemical input dependence and transfer in this cohort. They do not validate prospective drug-discovery utility, scaffold generalization, unseen doses or a broad range of new cell lines.
-
-The next strongest experiment is a frozen independent external panel with matched dose/time and credible effect labels, followed by functional validation of compound rankings. Repeating training characterizes variability but does not provide independent experimental evidence.
-
-See **Research_Report.pdf** for the full interpretation, code map and references. The motivating single-cell paper is literature context; the result figures here come from the project's bulk L1000 and GEO analyses."""
+    code(
+        """extra_models = ['ResidualFCFP4', 'ResidualChemicalVAE', 'ControlOnly',
+                'GlobalMeanResponse', 'CellMeanResponse', 'RidgeECFP4']
+extra = summary.loc[summary.model.isin(extra_models) & summary.phase.isin(['tuned','baseline']) & summary.dataset.isin(['internal_low_similarity','skbr3'])]
+display(extra[['dataset','model','mse_mean','mse_seed_sd','response_pearson']])
+permutation = pd.read_csv(BALANCED / 'diagnostics/permutation_seed_means.csv')
+assert permutation.loc[permutation.model.eq('ControlOnly'),'mse_increase'].eq(0).all()
+print('Chemical-shuffling negative control: passed.')"""
     )
     notebook = nbformat.v4.new_notebook(
         cells=cells,

@@ -59,6 +59,7 @@ def require_assets(checkpoints=False):
 
 def figures():
     run("presentation/figures.py")
+    run("presentation/focus_figures.py")
     run("presentation/poster.py")
 
 
