@@ -64,7 +64,7 @@ The analysis also tests chemical-input shuffling, residual prediction versus ini
 
 ![Comparison across the evaluation sets](presentation/figures/benchmark.png)
 
-*Network points represent three training seeds; diamonds show their means. MSE measures expression error, while the external panel scores regulation direction.*
+*Network points represent three training seeds; diamonds show their means. The left panel uses the original internal test (27,765 profiles); the table below reports its stricter low-similarity subset (16,531 profiles). MSE measures expression error, while the external panel scores regulation direction.*
 
 | Model | Low-similarity MSE | SKBR3 MSE | External correct / 42 |
 |---|---:|---:|---:|
