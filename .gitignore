@@ -23,3 +23,7 @@ dose_matched/source/*.gz
 runs/
 FILE_MANIFEST.tsv
 *.zip
+
+# Generated report data and progress markers
+/report_content.json
+/extension/balanced/latest_completed_stage.json
