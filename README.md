@@ -42,7 +42,14 @@ The external panel reconstructs measurements for **AKT1, AURKB, EGFR, PIK3CA, SM
 
 ![Experimental pipeline](presentation/figures/pipeline.png)
 
-Each molecular representation enters a separate MLP. All models use the same eligible samples and measured controls. The predicted response is evaluated against treated expression, treatment-minus-control changes and external regulation directions.
+1. **Assemble the experiments.** Read treated-expression targets, the supplied compound split and selected sample IDs ([preparation](MLP_PRnet_controls/prepare.py)).
+2. **Pair treatments with controls.** Match quality-passed DMSO measurements by plate, cell line, time and bead batch, then average control replicates ([matching](MLP_PRnet_controls/match_controls.py), [aggregation](MLP_PRnet_controls/aggregate_controls.py)).
+3. **Screen the cohort and retain split assignments.** Exclude SKBR3 and close external analogues; estimate control scaling from training inputs only ([external-compound screening](extension/curate.py), [split and scaling checks](extension/verify_revision.py)).
+4. **Encode the same compounds.** Compute FCFP4, ECFP4 and frozen ChemicalVAE features for three separate MLPs; use dose-scaled FCFP4 for PRnet ([features](MLP_PRnet_controls/prepare_features.py), [networks](extension/benchmark.py)).
+5. **Fit and select models.** Compare an equal three-setting grid, select settings and checkpoints by validation NLL, and repeat selected fits with three seeds ([training](extension/balanced_train.py), [tuning](extension/tune_models.py)).
+6. **Evaluate held-out predictions.** Compare the models and baselines on new compounds, SKBR3 and external gene directions; examine chemical shuffling, control noise and uncertainty ([evaluation](extension/evaluate_balanced.py), [diagnostics](extension/diagnose_final.py)).
+
+The cell icons, molecular drawing, feature grids and expression strips illustrate the procedure; their colors are schematic, not measured values. Counts and result plots come from the saved data and analyses. For the external GEO comparison, predictions use a cell-specific mean of LINCS control groups. GEO treated and control measurements supply the observed regulation directions, not the model inputs; differences between experimental platforms remain.
 
 ## Models and experimental design
 
@@ -131,4 +138,4 @@ A GitHub clone contains code, result tables and presentation files. The full sub
 | `presentation/` | Figures, report builders and poster |
 | `docs/` | Project brief, data instructions and repository organization |
 
-Data and model references are listed in [SOURCES.md](MLP_PRnet_controls/SOURCES.md). The report discusses PRnet, chemCPA, PertDiT and the motivating benchmarking literature. Third-party licenses and published-figure attribution are retained with the corresponding files.
+Data and model references are listed in [SOURCES.md](MLP_PRnet_controls/SOURCES.md). The report discusses PRnet, chemCPA, PertDiT and the motivating benchmarking literature. Third-party source credits and licenses are retained with the corresponding files.

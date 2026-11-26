@@ -145,15 +145,15 @@ def main():
     page("The pipeline, from input files to scientific tests")
     figure(
         "pipeline",
-        "Figure 1. Each molecular representation feeds a separately trained MLP. Matched DMSO expression supplies cellular context. The three MLPs, PRnet and baselines are evaluated on the same eligible samples.",
+        "Figure 1. The six steps are data assembly, control pairing, cohort screening, molecular encoding, validation-based selection and held-out evaluation. Each encoding feeds a separate MLP; PRnet and baselines use the same eligible samples. Icons and expression strips are schematic, while sample counts come from the data audit.",
         290,
     )
     h("What enters the model")
     p(
-        "The input files define the common experiment. l1000_level3_filtered_train_clean.feather contains treated-expression targets; compound_split.csv assigns compounds to train, validation or test; sample_usage.feather identifies the selected sample IDs. The frozen ChemicalVAE encoder supplies molecular features."
+        "The input files define the common experiment: l1000_level3_filtered_train_clean.feather supplies treated-expression targets, compound_split.csv supplies compound assignments and sample_usage.feather supplies selected sample IDs. After control pairing and screening, retained rows keep their original split labels. Training inputs alone determine control scaling; validation NLL selects settings and checkpoints. Test sets are evaluated after fitting."
     )
     p(
-        "Measured DMSO controls are paired with treated profiles. FCFP4 and ECFP4 encode chemical structure as 1,024 binary features (0 or 1); ChemicalVAE supplies 196 continuous encoder values. These are molecular descriptors, not gene-expression measurements. Each residual MLP adds a learned 978-gene response to the measured control. Control expression supplies the cell context, so a new cell line can be used when a suitable control is available."
+        "FCFP4 and ECFP4 supply 1,024 binary molecular features; the frozen ChemicalVAE encoder supplies 196 continuous values. Each residual MLP adds a learned 978-gene response to measured control expression. For external GEO scoring, predictions use a cell-specific mean of LINCS control groups. GEO treated-minus-control measurements provide the observed directions, not model inputs. This cross-platform comparison is separate from the plate-matched LINCS tests."
     )
     code(
         "chemical features + standardized control\n    -> 512 hidden units -> 256 hidden units\n    -> predicted change and positive variance\npredicted treated expression = control + predicted change"

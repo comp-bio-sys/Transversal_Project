@@ -65,6 +65,18 @@ print('Test compounds with identical ECFP4 to training:', audit['test_compounds_
         "display(Image(filename=str(PROJECT / 'presentation/figures/pipeline.png'), width=1100))"
     )
     md(
+        """The diagram follows six steps:
+
+1. Assemble the supplied treated profiles, compound assignments and sample IDs.
+2. Match measured DMSO controls by plate, cell, time and bead batch, and average replicates.
+3. Screen the cohort, retain the supplied split labels and estimate control scaling from training inputs only.
+4. Encode each compound as FCFP4, ECFP4 or ChemicalVAE features for separate MLPs; fit PRnet with dose-scaled FCFP4.
+5. Select settings and checkpoints using validation NLL, with the same tuning budget and three seeds.
+6. Compare held-out predictions with measurements and baselines, then examine chemical dependence, noise and uncertainty.
+
+Cell icons, feature grids and expression strips are schematic. Their colors do not represent measured values; sample counts and result plots come from the saved analyses. External GEO predictions use a cell-specific mean of LINCS control groups. GEO treated and control samples determine the observed gene directions, so platform differences remain."""
+    )
+    md(
         """## 2. Models and fitting
 
 FCFP4 describes local functional classes, ECFP4 describes local atom environments, and ChemicalVAE supplies a frozen 196-value molecular embedding. FCFP4 and ECFP4 each have 1,024 bits and radius 2. Each representation enters a separate MLP with the measured control vector.
@@ -209,7 +221,7 @@ The results address the brief through tests of unseen compounds, SKBR3, the six 
 
 The next strongest experiment is a frozen independent external panel with matched dose/time and credible effect labels, followed by functional validation of compound rankings. Repeating training characterizes variability but does not provide independent experimental evidence.
 
-See **Research_Report.pdf** for the full interpretation, code map and references. The motivating single-cell paper and its figures are separate published evidence, not observations in our bulk L1000 experiment."""
+See **Research_Report.pdf** for the full interpretation, code map and references. The motivating single-cell paper is literature context; the result figures here come from the project's bulk L1000 and GEO analyses."""
     )
     notebook = nbformat.v4.new_notebook(
         cells=cells,

@@ -10,3 +10,5 @@
 - ChemicalVAE encoder calculation from the supplied `chemicalvae_mlp.py`; supplied `zinc.json` and `zinc_encoder.h5` are retained under `encoder`.
 
 Source checksums, download verification, and target-scale checks are saved in the data audit files. Accessed 25 November 2026.
+
+The retained `vendor/PRnet/README.md` is the upstream documentation. Its example notebooks are in the [original PRnet repository](https://github.com/Perturbation-Response-Prediction/PRnet), rather than this project's source subset. Follow the root README for this benchmark's commands.
