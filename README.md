@@ -117,7 +117,7 @@ python run.py figures
 
 The notebook contains executed outputs. Install JupyterLab with `python -m pip install jupyterlab` if needed, then open the notebook with `jupyter lab Analysis.ipynb`. The prediction example is skipped when data and weights are absent. For full verification and prediction, first restore the assets described in [DATA.md](docs/DATA.md), then run `python run.py check`. Recomputing the full evaluation with `python run.py evaluate` can take hours. Full training with `python run.py train --fresh` can take days and first backs up the existing experiment outputs. All commands are listed by `python run.py --help`.
 
-A GitHub clone contains code, result tables and presentation files. The full submission ZIP also includes the arrays and weights needed for prediction and evaluation. See [Data and model files](docs/DATA.md) and [GitHub upload instructions](docs/GITHUB.md).
+A GitHub clone contains code, result tables and presentation files. The full submission ZIP also includes the arrays and weights needed for prediction and evaluation. See [Data and model files](docs/DATA.md) and [Repository organization](docs/GITHUB.md).
 
 ## Project files and sources
 
@@ -129,6 +129,6 @@ A GitHub clone contains code, result tables and presentation files. The full sub
 | `extension/balanced/` | Results, settings and checkpoint metadata |
 | `dose_matched/` | External studies and reconstructed measurements |
 | `presentation/` | Figures, report builders and poster |
-| `docs/` | Project brief, data instructions and GitHub guide |
+| `docs/` | Project brief, data instructions and repository organization |
 
 Data and model references are listed in [SOURCES.md](MLP_PRnet_controls/SOURCES.md). The report discusses PRnet, chemCPA, PertDiT and the motivating benchmarking literature. Third-party licenses and published-figure attribution are retained with the corresponding files.

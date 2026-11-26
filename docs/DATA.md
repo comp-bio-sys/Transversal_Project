@@ -39,4 +39,4 @@ Keep the CSV and JSON metadata from the same bundle with its arrays and weights.
 
 The full LINCS release is not included. The bundled prepared arrays are sufficient for the supplied fitting and evaluation workflow; reconstructing all upstream data joins may require the public source release. Source locations and download checks are documented in [SOURCES.md](../MLP_PRnet_controls/SOURCES.md) and the data audit files. [METHODS.md](../METHODS.md) explains the filters, control matching and external measurements.
 
-No public bundle URL is configured in this package. Add the actual storage link here when the data-and-model bundle is published.
+The data-and-model bundle is not currently available through a public download link.

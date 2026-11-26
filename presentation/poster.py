@@ -82,7 +82,6 @@ def main():
             col = base * v + np.ones(3) * (1 - v)
             box(x + j * 3.3, y, 2.7, 16, col)
 
-    # Full-width title and conventional conference structure follow the supplied reference.
     box(0, 0, WIDTH, 137, INK)
     text(24, 18, "Predicting gene-expression responses", 76, "white", True)
     text(24, 53, "to unseen chemical compounds", 76, "white", True)

@@ -100,7 +100,6 @@ class PEncoder(nn.Module):
                     self.FC.add_module(name="A{:d}".format(i), module=nn.LeakyReLU(negative_slope=0.3))
                     self.FC.add_module(name="D{:d}".format(i), module=nn.Dropout(p=dropout_rate))
 
-        #self.FC = nn.ModuleList(self.FC)
 
         print("\tMean/Var Layer in/out:", layer_sizes[-1], z_dimension)
         self.mean_encoder = nn.Linear(layer_sizes[-1], z_dimension)
