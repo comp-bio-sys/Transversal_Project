@@ -1,6 +1,6 @@
 # Supplementary analyses
 
-These analyses help explain the four-model comparison in the [project overview](../README.md). They assess whether chemical inputs add information beyond control expression, whether the architecture or experimental context drives performance, and how sensitive predictions are to control estimation. They do not replace the main comparison, and their results remain part of the project's scientific conclusions.
+These analyses complement the selected ECFP4 MLP–PRnet comparison in the [project overview](../README.md). They assess whether chemical inputs add information beyond control expression, whether the architecture or experimental context drives performance, and how sensitive predictions are to control estimation. They do not replace the main comparison, and their results remain part of the project's scientific conclusions.
 
 Shared data preparation, model fitting, metrics and uncertainty calculations are described in [METHODS.md](../METHODS.md). Saved numerical results are available under `extension/balanced`.
 
@@ -57,7 +57,7 @@ Sources: [paired MSE intervals](../extension/balanced/summary/paired_mse_interva
 
 *The 2 × 2 experiment crosses direct versus residual prediction with random versus zero mean-head initialization. Points are training seeds; bars show means.*
 
-All four combinations use ECFP4, three seeds and shared fixed fitting settings. This separates the prediction rule from initialization. These fixed-setting fits are distinct from the validation-tuned main comparison, so their scores should not be pooled with the selected four-model results.
+All four combinations use ECFP4, three seeds and shared fixed fitting settings. This separates the prediction rule from initialization. These fixed-setting fits are distinct from the validation-tuned main comparison, so their scores should not be pooled with the main validation-selected results.
 
 Source: [factorial ablation summary](../extension/balanced/summary/factorial_ablation.csv).
 

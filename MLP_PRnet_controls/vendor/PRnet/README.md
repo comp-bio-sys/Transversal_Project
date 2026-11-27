@@ -73,7 +73,7 @@ python test_demo.py --split_key demo_split
 ```
 ## Step 3: Inference with custom datatset
 
-Please see [custom_data_preprocessing.ipynb](preprocessing/custom_data_preprocessing.ipynb) to prepare your dataset. 'custom_data_preprocessing' is a demo which preprocesses the data from CCLE.
+Please see [custom_data_preprocessing.ipynb](https://github.com/Perturbation-Response-Prediction/PRnet/blob/main/preprocessing/custom_data_preprocessing.ipynb) to prepare your dataset. 'custom_data_preprocessing' is a demo which preprocesses the data from CCLE.
 
 ## Step 4: Train and test with provided datatset
 To train the L1000 dataset:
@@ -107,9 +107,9 @@ python analysis_sciplex.py --split_key drug_split_0
 
 | Name                                     | Description                                                  |
 | ---------------------------------------- | ------------------------------------------------------------ |
-| [drug_candidates_recomandation.ipynb](figure/drug_candidates_recomandation.ipynb) | Recomand drug for diseases.                                  |
-| [latent_tsne_lung_cancer](figure/latent_tsne_lung_cancer.ipynb)       | Learnable latent space of lung cancer data                   |
-| [SCLC_plot_dsea](figure/SCLC_plot_dsea.ipynb)                | Enrichment score of candidates against small cell lung cancer |
+| [drug_candidates_recomandation.ipynb](https://github.com/Perturbation-Response-Prediction/PRnet/blob/main/figure/drug_candidates_recomandation.ipynb) | Recomand drug for diseases.                                  |
+| [latent_tsne_lung_cancer](https://github.com/Perturbation-Response-Prediction/PRnet/blob/main/figure/latent_tsne_lung_cancer.ipynb)       | Learnable latent space of lung cancer data                   |
+| [SCLC_plot_dsea](https://github.com/Perturbation-Response-Prediction/PRnet/blob/main/figure/SCLC_plot_dsea.ipynb)                | Enrichment score of candidates against small cell lung cancer |
 
 ## References
 

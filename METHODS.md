@@ -34,7 +34,7 @@ The initial epoch cap was 50. A validation-only convergence audit refitted any t
 
 ### Representation ranking and refinement
 
-The three-encoding comparison is a project design choice. The brief asks for an MLP comparison against retrained PRnet and lists enhancement as optional. To present that sequence, this analysis first compares the three MLPs at the shared default setting using seed-42 validation NLL, then examines the preferred representation's tuning result.
+The three-encoding comparison is a project design choice. The brief asks for an MLP comparison against retrained PRnet and lists enhancement as optional. The three MLPs are compared at the shared default setting using seed-42 validation NLL, followed by the preferred representation's tuning results.
 
 | MLP | Default validation NLL | Best grid validation NLL | Best setting |
 |---|---:|---:|---|

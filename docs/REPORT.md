@@ -240,7 +240,7 @@ ChemicalVAE has the lowest test MSE among the MLPs, but did not have the lowest 
 | Coverage and replicate subsampling | Check predicted intervals and sensitivity to the available measured controls |
 | Source-recipe PRnet run | Different preprocessing; one seed; 24/42 dose-matched directions; raw MSE is on a different scale |
 
-Details, figures and source tables are indexed in [docs/SUPPLEMENTARY_ANALYSES.md](docs/SUPPLEMENTARY_ANALYSES.md). Full score tables retain the original internal test, stricter subsets and all supplementary comparators. Their different cohorts and fitting settings should not be pooled into one ranking.
+Details, figures and source tables are indexed in the [supplementary analyses](SUPPLEMENTARY_ANALYSES.md). Full score tables retain the original internal test, stricter subsets and all supplementary comparators. Their different cohorts and fitting settings should not be pooled into one ranking.
 
 For external chemical-MLP versus PRnet comparisons, all study-bootstrap intervals include zero. Only 15 of 42 labels meet the stronger-change rule. A reliable three-way up/down/unchanged classifier, broad cell-line generalization and prospective compound-selection utility remain unproven.
 
