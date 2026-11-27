@@ -82,8 +82,8 @@ def main():
     subtitle(24, 512, 346, "2  Compare three chemical representations")
     text(30, 536,
          "FCFP4: functional classes; ECFP4: atom environments.\n"
-         "ChemicalVAE: frozen SMILES features. Each MLP also\n"
-         "receives controls; PRnet uses dose-scaled FCFP4.", 23)
+         "ChemicalVAE: frozen SMILES features. All models use\n"
+         "DMSO expression; PRnet uses dose-scaled FCFP4.", 23)
     draw_encoding(axes(30, 575, 335, 100))
     text(30, 680, "Figure 2b. Each chemical representation enters a separate predictor.", 16, MUTED)
 
@@ -121,8 +121,8 @@ def main():
     mse_bar_axis(b2, data, "skbr3", size=1.85)
     text(404, 709,
          "Figure 4. Treated-expression MSE; lower is better.\n"
-         "Bars: mean; dots: three seeds; whiskers: seed range.\n"
-         "DMSO is an unchanged-expression reference, not a fitted model.\n"
+         "Model bars: three-seed means; dots: runs; whiskers: seed range.\n"
+         "The DMSO reference predicts the measured control expression.\n"
          "Distant compounds have nearest-training Tanimoto ≤ 0.7.", 18, MUTED)
     text(404, 751,
          "ECFP4 has lower MSE than PRnet in both tests.\n"
@@ -145,10 +145,10 @@ def main():
     d = axes(837, 463, 319, 127)
     noise_axis(d, data, size=2.1)
     text(802, 618,
-         "Figure 6. Absolute SKBR3 MSE after noise is added to DMSO inputs.\n"
-         "Zero noise matches panel B; fitted weights and targets stay fixed.\n"
-         "20 draws/nonzero level; lines: means; bands: three-seed range.\n"
-         "DMSO is not trained and has no training-seed band.", 18, MUTED)
+         "Figure 6. SKBR3 MSE after adding Gaussian noise to DMSO inputs.\n"
+         "20 draws per nonzero level; noise scaled by control-replicate SD.\n"
+         "Model curves: three-seed means; shading: seed ranges.\n"
+         "The DMSO reference predicts the noise-perturbed control values.", 18, MUTED)
     text(802, 657,
          "At 1 replicate SD: ECFP4 MSE rises from 0.654 to 0.993;\n"
          "PRnet rises from 2.176 to 2.229. ECFP4 remains lower.", 22)
