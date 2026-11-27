@@ -201,12 +201,11 @@ Internal and external tests were reused during development. Three seeds describe
 | dose_matched/measure.py | Reconstruct external measurements from GEO files |
 | diagnose_final.py; calibration.py | Evaluate chemical shuffling, input noise and predictive intervals |
 | summarize_revision.py; verify_revision.py | Summarize paired comparisons and check result consistency |
-| presentation/ | Build scientific figures, report, notebook and poster |
+| presentation/ | Reproduce scientific plots; view the finished poster |
 
 ```sh
 python -m pip install -r requirements.txt
 python run.py figures
-python run.py report
 python run.py notebook
 
 # With the data and weights restored:
@@ -215,11 +214,7 @@ python run.py evaluate
 python run.py train --fresh
 ```
 
-A GitHub clone contains code, saved result tables and presentation files. It can regenerate figures and the report without retraining. The full submission ZIP additionally contains prepared arrays, supplied split files, encoder weights and checkpoints. Restore these assets as described in docs/DATA.md before prediction, verification or full evaluation. Evaluation may take hours; full retraining may take days.
-
-Analysis.ipynb contains executed explanations and outputs; its prediction example is skipped if assets are absent. Verification covers 61 checkpoints, data separation, training-only scaling, selection rules and score arithmetic. The audit and checkpoint hashes are under extension/balanced. These are consistency checks, not independent replication.
-
-Primary results are under extension/balanced; external observations are under dose_matched. The separate extension/reference experiment uses a different source-style preprocessing recipe and is retained as a sensitivity analysis, not pooled into the selected-MLP comparison.
+The README explains how to run the analysis. Analysis.ipynb walks through the saved results. Data and model files needed for training are listed in docs/DATA.md.
 
 ## Supplementary checks and negative evidence
 

@@ -127,20 +127,17 @@ predicted treated expression = DMSO expression + predicted change</pre>
 <tr><td>dose_matched/measure.py</td><td>Reconstruct external measurements from GEO files</td></tr>
 <tr><td>diagnose_final.py; calibration.py</td><td>Evaluate chemical shuffling, input noise and predictive intervals</td></tr>
 <tr><td>summarize_revision.py; verify_revision.py</td><td>Summarize paired comparisons and check result consistency</td></tr>
-<tr><td>presentation/</td><td>Build scientific figures, report, notebook and poster</td></tr>
+<tr><td>presentation/</td><td>Reproduce scientific plots; view the finished poster</td></tr>
 </tbody></table>
 <pre>python -m pip install -r requirements.txt
 python run.py figures
-python run.py report
 python run.py notebook
 
 # With the data and weights restored:
 python run.py check
 python run.py evaluate
 python run.py train --fresh</pre>
-<p>A GitHub clone contains code, saved result tables and presentation files. It can regenerate figures and the report without retraining. The full submission ZIP additionally contains prepared arrays, supplied split files, encoder weights and checkpoints. Restore these assets as described in docs/DATA.md before prediction, verification or full evaluation. Evaluation may take hours; full retraining may take days.</p>
-<p>Analysis.ipynb contains executed explanations and outputs; its prediction example is skipped if assets are absent. Verification covers 61 checkpoints, data separation, training-only scaling, selection rules and score arithmetic. The audit and checkpoint hashes are under extension/balanced. These are consistency checks, not independent replication.</p>
-<p>Primary results are under extension/balanced; external observations are under dose_matched. The separate extension/reference experiment uses a different source-style preprocessing recipe and is retained as a sensitivity analysis, not pooled into the selected-MLP comparison.</p>
+<p>The README explains how to run the analysis. Analysis.ipynb walks through the saved results. Data and model files needed for training are listed in docs/DATA.md.</p>
 </section><section><h1>Supplementary checks and negative evidence</h1>
 <p class="subtitle"></p>
 <p>The main test figures compare the validation-preferred ECFP4 MLP, PRnet and measured DMSO expression. FCFP4 and ChemicalVAE test results are retained here rather than used to choose the lead MLP. Additional experiments remain part of the project because they test whether chemistry contributes useful information. The control-only MLP is a separately fitted network without chemical inputs; it is different from unchanged DMSO expression.</p>

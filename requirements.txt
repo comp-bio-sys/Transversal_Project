@@ -1,4 +1,2 @@
 -r MLP_PRnet_controls/requirements.txt
-reportlab>=4,<5
-pypdf>=5,<8
 ipython>=9

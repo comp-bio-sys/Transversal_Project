@@ -120,19 +120,21 @@ The project addresses the requested comparisons, but the evidence is exploratory
 
 ## Reproduce the analysis
 
-The report, figures and executed notebook can be read directly on GitHub. To rerun analysis of the saved result tables, use Python 3.13:
+The report, figures and executed notebook can be read directly on GitHub. To regenerate plots and rerun analysis of the saved result tables, use Python 3.13:
 
 ```sh
 git clone https://github.com/comp-bio-sys/Transversal_Project.git
 cd Transversal_Project
 python -m pip install -r requirements.txt
-python run.py notebook
 python run.py figures
+python run.py notebook
 ```
 
 Install JupyterLab with `python -m pip install jupyterlab` if needed, then open `jupyter lab Analysis.ipynb`. The notebook contains executed outputs; its prediction example is skipped when data and weights are absent.
 
-A GitHub clone contains code, result tables and presentation files. The full submission ZIP also includes arrays and weights needed for prediction and evaluation. Restore the assets described in [Data and model files](docs/DATA.md), then run `python run.py check`. Recomputing evaluation with `python run.py evaluate` can take hours; full training with `python run.py train --fresh` can take days and first backs up existing experiment outputs. All commands are listed by `python run.py --help`.
+`python run.py figures` rebuilds the plots from saved results. `python run.py notebook` executes the existing notebook and updates its outputs. The report text, PDF and poster are not regenerated; the HTML report displays the updated plot files.
+
+The full submission ZIP includes arrays and weights needed for prediction, evaluation and training. Restore the assets described in [Data and model files](docs/DATA.md), then run `python run.py check`. Recomputing evaluation with `python run.py evaluate` can take hours; full training with `python run.py train --fresh` can take days and first backs up existing experiment outputs. Both commands refresh the plots and notebook. All commands are listed by `python run.py --help`.
 
 ## Repository guide
 
@@ -143,7 +145,7 @@ A GitHub clone contains code, result tables and presentation files. The full sub
 | `extension/` | Training, evaluation and robustness analysis |
 | `extension/balanced/` | Result tables, selected settings and checkpoint metadata |
 | `dose_matched/` | External studies and reconstructed measurements |
-| `presentation/` | Figures, report builders and poster |
+| `presentation/` | Plotting code, exported figures and finished poster |
 | `docs/` | Project brief, supplementary analyses and data instructions |
 
 See [repository organization](docs/GITHUB.md) for the file structure. Data and model sources are listed in [SOURCES.md](MLP_PRnet_controls/SOURCES.md) and [extension/SOURCES.md](extension/SOURCES.md). Literature references are retained in the report. Third-party source credits and licenses remain with their corresponding files.

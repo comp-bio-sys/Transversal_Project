@@ -1,4 +1,4 @@
-"""Run the analysis, presentation builders or model training from one entry point."""
+"""Run the analysis notebook, result plots, evaluation or model training."""
 
 import argparse
 from datetime import datetime
@@ -60,19 +60,28 @@ def require_assets(checkpoints=False):
 def figures():
     run("presentation/figures.py")
     run("presentation/focus_figures.py")
-    run("presentation/poster.py")
 
 
-def report():
-    run("presentation/build_report.py")
-    run("presentation/render_report.py")
-    run("presentation/export_markdown.py")
+def notebook():
+    import nbformat
+    from nbclient import NotebookClient
+
+    path = ROOT / "Analysis.ipynb"
+    document = nbformat.read(path, as_version=4)
+    NotebookClient(
+        document,
+        timeout=600,
+        kernel_name="python3",
+        resources={"metadata": {"path": str(ROOT)}},
+    ).execute()
+    nbformat.write(document, path)
+    print("Updated Analysis.ipynb", flush=True)
 
 
-def presentation():
+def analysis():
     figures()
-    report()
-    run("presentation/build_notebook.py")
+    notebook()
+    print("Report and poster are saved documents; review them after new experiments.", flush=True)
 
 
 def main():
@@ -82,16 +91,15 @@ def main():
         "check", help="verify splits, model metadata and stored results"
     )
     commands.add_parser(
-        "figures", help="rebuild figures and the poster from result tables"
+        "figures", help="regenerate plots from saved result tables"
     )
-    commands.add_parser("report", help="rebuild the PDF, HTML and GitHub reports")
-    commands.add_parser("notebook", help="rebuild and execute the analysis notebook")
+    commands.add_parser("notebook", help="execute the existing analysis notebook")
     commands.add_parser(
         "evaluate",
-        help="reevaluate saved models and rebuild all outputs; may take hours",
+        help="reevaluate saved models and refresh plots and notebook; may take hours",
     )
     train = commands.add_parser(
-        "train", help="fit the benchmark and rebuild all outputs; may take days"
+        "train", help="fit the benchmark and refresh plots and notebook; may take days"
     )
     train.add_argument(
         "--fresh",
@@ -112,10 +120,8 @@ def main():
         run("extension/verify_revision.py")
     elif args.command == "figures":
         figures()
-    elif args.command == "report":
-        report()
     elif args.command == "notebook":
-        run("presentation/build_notebook.py")
+        notebook()
     elif args.command == "evaluate":
         for script in [
             "evaluate_balanced",
@@ -125,7 +131,7 @@ def main():
             "verify_revision",
         ]:
             run(f"extension/{script}.py")
-        presentation()
+        analysis()
     elif args.command == "train":
         existing = ROOT / "extension/balanced"
         if args.fresh and existing.exists():
@@ -144,7 +150,7 @@ def main():
             )
         run("extension/run_scientific_revision.py")
         run("extension/verify_revision.py")
-        presentation()
+        analysis()
 
 
 if __name__ == "__main__":

@@ -4,7 +4,9 @@ The full submission ZIP contains the prepared expression data, molecular encoder
 
 ## What works from a GitHub clone?
 
-The executed `Analysis.ipynb`, report, poster and result tables can be read immediately. With the dependencies installed, figures and reports can be rebuilt from those tables. Running predictions, full verification, evaluation or training requires the bundled arrays and weights.
+The executed `Analysis.ipynb`, report, poster and result tables can be read immediately. With the dependencies installed, `python run.py figures` regenerates the plots and `python run.py notebook` reruns the saved-table analysis in the existing notebook. The prediction example is skipped when data and weights are absent.
+
+Running predictions, full verification, evaluation or training requires the bundled arrays and weights. Evaluation and training refresh the plots and notebook. The report text, PDF and poster are not regenerated; the HTML report displays the updated plot files.
 
 ## Restore the experiment files
 
